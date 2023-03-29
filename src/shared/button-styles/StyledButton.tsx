@@ -6,6 +6,7 @@ interface IProps {
   btnWidth?: number;
   btnHeight?: number;
   color?: string;
+  click?: Function;
 }
 
 export default function StyledButton({
