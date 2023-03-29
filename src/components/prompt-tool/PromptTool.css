@@ -1,0 +1,12 @@
+.prompt-tool-main-container{
+    width: 800px;
+    height: 1000px;
+    background: blue;
+
+    display: flex;
+    justify-content: center;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,18 @@
+
+.btn{
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.btn:hover{
+    transform: translateY(-2px);
+}
+
+.btn-style-1{
+    font-weight: 700;
+    background: rgb(142,170,255);
+    background: radial-gradient(circle, rgba(142,170,255,1) 0%, rgba(95,171,255,1) 100%);
+
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
