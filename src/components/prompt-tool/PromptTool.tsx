@@ -26,8 +26,8 @@ export default function PromptTool() {
         </div>
         <label htmlFor="">Choose output</label>
         <div className="output-types-container">
-          <StyledButton btnStyle={1} title="text" />
-          <StyledButton btnStyle={1} title="picture" />
+          <StyledButton btnStyle={2} title="text" />
+          <StyledButton btnStyle={2} title="picture" />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <input type="text" placeholder="write prompt" />
