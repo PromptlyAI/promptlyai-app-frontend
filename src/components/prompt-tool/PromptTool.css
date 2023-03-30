@@ -13,3 +13,8 @@
   border: solid black 2px;
   padding: 20px;
 }
+.output-text-container {
+  word-wrap: break-word;
+  max-width: 300px;
+  height: fit-content;
+}
