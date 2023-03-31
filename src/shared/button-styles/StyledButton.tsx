@@ -25,8 +25,8 @@ export default function StyledButton({
       className={
         pressed !== undefined
           ? pressed
-            ? `btn-style-2 btn`
-            : `btn-style-3 btn`
+            ? `btn-style-3 btn`
+            : `btn-style-2 btn`
           : `btn-style-${btnStyle} btn`
       }
       style={{

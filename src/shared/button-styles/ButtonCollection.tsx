@@ -23,10 +23,29 @@ export default function ButtonCollection({ buttonsTitles }: IProps) {
       }))
     );
   }, []);
+
+  useEffect(() => {
+    console.log(buttons);
+  }, [buttons]);
+  function pressBtn(_id: number) {
+    let arr = [...buttons];
+    arr.map((btn) =>
+      btn.id === _id ? (btn.pressed = !btn.pressed) : (btn.pressed = false)
+    );
+    setButtons(arr);
+  }
+
   return (
     <div>
       {buttons.map((btn) => (
-        <StyledButton title={btn.title} pressed={btn.pressed} />
+        <StyledButton
+          click={() => {
+            pressBtn(btn.id);
+          }}
+          btnStyle={2}
+          title={btn.title}
+          pressed={btn.pressed}
+        />
       ))}
     </div>
   );
