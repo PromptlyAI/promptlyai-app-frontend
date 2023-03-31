@@ -7,6 +7,7 @@ interface IProps {
   btnHeight?: number;
   color?: string;
   click?: () => void;
+  pressed?: boolean;
 }
 
 export default function StyledButton({
@@ -16,11 +17,18 @@ export default function StyledButton({
   btnHeight = 35,
   color,
   click,
+  pressed,
 }: IProps) {
   return (
     <button
       onClick={() => click !== undefined && click()}
-      className={`btn-style-${btnStyle} btn`}
+      className={
+        pressed !== undefined
+          ? pressed
+            ? `btn-style-3 btn`
+            : `btn-style-2 btn`
+          : `btn-style-${btnStyle} btn`
+      }
       style={{
         width: btnWidth,
         height: btnHeight,

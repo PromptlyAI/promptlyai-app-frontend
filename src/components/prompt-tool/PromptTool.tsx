@@ -3,6 +3,7 @@ import runTextAnimation from "../../functions/runTextAnimation";
 import StyledButton from "../../shared/button-styles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import "./PromptTool.css";
+import ButtonCollection from "../../shared/button-styles/ButtonCollection";
 
 export default function PromptTool() {
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -55,8 +56,9 @@ export default function PromptTool() {
         </div>
         <label htmlFor="">Choose output</label>
         <div className="output-types-container">
-          <StyledButton btnStyle={2} title="text" />
-          <StyledButton btnStyle={2} title="picture" />
+          <ButtonCollection buttonsTitles={["text", "picture"]} />
+          {/* <StyledButton btnStyle={2} title="text" />
+          <StyledButton btnStyle={2} title="picture" /> */}
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <input type="text" placeholder="write prompt" />
