@@ -6,6 +6,7 @@ interface IProps {
   btnWidth?: number;
   btnHeight?: number;
   color?: string;
+  click?: () => void;
 }
 
 export default function StyledButton({
@@ -14,9 +15,11 @@ export default function StyledButton({
   btnWidth = 100,
   btnHeight = 35,
   color,
+  click,
 }: IProps) {
   return (
     <button
+      onClick={() => click !== undefined && click()}
       className={`btn-style-${btnStyle} btn`}
       style={{
         width: btnWidth,
