@@ -18,6 +18,8 @@
     justify-content: center;
     height: 480px;
     
+    border-radius: 20px;
+
     overflow-y: scroll;
     gap: 50px;
 }
@@ -29,4 +31,25 @@
 label{
     font-size: 28px;
     color: white
+}
+.clear-history-container{
+    z-index: 0;
+    height: 100px;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    background-color: #2B2B32;
+
+}
+.bottom-gradient{
+    position: absolute;
+    bottom: 100px;
+    width: 97%;
+    height: 50px;
+    background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 34%);
 }

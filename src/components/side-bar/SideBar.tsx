@@ -45,24 +45,42 @@ export default function SideBar() {
           </div>
         </div>
         <label htmlFor="">PROMPT HISTORY</label>
-        <div className="prompt-history-container">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              paddingTop: "10px",
-            }}
-          >
-            {promptHistory.map((history) => (
-              <StyledButton
-                btnWidth={355}
-                btnHeight={56}
-                btnStyle={2}
-                textColor="white"
-                title={history.title}
-              />
-            ))}
+        <div
+          style={{
+            position: "relative",
+            height: "fit-content",
+            paddingBottom: "50px",
+          }}
+        >
+          <div className="prompt-history-container">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                paddingTop: "10px",
+              }}
+            >
+              {promptHistory.map((history) => (
+                <StyledButton
+                  btnWidth={355}
+                  btnHeight={56}
+                  btnStyle={2}
+                  textColor="white"
+                  title={history.title}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="bottom-gradient"></div>
+          <div className="clear-history-container">
+            <StyledButton
+              btnWidth={355}
+              btnHeight={56}
+              btnStyle={2}
+              textColor="white"
+              title="CLEAR PROMPT HISTORY"
+            />
           </div>
         </div>
       </div>
