@@ -2,4 +2,31 @@
 
 * {
   font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+.App{
+  display: flex;
+}
+::-webkit-scrollbar-track
+{
+  z-index: 10;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  z-index: 10;
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  z-index: 10;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }

@@ -1,4 +1,5 @@
 .btn {
+  position: relative;
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -21,18 +22,35 @@
 }
 
 .btn-style-2 {
+  
   font-weight: 700;
-  background: none;
+  font-size: 23px;
+  background: #777777;
   border: solid black 2px;
 
-  color: black;
-  border-radius: 5px;
+  color: white;
+  border-radius: 17px;
+
+  
 }
 .btn-style-3 {
   font-weight: 700;
-  background: black;
+  font-size: 23px;
+  background: #605C9D;
   border: solid white 2px;
 
   color: white;
   border-radius: 10px;
+}
+
+.left-icon{
+  position: absolute;
+  left: 20px;
+  color: #202026;
+
+}
+.right-icon{
+  position: absolute;
+  right: 20px;
+  color: #202026;
 }

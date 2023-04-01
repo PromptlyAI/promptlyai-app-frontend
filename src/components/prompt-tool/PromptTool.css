@@ -1,6 +1,6 @@
 .prompt-tool-main-container {
   width: 800px;
-  height: 1000px;
+  height: fit-content;
 
   display: flex;
   justify-content: center;

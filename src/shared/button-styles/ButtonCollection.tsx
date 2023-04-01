@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import StyledButton from "./StyledButton";
 
+interface styleProps {
+  display: string;
+  flexDirection: string;
+  gap: string;
+}
+
 interface IProps {
   buttonsTitles: string[];
+  _styles?: styleProps;
 }
 
 interface IButton {
@@ -11,7 +18,7 @@ interface IButton {
   id: number;
 }
 
-export default function ButtonCollection({ buttonsTitles }: IProps) {
+export default function ButtonCollection({ buttonsTitles, _styles }: IProps) {
   const [buttons, setButtons] = useState<IButton[]>([]);
 
   useEffect(() => {
@@ -42,6 +49,8 @@ export default function ButtonCollection({ buttonsTitles }: IProps) {
           click={() => {
             pressBtn(btn.id);
           }}
+          btnWidth={383}
+          btnHeight={63}
           btnStyle={2}
           title={btn.title}
           pressed={btn.pressed}
