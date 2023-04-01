@@ -1,5 +1,7 @@
 import React from "react";
 import "../button-styles/StyledButton.css";
+import Book_open from "./Book_open.png";
+import Trash from "./Trash.png";
 interface IProps {
   btnStyle?: number;
   title?: string;
@@ -8,6 +10,7 @@ interface IProps {
   color?: string;
   click?: () => void;
   pressed?: boolean;
+  textColor?: string;
 }
 
 export default function StyledButton({
@@ -18,6 +21,7 @@ export default function StyledButton({
   color,
   click,
   pressed,
+  textColor,
 }: IProps) {
   return (
     <button
@@ -30,12 +34,15 @@ export default function StyledButton({
           : `btn-style-${btnStyle} btn`
       }
       style={{
-        width: btnWidth,
-        height: btnHeight,
+        minWidth: btnWidth,
+        minHeight: btnHeight,
         background: color,
+        color: textColor,
       }}
     >
+      <img className="left-icon" src={Book_open} alt="" />
       {title}
+      {/* <img className="right-icon" src={Trash} alt="" /> */}
     </button>
   );
 }
