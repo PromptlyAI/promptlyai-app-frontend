@@ -11,6 +11,8 @@ interface IProps {
   click?: () => void;
   pressed?: boolean;
   textColor?: string;
+  bookIcon?: boolean;
+  trashIcon?: boolean;
 }
 
 export default function StyledButton({
@@ -22,6 +24,8 @@ export default function StyledButton({
   click,
   pressed,
   textColor,
+  bookIcon,
+  trashIcon,
 }: IProps) {
   return (
     <button
@@ -40,9 +44,11 @@ export default function StyledButton({
         color: textColor,
       }}
     >
-      <img className="left-icon" src={Book_open} alt="" />
+      {bookIcon && <img className="left-icon" src={Book_open} alt="" />}
       {title}
-      {/* <img className="right-icon" src={Trash} alt="" /> */}
+      {trashIcon && pressed && (
+        <img className="right-icon" src={Trash} alt="" />
+      )}
     </button>
   );
 }
