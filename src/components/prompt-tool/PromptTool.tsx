@@ -4,6 +4,7 @@ import StyledButton from "../../shared/button-styles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import "./PromptTool.css";
 import ButtonCollection from "../../shared/button-styles/ButtonCollection";
+import UpgradeButton from "../upgrade-button/UpgradeButton";
 
 export default function PromptTool() {
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -49,54 +50,68 @@ export default function PromptTool() {
     await runTextAnimation(response, setOutput, 20);
   }
   return (
-    <div className="prompt-tool-main-container">
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <div className="center">
-          <h1>Prompt Tool</h1>
-        </div>
-        <label htmlFor="">Choose output</label>
-        <div className="output-types-container">
-          <ButtonCollection buttonsTitles={["text", "picture"]} />
-          {/* <StyledButton btnStyle={2} title="text" />
-          <StyledButton btnStyle={2} title="picture" /> */}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <input type="text" placeholder="write prompt" />
+    <div className="prompt-tool-container">
+      <div className="prompt-tool-top-container">
+        <StyledButton
+          btnStyle={3}
+          title="A fish thats swimming underne..."
+          bookIcon={true}
+          btnWidth={604}
+          btnHeight={68}
+          pressed={true}
+          trashIcon={true}
+        />
+        <UpgradeButton />
+      </div>
+      <div className="prompt-tool-main-container">
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div className="center">
-            <StyledButton
-              click={() => fetchPromptOutput()}
-              btnStyle={1}
-              title="promptify"
-            />
+            <h1>Prompt Tool</h1>
           </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <label htmlFor="">output prompt:</label>
-          <StyledInput
-            inpStyle={1}
-            title={promptOutput}
-            change={(ev) => setPromptOutput(ev.target.value)}
-            inpHeight={100}
-            inpWidht={400}
-          />
-
-          <StyledButton
-            click={() => fetchOutput()}
-            btnStyle={1}
-            title="Generate"
-          />
-
-          {output && (
-            <div className="output-text-container">
-              <span>{output}</span>
+          <label htmlFor="">Choose output</label>
+          <div className="output-types-container">
+            <ButtonCollection buttonsTitles={["text", "picture"]} />
+            {/* <StyledButton btnStyle={2} title="text" />
+          <StyledButton btnStyle={2} title="picture" /> */}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <input type="text" placeholder="write prompt" />
+            <div className="center">
+              <StyledButton
+                click={() => fetchPromptOutput()}
+                btnStyle={1}
+                title="promptify"
+              />
             </div>
-          )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <label htmlFor="">output prompt:</label>
+            <StyledInput
+              inpStyle={1}
+              title={promptOutput}
+              change={(ev) => setPromptOutput(ev.target.value)}
+              inpHeight={100}
+              inpWidht={400}
+            />
+
+            <StyledButton
+              click={() => fetchOutput()}
+              btnStyle={1}
+              title="Generate"
+            />
+
+            {output && (
+              <div className="output-text-container">
+                <span>{output}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

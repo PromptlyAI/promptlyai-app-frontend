@@ -18,6 +18,7 @@
   margin: 0;
 }
 .App {
+  background: var(--dark-blue);
   display: flex;
 }
 ::-webkit-scrollbar-track {
