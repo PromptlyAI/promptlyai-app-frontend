@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ButtonCollection from "../../shared/button-styles/ButtonCollection";
-import StyledButton from "../../shared/button-styles/StyledButton";
+import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
+import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SideBar.css";
 import Logo from "../../images/PromptlyLogo.png";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "../button-styles/StyledButton.css";
+import "../ButtonStyles/StyledButton.css";
 import BookClicked from "../../images/BookClicked.png";
 import Book from "../../images/Book.png";
 

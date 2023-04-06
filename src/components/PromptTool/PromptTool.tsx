@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import runTextAnimation from "../../functions/runTextAnimation";
-import StyledButton from "../../shared/button-styles/StyledButton";
+import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import "./PromptTool.css";
-import ButtonCollection from "../../shared/button-styles/ButtonCollection";
-import UpgradeButton from "../upgrade-button/UpgradeButton";
+import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
+import UpgradeButton from "../UpgradeSection/UpgradeSection";
 
 export default function PromptTool() {
+  const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
   const [promptOutput, setPromptOutput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
 
@@ -61,7 +62,7 @@ export default function PromptTool() {
           pressed={true}
           trashIcon={false}
         />
-        <UpgradeButton />
+        {!isPremiumUser && <UpgradeButton />}
       </div>
       <div className="prompt-tool-main-container">
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>

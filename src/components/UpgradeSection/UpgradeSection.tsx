@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./UpgradeButton.css";
+import "./UpgradeSection.css";
 export default function UpgradeButton() {
   const [wordsUsed, setWordsUsed] = useState<number>(5000);
   return (
@@ -13,7 +13,7 @@ export default function UpgradeButton() {
           ></div>
         </div>
       </div>
-      <button className="upgrade">UPGRADE</button>
+      <button className="upgrade-btn">UPGRADE</button>
     </div>
   );
 }

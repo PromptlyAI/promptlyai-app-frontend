@@ -3,7 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import PromptPage from "./pages/PromptPage/PromptPage";
-import SideBar from "./components/side-bar/SideBar";
+import SideBar from "./components/SideBar/SideBar";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
