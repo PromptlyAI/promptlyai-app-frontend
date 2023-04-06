@@ -59,7 +59,7 @@ export default function PromptTool() {
           btnWidth={604}
           btnHeight={68}
           pressed={true}
-          trashIcon={true}
+          trashIcon={false}
         />
         <UpgradeButton />
       </div>
@@ -71,8 +71,6 @@ export default function PromptTool() {
           <label htmlFor="">Choose output</label>
           <div className="output-types-container">
             <ButtonCollection buttonsTitles={["text", "picture"]} />
-            {/* <StyledButton btnStyle={2} title="text" />
-          <StyledButton btnStyle={2} title="picture" /> */}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input type="text" placeholder="write prompt" />

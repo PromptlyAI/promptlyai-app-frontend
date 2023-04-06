@@ -1,7 +1,11 @@
 import React from "react";
 import "../button-styles/StyledButton.css";
-import Book_open from "./Book_open.png";
-import Trash from "./Trash.png";
+import BookClicked from "../../images/BookClicked.png";
+import Book from "../../images/Book.png";
+
+import Trash from "../../images/Trash.png";
+import { FaBeer } from "react-icons/fa";
+
 interface IProps {
   btnStyle?: number;
   title?: string;
@@ -46,7 +50,12 @@ export default function StyledButton({
         color: textColor,
       }}
     >
-      {bookIcon && <img className="left-icon" src={Book_open} alt="" />}
+      {bookIcon &&
+        (pressed ? (
+          <img className="left-icon" src={BookClicked} alt="" />
+        ) : (
+          <img className="left-icon" src={Book} alt="" />
+        ))}
       {title}
       {trashIcon && pressed && (
         <img

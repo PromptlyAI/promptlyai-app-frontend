@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ButtonCollection from "../../shared/button-styles/ButtonCollection";
 import StyledButton from "../../shared/button-styles/StyledButton";
 import "./SideBar.css";
-import Logo from "./PromptlyLogo.png";
+import Logo from "../../images/PromptlyLogo.png";
 
 interface histotyProps {
   title: string;
