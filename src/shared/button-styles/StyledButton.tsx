@@ -9,6 +9,7 @@ interface IProps {
   btnHeight?: number;
   color?: string;
   click?: () => void;
+  deleteIconClick?: () => void;
   pressed?: boolean;
   textColor?: string;
   bookIcon?: boolean;
@@ -23,6 +24,7 @@ export default function StyledButton({
   color,
   click,
   pressed,
+  deleteIconClick,
   textColor,
   bookIcon,
   trashIcon,
@@ -47,7 +49,12 @@ export default function StyledButton({
       {bookIcon && <img className="left-icon" src={Book_open} alt="" />}
       {title}
       {trashIcon && pressed && (
-        <img className="right-icon" src={Trash} alt="" />
+        <img
+          // onClick={() => deleteIconClick()}
+          className="right-icon"
+          src={Trash}
+          alt=""
+        />
       )}
     </button>
   );

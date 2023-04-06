@@ -1,5 +1,5 @@
 import React from "react";
-import PromptTool from "../components/prompt-tool/PromptTool";
+import PromptTool from "../../components/prompt-tool/PromptTool";
 
 export default function PromptPage() {
   return (

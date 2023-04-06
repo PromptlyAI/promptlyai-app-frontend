@@ -12,89 +12,98 @@ interface histotyProps {
 }
 
 export default function SideBar() {
-  const [promptHistory, setPromptHistory] = useState<histotyProps[]>([
+  const [promptHistory, setPromptHistory] = useState<histotyProps[]>(() => [
     {
-      title: "butcher fish",
+      title: "butcher 1 fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.ceil(Math.round(Math.random() * 100) / 100) * 100,
     },
     {
       title: "butcher fish",
       path: "slakt",
       pressed: false,
-      id: Math.random(),
+      id: Math.round(Math.random() * 100) / 100,
     },
   ]);
 
+  // function pressBtn(_id: number) {
+  //   let arr = [...promptHistory];
+  //   arr.map((btn) =>
+  //     btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
+  //   );
+  //   setPromptHistory(arr);
+  // }
   function pressBtn(_id: number) {
-    let arr = [...promptHistory];
-    arr.map((btn) =>
-      btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
+    let arr = promptHistory.map((btn) =>
+      btn.id === _id ? { ...btn, pressed: true } : { ...btn, pressed: false }
     );
     setPromptHistory(arr);
   }
 
+  const deleteBtn = (index: number) => {
+    setPromptHistory((prevValue) => prevValue.splice(index));
+  };
   return (
     <div className="side-bar-container">
       <div className="logo-container">
@@ -134,17 +143,20 @@ export default function SideBar() {
                 paddingBottom: "100px",
               }}
             >
-              {promptHistory.map((history) => (
+              {promptHistory.map((historyBtn, index) => (
                 <StyledButton
                   click={() => {
-                    pressBtn(history.id);
+                    pressBtn(historyBtn.id);
                   }}
-                  pressed={history.pressed}
+                  deleteIconClick={() => {
+                    setPromptHistory((prevValue) => prevValue.splice(index));
+                  }}
+                  pressed={historyBtn.pressed}
                   btnWidth={355}
                   btnHeight={56}
                   btnStyle={2}
                   textColor="white"
-                  title={history.title}
+                  title={historyBtn.title}
                   bookIcon={true}
                   trashIcon={true}
                 />
@@ -159,6 +171,7 @@ export default function SideBar() {
               btnStyle={2}
               textColor="white"
               title="CLEAR PROMPT HISTORY"
+              deleteIconClick={() => {}}
             />
           </div>
         </div>
