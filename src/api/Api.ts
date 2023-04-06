@@ -12,8 +12,11 @@ export default async function Api({path, method, params}: IProps) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(params)
+        body: params && JSON.stringify(params)
     })
-    const data = await response.json();
-    return await data
+    try{
+        return await response.json();
+    }catch(err){
+        return response
+    }
 }

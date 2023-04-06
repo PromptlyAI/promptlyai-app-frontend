@@ -6,6 +6,7 @@ import PromptPage from "./pages/PromptPage/PromptPage";
 import SideBar from "./components/side-bar/SideBar";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </div>
     </Router>
