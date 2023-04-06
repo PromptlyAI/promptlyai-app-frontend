@@ -1,6 +1,7 @@
 .side-bar-container {
   width: 440px;
   height: 100vh;
+  position: relative;
 
   background: #1f1f24;
 }

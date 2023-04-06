@@ -3,6 +3,7 @@ import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SideBar.css";
 import Logo from "../../images/PromptlyLogo.png";
+import ProfileBar from "../ProfileBar/ProfileBar";
 
 interface histotyProps {
   title: string;
@@ -176,6 +177,7 @@ export default function SideBar() {
           </div>
         </div>
       </div>
+      <ProfileBar />
     </div>
   );
 }
