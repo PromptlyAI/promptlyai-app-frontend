@@ -4,7 +4,7 @@ import BookClicked from "../../images/BookClicked.png";
 import Book from "../../images/Book.png";
 
 import Trash from "../../images/Trash.png";
-import { FaBeer } from "react-icons/fa";
+import { AiOutlineSearch } from "react-icons/ai";
 
 interface IProps {
   btnStyle?: number;
@@ -18,6 +18,7 @@ interface IProps {
   textColor?: string;
   bookIcon?: boolean;
   trashIcon?: boolean;
+  customIcon?: string;
 }
 
 export default function StyledButton({
@@ -32,6 +33,7 @@ export default function StyledButton({
   textColor,
   bookIcon,
   trashIcon,
+  customIcon = "",
 }: IProps) {
   return (
     <button
@@ -56,6 +58,15 @@ export default function StyledButton({
         ) : (
           <img className="left-icon" src={Book} alt="" />
         ))}
+      {customIcon && (
+        <>
+          {customIcon === "search" ? (
+            <AiOutlineSearch className="left-icon" />
+          ) : (
+            <AiOutlineSearch className="left-icon" />
+          )}
+        </>
+      )}
       {title}
       {trashIcon && pressed && (
         <img

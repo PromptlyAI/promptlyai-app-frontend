@@ -7,6 +7,7 @@ img {
   position: relative;
   cursor: pointer;
   transition: 0.2s ease;
+  font-size: 23px;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -28,7 +29,7 @@ img {
 
 .btn-style-2 {
   font-weight: 700;
-  font-size: 23px;
+
   background: var(--button-color);
   border: solid black 2px;
 
@@ -37,7 +38,6 @@ img {
 }
 .btn-style-3 {
   font-weight: 700;
-  font-size: 23px;
   background: var(--button-select-color);
   border: solid white 2px;
 
@@ -53,4 +53,17 @@ img {
   position: absolute;
   right: 20px;
   color: #202026;
+}
+@media only screen and (max-width: 1000px) {
+  .btn {
+    font-size: 20px;
+  }
+  .left-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .right-icon {
+    width: 22px;
+    height: 22px;
+  }
 }

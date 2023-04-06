@@ -12,13 +12,17 @@
 }
 h2 {
   color: white;
+  cursor: pointer;
+  user-select: none;
 }
 .profile-picture {
+  cursor: pointer;
   border-radius: 100px;
   width: 65px;
   height: 65px;
 }
 .settings-btn {
+  cursor: pointer;
   position: absolute;
   top: 15px;
   right: 40px;
