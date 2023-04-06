@@ -1,0 +1,16 @@
+.login-page-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+h1{
+    color: white;
+    text-align: center;
+}
+.login-inputs{
+    gap: 10px;
+    align-items: center ;
+    display: flex;
+    flex-direction: column;
+}

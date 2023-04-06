@@ -1,4 +1,9 @@
+img {
+  user-select: none;
+}
+
 .btn {
+  user-select: none;
   position: relative;
   cursor: pointer;
   transition: 0.2s ease;
@@ -7,7 +12,7 @@
   transform: translateY(-2px);
 }
 
-.btn-style-1 {
+/* .btn-style-1 {
   font-weight: 700;
   background: rgb(142, 170, 255);
   background: radial-gradient(
@@ -19,37 +24,33 @@
   color: white;
   border: none;
   border-radius: 20px;
-}
+} */
 
 .btn-style-2 {
-  
   font-weight: 700;
   font-size: 23px;
-  background: #777777;
+  background: var(--button-color);
   border: solid black 2px;
 
   color: white;
   border-radius: 17px;
-
-  
 }
 .btn-style-3 {
   font-weight: 700;
   font-size: 23px;
-  background: #605C9D;
+  background: var(--button-select-color);
   border: solid white 2px;
 
   color: white;
   border-radius: 10px;
 }
 
-.left-icon{
+.left-icon {
   position: absolute;
   left: 20px;
   color: #202026;
-
 }
-.right-icon{
+.right-icon {
   position: absolute;
   right: 20px;
   color: #202026;
