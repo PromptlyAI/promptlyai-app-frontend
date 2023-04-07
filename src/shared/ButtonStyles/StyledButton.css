@@ -7,28 +7,15 @@ img {
   position: relative;
   cursor: pointer;
   transition: 0.2s ease;
+  font-size: 23px;
 }
 .btn:hover {
   transform: translateY(-2px);
 }
 
-/* .btn-style-1 {
-  font-weight: 700;
-  background: rgb(142, 170, 255);
-  background: radial-gradient(
-    circle,
-    rgba(142, 170, 255, 1) 0%,
-    rgba(95, 171, 255, 1) 100%
-  );
-
-  color: white;
-  border: none;
-  border-radius: 20px;
-} */
-
 .btn-style-2 {
   font-weight: 700;
-  font-size: 23px;
+
   background: var(--button-color);
   border: solid black 2px;
 
@@ -37,8 +24,24 @@ img {
 }
 .btn-style-3 {
   font-weight: 700;
-  font-size: 23px;
   background: var(--button-select-color);
+  border: solid white 2px;
+
+  color: white;
+  border-radius: 10px;
+}
+.btn-style-4 {
+  font-weight: 700;
+  background: rgb(252, 70, 70);
+  border: solid white 2px;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+}
+.btn-style-5 {
+  font-weight: 700;
+  background: transparent;
+  padding: 10px;
   border: solid white 2px;
 
   color: white;
@@ -48,10 +51,22 @@ img {
 .left-icon {
   position: absolute;
   left: 20px;
-  color: #202026;
 }
 .right-icon {
   position: absolute;
   right: 20px;
   color: #202026;
+}
+@media only screen and (max-width: 1000px) {
+  .btn {
+    font-size: 20px;
+  }
+  .left-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .right-icon {
+    width: 22px;
+    height: 22px;
+  }
 }

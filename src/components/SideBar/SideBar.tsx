@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import ButtonCollection from "../../shared/button-styles/ButtonCollection";
-import StyledButton from "../../shared/button-styles/StyledButton";
+import React, { useState, useEffect } from "react";
+import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
+import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SideBar.css";
-import Logo from "./PromptlyLogo.png";
+import Logo from "../../images/PromptlyLogo.png";
+import ProfileBar from "../ProfileBar/ProfileBar";
 
-interface histotyProps {
+interface buttonProps {
   title: string;
   path: string;
   pressed: boolean;
   id: number;
+  icon?: string;
 }
 
 export default function SideBar() {
-  const [promptHistory, setPromptHistory] = useState<histotyProps[]>(() => [
+  const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => [
     {
       title: "butcher 1 fish",
       path: "slakt",
@@ -86,28 +88,69 @@ export default function SideBar() {
       id: Math.round(Math.random() * 100) / 100,
     },
   ]);
+  const [modes, setModes] = useState<buttonProps[]>(() => [
+    {
+      title: "PROMPT-EDITOR",
+      path: "",
+      pressed: true,
+      id: Math.round(Math.random() * 100) / 100,
+      icon: "search",
+    },
+    {
+      title: "IMAGE-EDITOR",
+      path: "",
+      pressed: false,
+      id: Math.round(Math.random() * 100) / 100,
+      icon: "search",
+    },
+  ]);
 
-  // function pressBtn(_id: number) {
-  //   let arr = [...promptHistory];
-  //   arr.map((btn) =>
-  //     btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
-  //   );
-  //   setPromptHistory(arr);
-  // }
-  function pressBtn(_id: number) {
-    let arr = promptHistory.map((btn) =>
-      btn.id === _id ? { ...btn, pressed: true } : { ...btn, pressed: false }
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
+  const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
+
+  useEffect(() => {
+    if (screenWidth < 1000) {
+      setSmallBtnSize(200);
+      setBigBtnSize(250);
+      return;
+    }
+    if (screenWidth < 1200) {
+      setSmallBtnSize(300);
+      setBigBtnSize(300);
+      return;
+    }
+  }, [screenWidth]);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  function pressHistoryBtn(_id: number) {
+    let arr = [...promptHistory];
+    arr.map((btn) =>
+      btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     );
     setPromptHistory(arr);
   }
 
-  const deleteBtn = (index: number) => {
-    setPromptHistory((prevValue) => prevValue.splice(index));
-  };
+  function pressModeBtn(_id: number) {
+    let arr = [...modes];
+    arr.map((btn) =>
+      btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
+    );
+    setModes(arr);
+  }
+
+  // const deleteBtn = (index: number) => {
+  //   setPromptHistory((prevValue) => prevValue.splice(index));
+  // };
   return (
     <div className="side-bar-container">
       <div className="logo-container">
-        <img src={Logo} alt="" />
+        <img className="logo" src={Logo} alt="" />
       </div>
       <div style={{ padding: "20px" }}>
         <div
@@ -120,9 +163,22 @@ export default function SideBar() {
         >
           <label htmlFor="">MODE</label>
           <div className="mode-container">
-            <ButtonCollection
-              buttonsTitles={["PROMPT-EDITOR", "IMAGE-EDITOR"]}
-            />
+            {modes.map((modeBtn) => (
+              <StyledButton
+                click={() => {
+                  pressModeBtn(modeBtn.id);
+                }}
+                pressed={modeBtn.pressed}
+                btnWidth={bigBtnsSize}
+                btnHeight={56}
+                btnStyle={2}
+                textColor="white"
+                title={modeBtn.title}
+                customIcon={modeBtn.icon}
+                bookIcon={false}
+                trashIcon={false}
+              />
+            ))}
           </div>
         </div>
         <label htmlFor="">PROMPT HISTORY</label>
@@ -146,13 +202,13 @@ export default function SideBar() {
               {promptHistory.map((historyBtn, index) => (
                 <StyledButton
                   click={() => {
-                    pressBtn(historyBtn.id);
+                    pressHistoryBtn(historyBtn.id);
                   }}
                   deleteIconClick={() => {
                     setPromptHistory((prevValue) => prevValue.splice(index));
                   }}
                   pressed={historyBtn.pressed}
-                  btnWidth={355}
+                  btnWidth={smallBtnsSize}
                   btnHeight={56}
                   btnStyle={2}
                   textColor="white"
@@ -166,7 +222,7 @@ export default function SideBar() {
           <div className="bottom-gradient"></div>
           <div className="clear-history-container">
             <StyledButton
-              btnWidth={355}
+              btnWidth={bigBtnsSize}
               btnHeight={56}
               btnStyle={2}
               textColor="white"
@@ -176,6 +232,7 @@ export default function SideBar() {
           </div>
         </div>
       </div>
+      <ProfileBar />
     </div>
   );
 }

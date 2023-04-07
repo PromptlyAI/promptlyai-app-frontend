@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StyledButton from "../../shared/button-styles/StyledButton";
+import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./RegisterPage.css";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import Api from "../../api/Api";
@@ -13,7 +13,8 @@ export default function RegisterPage() {
     const response = await Api({
       path: "user/register",
       method: "POST",
-      params: { name, email, password },
+      bodyParams: { name, email, password },
+      token: "",
     });
     console.log(response);
   }

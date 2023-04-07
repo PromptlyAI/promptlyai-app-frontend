@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StyledButton from "../../shared/button-styles/StyledButton";
+import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./LoginPage.css";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import Api from "../../api/Api";
@@ -12,9 +12,11 @@ export default function LoginPage() {
     const response = await Api({
       path: "user/login",
       method: "POST",
-      params: { email, password },
+      bodyParams: { email, password },
     });
-    console.log(response);
+    // const data = await response.json();
+    localStorage.setItem("token", await response.token);
+    console.log(localStorage.getItem("token"));
   }
 
   return (

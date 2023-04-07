@@ -1,7 +1,11 @@
 import React from "react";
-import "../button-styles/StyledButton.css";
-import Book_open from "./Book_open.png";
-import Trash from "./Trash.png";
+import "../ButtonStyles/StyledButton.css";
+import BookClicked from "../../images/BookClicked.png";
+import Book from "../../images/Book.png";
+
+import Trash from "../../images/Trash.png";
+import { AiOutlineSearch } from "react-icons/ai";
+
 interface IProps {
   btnStyle?: number;
   title?: string;
@@ -14,6 +18,7 @@ interface IProps {
   textColor?: string;
   bookIcon?: boolean;
   trashIcon?: boolean;
+  customIcon?: string;
 }
 
 export default function StyledButton({
@@ -28,6 +33,7 @@ export default function StyledButton({
   textColor,
   bookIcon,
   trashIcon,
+  customIcon = "",
 }: IProps) {
   return (
     <button
@@ -46,7 +52,21 @@ export default function StyledButton({
         color: textColor,
       }}
     >
-      {bookIcon && <img className="left-icon" src={Book_open} alt="" />}
+      {bookIcon &&
+        (pressed ? (
+          <img className="left-icon" src={BookClicked} alt="" />
+        ) : (
+          <img className="left-icon" src={Book} alt="" />
+        ))}
+      {customIcon && (
+        <>
+          {customIcon === "search" ? (
+            <AiOutlineSearch className="left-icon" />
+          ) : (
+            <AiOutlineSearch className="left-icon" />
+          )}
+        </>
+      )}
       {title}
       {trashIcon && pressed && (
         <img

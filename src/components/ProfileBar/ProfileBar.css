@@ -1,0 +1,29 @@
+.profile-bar-container {
+  border-top: solid var(--button-color) 5px;
+  position: absolute;
+  bottom: 20px;
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  /* justify-content: space-around; */
+  /* padding: 30px; */
+  align-items: center;
+}
+h2 {
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+.profile-picture {
+  cursor: pointer;
+  border-radius: 100px;
+  width: 65px;
+  height: 65px;
+}
+.settings-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 40px;
+}

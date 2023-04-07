@@ -1,6 +1,7 @@
 .side-bar-container {
   width: 440px;
   height: 100vh;
+  position: relative;
 
   background: #1f1f24;
 }
@@ -58,4 +59,34 @@ label {
     rgba(0, 0, 0, 1) 0%,
     rgba(255, 255, 255, 0) 100%
   );
+}
+
+@media only screen and (max-width: 1500px) {
+  .side-bar-container {
+    width: 400px;
+  }
+  .prompt-history-container {
+    height: 350px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  label {
+    font-size: 22px;
+  }
+  .side-bar-container {
+    width: 390px;
+  }
+  .prompt-history-container {
+    height: 300px;
+  }
+  .logo {
+    width: 200.25px;
+    height: 50.25px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .logo {
+    width: 140px;
+    height: 35px;
+  }
 }
