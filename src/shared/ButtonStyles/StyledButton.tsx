@@ -19,6 +19,7 @@ interface IProps {
   bookIcon?: boolean;
   trashIcon?: boolean;
   customIcon?: string;
+  animationPopup?: boolean;
 }
 
 export default function StyledButton({
@@ -34,6 +35,7 @@ export default function StyledButton({
   bookIcon,
   trashIcon,
   customIcon = "",
+  animationPopup = false,
 }: IProps) {
   return (
     <button
@@ -41,8 +43,14 @@ export default function StyledButton({
       className={
         pressed !== undefined
           ? pressed
-            ? `btn-style-3 btn`
+            ? animationPopup
+              ? `btn-style-3 btn animation-popup`
+              : `btn-style-3 btn`
+            : animationPopup
+            ? `btn-style-2 btn animation-popup`
             : `btn-style-2 btn`
+          : animationPopup
+          ? `btn-style-${btnStyle} btn animation-popup`
           : `btn-style-${btnStyle} btn`
       }
       style={{
