@@ -12,9 +12,11 @@ export default function LoginPage() {
     const response = await Api({
       path: "user/login",
       method: "POST",
-      params: { email, password },
+      bodyParams: { email, password },
     });
-    console.log(response);
+    // const data = await response.json();
+    localStorage.setItem("token", await response.token);
+    console.log(localStorage.getItem("token"));
   }
 
   return (

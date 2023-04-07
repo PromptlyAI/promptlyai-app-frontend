@@ -13,7 +13,8 @@ export default function RegisterPage() {
     const response = await Api({
       path: "user/register",
       method: "POST",
-      params: { name, email, password },
+      bodyParams: { name, email, password },
+      token: "",
     });
     console.log(response);
   }

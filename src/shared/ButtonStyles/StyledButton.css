@@ -13,20 +13,6 @@ img {
   transform: translateY(-2px);
 }
 
-/* .btn-style-1 {
-  font-weight: 700;
-  background: rgb(142, 170, 255);
-  background: radial-gradient(
-    circle,
-    rgba(142, 170, 255, 1) 0%,
-    rgba(95, 171, 255, 1) 100%
-  );
-
-  color: white;
-  border: none;
-  border-radius: 20px;
-} */
-
 .btn-style-2 {
   font-weight: 700;
 
@@ -39,6 +25,23 @@ img {
 .btn-style-3 {
   font-weight: 700;
   background: var(--button-select-color);
+  border: solid white 2px;
+
+  color: white;
+  border-radius: 10px;
+}
+.btn-style-4 {
+  font-weight: 700;
+  background: rgb(252, 70, 70);
+  border: solid white 2px;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+}
+.btn-style-5 {
+  font-weight: 700;
+  background: transparent;
+  padding: 10px;
   border: solid white 2px;
 
   color: white;
