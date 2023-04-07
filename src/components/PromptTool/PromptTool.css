@@ -1,6 +1,6 @@
 .prompt-tool-container {
   padding: 50px;
-  height: 700px;
+  height: 900px;
 }
 .prompt-tool-main-container {
   border-radius: 30px;
@@ -10,7 +10,7 @@
   background: var(--light-blue);
 
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .prompt-tool-top-container {
   height: 100px;
