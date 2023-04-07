@@ -5,6 +5,7 @@ import Book from "../../images/Book.png";
 
 import Trash from "../../images/Trash.png";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface IProps {
   btnStyle?: number;
@@ -20,6 +21,7 @@ interface IProps {
   trashIcon?: boolean;
   customIcon?: string;
   animationPopup?: boolean;
+  arrowIcon?: boolean;
 }
 
 export default function StyledButton({
@@ -36,6 +38,7 @@ export default function StyledButton({
   trashIcon,
   customIcon = "",
   animationPopup = false,
+  arrowIcon,
 }: IProps) {
   return (
     <button
@@ -76,13 +79,19 @@ export default function StyledButton({
         </>
       )}
       {title}
-      {trashIcon && pressed && (
-        <img
-          // onClick={() => deleteIconClick()}
-          className="right-icon"
-          src={Trash}
-          alt=""
-        />
+      {arrowIcon ? (
+        <IoIosArrowForward style={{ color: "white" }} className="right-icon" />
+      ) : (
+        <>
+          {trashIcon && pressed && (
+            <img
+              // onClick={() => deleteIconClick()}
+              className="right-icon"
+              src={Trash}
+              alt=""
+            />
+          )}
+        </>
       )}
     </button>
   );

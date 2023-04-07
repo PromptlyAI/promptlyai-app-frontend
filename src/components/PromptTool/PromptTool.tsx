@@ -101,19 +101,19 @@ export default function PromptTool() {
             />
           </div>
         </div>
-        {improvedPrompt && (
-          <div style={{ height: "85%", display: "flex", alignItems: "center" }}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <label htmlFor="">Generated Text:</label>
-              <StyledInput
-                inpWidht={450}
-                inpHeight={600}
-                inpStyle={1}
-                title={improvedPrompt}
-              />
-            </div>
+        {/* {improvedPrompt && ( */}
+        <div style={{ height: "85%", display: "flex", alignItems: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label htmlFor="">Generated Text:</label>
+            <StyledInput
+              inpWidht={450}
+              inpHeight={600}
+              inpStyle={1}
+              title={improvedPrompt}
+            />
           </div>
-        )}
+        </div>
+        {/* )} */}
       </div>
     </div>
   );
