@@ -1,11 +1,12 @@
 import React from "react";
+import "./StyledInput.css";
 
 interface IProps {
   inpStyle: number;
   title: string;
-  change: (ev: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  inpWidht: number;
-  inpHeight: number;
+  change?: (ev: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  inpWidht?: number;
+  inpHeight?: number;
 }
 
 export default function StyledInput({

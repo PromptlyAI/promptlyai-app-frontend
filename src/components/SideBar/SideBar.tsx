@@ -134,6 +134,11 @@ export default function SideBar() {
       btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     );
     setPromptHistory(arr);
+
+    //deselect all mode buttons
+    let modeButtons = [...modes];
+    modeButtons.map((btn) => (btn.pressed = false));
+    setModes(modeButtons);
   }
 
   function pressModeBtn(_id: number) {
@@ -142,11 +147,23 @@ export default function SideBar() {
       btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     );
     setModes(arr);
+
+    //deselect all history buttons
+    let historyArr = [...promptHistory];
+    historyArr.map((btn) => (btn.pressed = false));
+    setPromptHistory(historyArr);
   }
 
-  // const deleteBtn = (index: number) => {
-  //   setPromptHistory((prevValue) => prevValue.splice(index));
-  // };
+  // function rapidHistoryBtnAnimation(){
+  //   let i = 0;
+  //   const interval = setInterval(() => {
+  //     const arr = promptHistory.map((btn, index)=> {
+  //       if(index === i){
+  //         btn.popupA
+  //       }
+  //     })
+  //   }, 20)
+  // }
   return (
     <div className="side-bar-container">
       <div className="logo-container">
@@ -215,6 +232,7 @@ export default function SideBar() {
                   title={historyBtn.title}
                   bookIcon={true}
                   trashIcon={true}
+                  animationPopup={true}
                 />
               ))}
             </div>
@@ -228,6 +246,7 @@ export default function SideBar() {
               textColor="white"
               title="CLEAR PROMPT HISTORY"
               deleteIconClick={() => {}}
+              animationPopup={true}
             />
           </div>
         </div>

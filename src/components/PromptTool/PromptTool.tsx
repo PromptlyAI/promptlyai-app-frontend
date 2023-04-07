@@ -9,10 +9,11 @@ import Api from "../../api/Api";
 
 export default function PromptTool() {
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
+  const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
-  const [output, setOutput] = useState<string>("");
+  const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
-  async function fetchPromptOutput() {
+  async function fetchImprovedPrompt() {
     //fetch prompt output:
 
     const response = await Api({
@@ -24,14 +25,15 @@ export default function PromptTool() {
     await runTextAnimation(response, setPromptOutput, 20);
   }
 
-  async function fetchOutput() {
+  async function fetchFinalOutput() {
     //fetch output:
-    const response = await Api({
-      path: `/prompt?prompt=${promptOutput}`,
-      method: "GET",
-    });
+    // const response = await Api({
+    //   path: `/prompt?prompt=${promptOutput}`,
+    //   method: "GET",
+    // });
 
-    await runTextAnimation(response, setOutput, 20);
+    const response = "fjsdjfisdjfisdnjfi";
+    await runTextAnimation(response, setImprovedPrompt, 20);
   }
   return (
     <div className="prompt-tool-container">
@@ -52,49 +54,66 @@ export default function PromptTool() {
           <div className="center">
             <h1>Prompt Tool</h1>
           </div>
-          <label htmlFor="">Choose output</label>
-          <div className="output-types-container">
-            <ButtonCollection buttonsTitles={["text", "picture"]} />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <input type="text" placeholder="write prompt" />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            <label htmlFor="">Write a prompt</label>
+            <StyledInput
+              inpWidht={450}
+              inpHeight={200}
+              inpStyle={1}
+              title={userPrompt}
+              change={(ev) => setUserPrompt(ev.target.value)}
+            />
             <div className="center">
               <StyledButton
-                click={() => fetchPromptOutput()}
-                btnStyle={1}
+                click={() => fetchImprovedPrompt()}
+                btnStyle={3}
+                btnWidth={200}
+                btnHeight={50}
                 title="promptify"
               />
             </div>
           </div>
+          <label htmlFor="">Improved prompt:</label>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              gap: "10px",
             }}
           >
-            <label htmlFor="">output prompt:</label>
             <StyledInput
               inpStyle={1}
               title={promptOutput}
               change={(ev) => setPromptOutput(ev.target.value)}
-              inpHeight={100}
-              inpWidht={400}
+              inpHeight={200}
+              inpWidht={450}
             />
 
             <StyledButton
-              click={() => fetchOutput()}
-              btnStyle={1}
-              title="Generate"
+              click={() => fetchFinalOutput()}
+              btnStyle={3}
+              btnWidth={200}
+              btnHeight={50}
+              title="Generate Text"
             />
-
-            {output && (
-              <div className="output-text-container">
-                <span>{output}</span>
-              </div>
-            )}
           </div>
         </div>
+        {improvedPrompt && (
+          <div style={{ height: "85%", display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <label htmlFor="">Generated Text:</label>
+              <StyledInput
+                inpWidht={450}
+                inpHeight={600}
+                inpStyle={1}
+                title={improvedPrompt}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

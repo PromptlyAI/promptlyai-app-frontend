@@ -1,3 +1,7 @@
+textarea {
+  resize: none;
+}
 .input-style-1 {
   border-radius: 10px;
+  resize: none;
 }

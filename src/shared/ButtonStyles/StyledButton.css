@@ -57,6 +57,20 @@ img {
   right: 20px;
   color: #202026;
 }
+.animation-popup {
+  animation: itempopup 0.2s ease-in-out 0s 1;
+}
+@keyframes itempopup {
+  0% {
+    opacity: 0.2;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .btn {
     font-size: 20px;
