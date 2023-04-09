@@ -1,0 +1,28 @@
+.intro-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-gray);
+}
+.logo-intro {
+  margin-bottom: 300px;
+  width: 300.475px;
+  height: 75.375px;
+  animation: fade-in-and-out 3s ease-in-out 0s 1;
+}
+@keyframes fade-in-and-out {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

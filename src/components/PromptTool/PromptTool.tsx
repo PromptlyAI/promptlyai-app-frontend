@@ -17,15 +17,21 @@ export default function PromptTool() {
 
   const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
+  const [promptOutputLoading, setPromptOutputLoading] =
+    useState<boolean>(false);
+  const [improvedPromptLoading, setImprovedPromptLoading] =
+    useState<boolean>(false);
+
   async function fetchImprovedPrompt() {
     //fetch prompt output:
-
+    setPromptOutputLoading(true);
     const response = await Api({
       path: `prompt/get-improved-prompt?prompt=${userPrompt}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
     // console.log(await response);
+    setPromptOutputLoading(false);
     const responseString = await response.prompt.output;
     setPromptId(await response.prompt.id);
 
@@ -33,12 +39,14 @@ export default function PromptTool() {
   }
 
   async function fetchFinalOutput() {
+    setImprovedPromptLoading(true);
     const response = await Api({
       path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
+    setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;
     await runTextAnimation(responseString, setImprovedPrompt, 14);
   }
@@ -74,11 +82,16 @@ export default function PromptTool() {
             />
             <div className="center">
               <StyledButton
-                click={() => fetchImprovedPrompt()}
+                click={() => {
+                  if (!promptOutputLoading) {
+                    fetchImprovedPrompt();
+                  }
+                }}
                 btnStyle={3}
                 btnWidth={200}
                 btnHeight={50}
                 title="promptify"
+                loading={promptOutputLoading}
               />
             </div>
           </div>
@@ -100,11 +113,16 @@ export default function PromptTool() {
             />
 
             <StyledButton
-              click={() => fetchFinalOutput()}
+              click={() => {
+                if (!improvedPromptLoading) {
+                  fetchFinalOutput();
+                }
+              }}
               btnStyle={3}
               btnWidth={200}
               btnHeight={50}
               title="Generate Text"
+              loading={improvedPromptLoading}
             />
           </div>
         </div>
@@ -117,6 +135,7 @@ export default function PromptTool() {
               inpHeight={600}
               inpStyle={1}
               title={improvedPrompt}
+              change={(ev) => setImprovedPrompt(ev.target.value)}
             />
           </div>
         </div>
