@@ -9,31 +9,38 @@ import Api from "../../api/Api";
 
 export default function PromptTool() {
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
+
   const [userPrompt, setUserPrompt] = useState<string>("");
+
   const [promptOutput, setPromptOutput] = useState<string>("");
+  const [promptId, setPromptId] = useState<string>("");
+
   const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
   async function fetchImprovedPrompt() {
     //fetch prompt output:
 
     const response = await Api({
-      path: `/prompt?${promptOutput}`,
+      path: `prompt/get-improved-prompt?prompt=${userPrompt}`,
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+    // console.log(await response);
+    const responseString = await response.prompt.output;
+    setPromptId(await response.prompt.id);
+
+    await runTextAnimation(responseString, setPromptOutput, 14);
+  }
+
+  async function fetchFinalOutput() {
+    const response = await Api({
+      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    await runTextAnimation(response, setPromptOutput, 20);
-  }
-
-  async function fetchFinalOutput() {
-    //fetch output:
-    // const response = await Api({
-    //   path: `/prompt?prompt=${promptOutput}`,
-    //   method: "GET",
-    // });
-
-    const response = "fjsdjfisdjfisdnjfi";
-    await runTextAnimation(response, setImprovedPrompt, 20);
+    const responseString = await response.promptAnswer.output;
+    await runTextAnimation(responseString, setImprovedPrompt, 14);
   }
   return (
     <div className="prompt-tool-container">

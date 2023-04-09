@@ -22,6 +22,7 @@ export default function LoginPage() {
   return (
     <div className="login-page-container">
       <div>
+        <img src="" alt="" />
         <h1>Login</h1>
         <div className="login-inputs">
           <label htmlFor="">Enter email</label>

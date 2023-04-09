@@ -31,6 +31,7 @@ export default function SettingsPage() {
         token: token,
       });
       console.log(await response);
+      localStorage.removeItem("token");
     };
     deleteUser();
   }
