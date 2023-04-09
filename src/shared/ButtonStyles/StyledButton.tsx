@@ -22,6 +22,7 @@ interface IProps {
   customIcon?: string;
   animationPopup?: boolean;
   arrowIcon?: boolean;
+  loading?: boolean;
 }
 
 export default function StyledButton({
@@ -39,6 +40,7 @@ export default function StyledButton({
   customIcon = "",
   animationPopup = false,
   arrowIcon,
+  loading = false,
 }: IProps) {
   return (
     <button
@@ -78,7 +80,14 @@ export default function StyledButton({
           )}
         </>
       )}
-      {title}
+      {loading ? (
+        <div className="center">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <>{title}</>
+      )}
+
       {arrowIcon ? (
         <IoIosArrowForward style={{ color: "white" }} className="right-icon" />
       ) : (

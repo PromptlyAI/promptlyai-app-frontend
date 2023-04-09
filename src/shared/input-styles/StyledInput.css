@@ -2,6 +2,8 @@ textarea {
   resize: none;
 }
 .input-style-1 {
+  padding: 6px;
+  outline: none;
   border-radius: 10px;
   resize: none;
 }
