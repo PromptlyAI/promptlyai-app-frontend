@@ -4,100 +4,27 @@ import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SideBar.css";
 import Logo from "../../images/PromptlyLogo.png";
 import ProfileBar from "../ProfileBar/ProfileBar";
-
+import Api from "../../api/Api";
 interface buttonProps {
-  title: string;
-  path: string;
+  input: string;
+  path?: string;
   pressed: boolean;
   id: number;
   icon?: string;
 }
 
 export default function SideBar() {
-  const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => [
-    {
-      title: "butcher 1 fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.ceil(Math.round(Math.random() * 100) / 100) * 100,
-    },
-    {
-      title: "butcher fish",
-      path: "slakt",
-      pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
-    },
-  ]);
+  const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [modes, setModes] = useState<buttonProps[]>(() => [
     {
-      title: "PROMPT-EDITOR",
+      input: "PROMPT-EDITOR",
       path: "",
       pressed: true,
       id: Math.round(Math.random() * 100) / 100,
       icon: "search",
     },
     {
-      title: "IMAGE-EDITOR",
+      input: "IMAGE-EDITOR",
       path: "",
       pressed: false,
       id: Math.round(Math.random() * 100) / 100,
@@ -123,10 +50,29 @@ export default function SideBar() {
   }, [screenWidth]);
 
   useEffect(() => {
+    getPromptHistory();
+
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  async function getPromptHistory() {
+    const response = await Api({
+      path: "prompt/prompts",
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+    console.log(await response);
+
+    const arr: buttonProps[] = await response.map((item: any) => ({
+      input: item.input,
+      id: item.id,
+      pressed: false,
+    }));
+
+    setPromptHistory([...arr]);
+  }
 
   function pressHistoryBtn(_id: number) {
     let arr = [...promptHistory];
@@ -153,17 +99,6 @@ export default function SideBar() {
     historyArr.map((btn) => (btn.pressed = false));
     setPromptHistory(historyArr);
   }
-
-  // function rapidHistoryBtnAnimation(){
-  //   let i = 0;
-  //   const interval = setInterval(() => {
-  //     const arr = promptHistory.map((btn, index)=> {
-  //       if(index === i){
-  //         btn.popupA
-  //       }
-  //     })
-  //   }, 20)
-  // }
   return (
     <div className="side-bar-container">
       <div className="logo-container">
@@ -190,7 +125,7 @@ export default function SideBar() {
                 btnHeight={56}
                 btnStyle={2}
                 textColor="white"
-                title={modeBtn.title}
+                title={modeBtn.input}
                 customIcon={modeBtn.icon}
                 bookIcon={false}
                 trashIcon={false}
@@ -208,35 +143,29 @@ export default function SideBar() {
           }}
         >
           <div className="prompt-history-container">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                paddingTop: "420px",
-                paddingBottom: "100px",
-              }}
-            >
-              {promptHistory.map((historyBtn, index) => (
-                <StyledButton
-                  click={() => {
-                    pressHistoryBtn(historyBtn.id);
-                  }}
-                  deleteIconClick={() => {
-                    setPromptHistory((prevValue) => prevValue.splice(index));
-                  }}
-                  pressed={historyBtn.pressed}
-                  btnWidth={smallBtnsSize}
-                  btnHeight={56}
-                  btnStyle={2}
-                  textColor="white"
-                  title={historyBtn.title}
-                  bookIcon={true}
-                  trashIcon={true}
-                  animationPopup={true}
-                />
-              ))}
-            </div>
+            {promptHistory.map((historyBtn) => (
+              <StyledButton
+                key={historyBtn.id}
+                click={() => {
+                  pressHistoryBtn(historyBtn.id);
+                }}
+                deleteIconClick={() => {
+                  setPromptHistory((prevValue) =>
+                    prevValue.splice(historyBtn.id)
+                  );
+                }}
+                pressed={historyBtn.pressed}
+                btnWidth={smallBtnsSize}
+                btnHeight={56}
+                btnStyle={2}
+                textColor="white"
+                title={historyBtn.input}
+                bookIcon={true}
+                trashIcon={true}
+                animationPopup={true}
+              />
+            ))}
+            {/* </div> */}
           </div>
           <div className="bottom-gradient"></div>
           <div className="clear-history-container">
