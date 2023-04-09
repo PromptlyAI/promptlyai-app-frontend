@@ -26,9 +26,7 @@
 
   padding-bottom: 100px;
 }
-.prompt-history-container::-webkit-scrollbar {
-  height: 50px;
-  width: 10px;
+.prompt-history-container::-webkit-scrollbar-thumb {
 }
 .mode-container {
   display: flex;
@@ -43,7 +41,9 @@ label {
 .clear-history-container {
   height: 100px;
   width: 100%;
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@ label {
 }
 .bottom-gradient {
   position: absolute;
-  bottom: 80px;
+  bottom: 130px;
   width: 97%;
   height: 45px;
   background: rgb(0, 0, 0);

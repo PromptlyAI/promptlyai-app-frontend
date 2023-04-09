@@ -159,7 +159,11 @@ export default function SideBar() {
                 btnHeight={56}
                 btnStyle={2}
                 textColor="white"
-                title={historyBtn.input}
+                title={
+                  historyBtn.input.length > 20
+                    ? `${historyBtn.input.slice(0, 20)}...`
+                    : historyBtn.input
+                }
                 bookIcon={true}
                 trashIcon={true}
                 animationPopup={true}
