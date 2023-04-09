@@ -194,6 +194,7 @@ export default function SideBar() {
                 customIcon={modeBtn.icon}
                 bookIcon={false}
                 trashIcon={false}
+                arrowIcon={true}
               />
             ))}
           </div>
