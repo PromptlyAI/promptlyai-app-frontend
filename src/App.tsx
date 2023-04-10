@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import IntroPage from "./pages/IntroPage/IntroPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 function App() {
   return (
@@ -26,10 +27,9 @@ function App() {
           />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-
           <Route path="/loading" element={<IntroPage />} />
-
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </Router>
