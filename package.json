@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "serve -s build -l 3000"
+    "start": "vite serve"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -15,8 +15,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router": "^6.10.0",
-    "react-router-dom": "^6.10.0",
-    "serve": "^14.2.0"
+    "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
