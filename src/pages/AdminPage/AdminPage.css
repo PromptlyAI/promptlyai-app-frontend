@@ -39,7 +39,7 @@
 }
 .bottom-gradient-admin {
   position: absolute;
-  bottom: 12px;
+  bottom: 0;
   width: 98.7%;
   height: 50px;
 

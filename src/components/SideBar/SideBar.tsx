@@ -15,6 +15,8 @@ interface buttonProps {
 
 export default function SideBar() {
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
+  const [promptHistoryLoading, setPromptHistoryLoading] =
+    useState<boolean>(false);
   const [modes, setModes] = useState<buttonProps[]>(() => [
     {
       input: "PROMPT-EDITOR",
@@ -58,6 +60,7 @@ export default function SideBar() {
   }, []);
 
   async function getPromptHistory() {
+    setPromptHistoryLoading(true);
     const response = await Api({
       path: "prompt/prompts",
       method: "GET",
@@ -72,6 +75,7 @@ export default function SideBar() {
     }));
 
     setPromptHistory([...arr]);
+    setPromptHistoryLoading(false);
   }
 
   function pressHistoryBtn(_id: number) {
@@ -101,8 +105,10 @@ export default function SideBar() {
   }
   return (
     <div className="side-bar-container">
-      <div className="logo-container">
-        <img className="logo" src={Logo} alt="" />
+      <div className="logo-main-container">
+        <div className="logo-container">
+          <img className="logo" src={Logo} alt="" />
+        </div>
       </div>
       <div style={{ padding: "20px" }}>
         <div
@@ -143,7 +149,7 @@ export default function SideBar() {
           }}
         >
           <div className="prompt-history-container">
-            {promptHistory.length > 0 ? (
+            {!promptHistoryLoading ? (
               <>
                 {promptHistory.map((historyBtn) => (
                   <StyledButton
@@ -173,7 +179,15 @@ export default function SideBar() {
                 ))}
               </>
             ) : (
-              <div className="center">
+              <div
+                style={{
+                  width: "100%",
+                  height: "15%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
                 <div className="loader"></div>
               </div>
             )}
