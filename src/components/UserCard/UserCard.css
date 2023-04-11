@@ -1,0 +1,11 @@
+.user-card-container{
+    background: var(--button-select-color);
+    width: 250px;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    gap: 10px;
+}
