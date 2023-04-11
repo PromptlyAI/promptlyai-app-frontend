@@ -80,7 +80,7 @@ export default function SideBar() {
       btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     );
     setPromptHistory(arr);
-
+    
     //deselect all mode buttons
     let modeButtons = [...modes];
     modeButtons.map((btn) => (btn.pressed = false));
