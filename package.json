@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "vite serve"
+    "start": "npx http-server ./dist"
   },
   "dependencies": {
     "axios": "^0.24.0",

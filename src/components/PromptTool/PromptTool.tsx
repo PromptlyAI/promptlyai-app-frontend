@@ -6,6 +6,8 @@ import "./PromptTool.css";
 import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import Api from "../../api/Api";
+import { useNavigate } from "react-router";
+
 
 export default function PromptTool() {
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
@@ -21,6 +23,42 @@ export default function PromptTool() {
     useState<boolean>(false);
   const [improvedPromptLoading, setImprovedPromptLoading] =
     useState<boolean>(false);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    checkIfUserHasToLogInAndLogInIfItIsThatWay();
+  });
+
+  function checkIfUserHasToLogInAndLogInIfItIsThatWay(){
+    let token = localStorage.getItem("token");
+    if(!token || isJwtExpired(token)){
+      navigate("/login");
+    }
+  }
+
+  function isJwtExpired(jwt : string) {
+    // Step 1: Split the token into its parts
+    const tokenParts = jwt.split('.');
+    if (tokenParts.length !== 3) {
+      throw new Error('Invalid JWT format');
+    }
+  
+    // Step 2: Decode the payload
+    const payloadBase64Url = tokenParts[1];
+    const payloadBase64 = payloadBase64Url.replace('-', '+').replace('_', '/');
+    const payloadJson = atob(payloadBase64);
+    const payload = JSON.parse(payloadJson);
+  
+    // Step 3: Check the 'exp' claim
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    if (payload.exp && payload.exp < currentTime) {
+      return true; // Token has expired
+    }    
+  
+    return false; // Token has not expired
+  }
+
 
   async function fetchImprovedPrompt() {
     //fetch prompt output:
