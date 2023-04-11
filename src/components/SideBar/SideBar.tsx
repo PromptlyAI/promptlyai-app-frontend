@@ -143,34 +143,42 @@ export default function SideBar() {
           }}
         >
           <div className="prompt-history-container">
-            {promptHistory.map((historyBtn) => (
-              <StyledButton
-                key={historyBtn.id}
-                click={() => {
-                  pressHistoryBtn(historyBtn.id);
-                }}
-                deleteIconClick={() => {
-                  setPromptHistory((prevValue) =>
-                    prevValue.splice(historyBtn.id)
-                  );
-                }}
-                pressed={historyBtn.pressed}
-                btnWidth={smallBtnsSize}
-                btnHeight={56}
-                btnStyle={2}
-                textColor="white"
-                title={
-                  historyBtn.input.length > 20
-                    ? `${historyBtn.input.slice(0, 20)}...`
-                    : historyBtn.input
-                }
-                bookIcon={true}
-                trashIcon={true}
-                animationPopup={true}
-              />
-            ))}
-            {/* </div> */}
+            {promptHistory.length > 0 ? (
+              <>
+                {promptHistory.map((historyBtn) => (
+                  <StyledButton
+                    key={historyBtn.id}
+                    click={() => {
+                      pressHistoryBtn(historyBtn.id);
+                    }}
+                    deleteIconClick={() => {
+                      setPromptHistory((prevValue) =>
+                        prevValue.splice(historyBtn.id)
+                      );
+                    }}
+                    pressed={historyBtn.pressed}
+                    btnWidth={smallBtnsSize}
+                    btnHeight={56}
+                    btnStyle={2}
+                    textColor="white"
+                    title={
+                      historyBtn.input.length > 20
+                        ? `${historyBtn.input.slice(0, 20)}...`
+                        : historyBtn.input
+                    }
+                    bookIcon={true}
+                    trashIcon={true}
+                    animationPopup={true}
+                  />
+                ))}
+              </>
+            ) : (
+              <div className="center">
+                <div className="loader"></div>
+              </div>
+            )}
           </div>
+
           <div className="bottom-gradient"></div>
           <div className="clear-history-container">
             <StyledButton
