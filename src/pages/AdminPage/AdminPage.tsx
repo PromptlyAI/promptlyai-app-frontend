@@ -17,7 +17,9 @@ interface UserProps {
 export default function AdminPage() {
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<UserProps[]>();
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   async function searchUsers() {
+    setIsSearching(true);
     const response = await Api({
       path: `admin/searchUsers?search=${search}`,
       method: "GET",
@@ -33,15 +35,14 @@ export default function AdminPage() {
       isBanned: item.isBanned,
     }));
     setUsers(arr);
+    setIsSearching(false);
   }
   return (
     <div className="admin-container">
       <div>
-        <h1>Admin</h1>
         <div className="admin-tools-container">
           <h2>Admin Tools:</h2>
           <div className="search-container">
-            {/* <div> */}
             <label>Search Users</label>
             <StyledInput
               change={(ev) => setSearch(ev.target.value)}
@@ -58,21 +59,33 @@ export default function AdminPage() {
               title="search"
               btnHeight={40}
               btnWidth={200}
+              loading={isSearching}
             />
           </div>
           <div className="center">
-            <div className="user-container">
-              {users?.map((user) => (
-                <UserCard
-                  key={user.id}
-                  name={user.name}
-                  email={user.email}
-                  id={user.id}
-                  role={user.role}
-                  totalTokenBalance={user.totalTokenBalance}
-                  isBanned={user.isBanned}
-                />
-              ))}
+            <div className="user-main-container">
+              {users && (
+                <div className="user-container">
+                  {users?.map((user) => (
+                    <UserCard
+                      key={user.id}
+                      name={user.name}
+                      email={user.email}
+                      id={user.id}
+                      role={user.role}
+                      totalTokenBalance={user.totalTokenBalance}
+                      isBanned={user.isBanned}
+                    />
+                  ))}
+                </div>
+              )}
+              {users && (
+                <>
+                  {users.length > 9 && (
+                    <div className="bottom-gradient-admin"></div>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>
