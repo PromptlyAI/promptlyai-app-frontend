@@ -61,6 +61,11 @@ export default function SettingsPage() {
     console.log(await response);
   }
 
+  function logout() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
     <div className="setting-page-container">
       <div style={{ position: "absolute", left: "100px", top: "20px" }}>
@@ -105,6 +110,7 @@ export default function SettingsPage() {
           btnStyle={3}
           title="Change password"
         />
+        <StyledButton click={() => logout()} btnStyle={4} title="Logout" />
         <StyledButton
           click={() => setShowWarning(true)}
           btnStyle={4}
