@@ -5,11 +5,23 @@
 
   background: #1f1f24;
 }
+.logo {
+  width: 267.49px;
+  height: 66.14px;
+  display: block;
+  margin: 0 auto;
+}
+.logo-main-container {
+  height: fit-content;
+  background: #1b1a20;
+  align-items: center;
+  display: flex;
+}
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1b1a20;
+
   width: 100%;
   height: 118px;
 }
