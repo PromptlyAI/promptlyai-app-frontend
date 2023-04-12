@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
@@ -7,26 +7,25 @@ import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import Api from "../../api/Api";
 import { useNavigate } from "react-router";
-import { PromptContext } from "../../context/PromptContext";
+import Popup from "../Popup/popup";
+
 
 export default function PromptTool() {
-  const { promptId } = useContext(PromptContext);
-  const [promptTitle, setPromptTitle] = useState<string>("New Prompt");
-
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
 
-  //prompts and inputs
   const [userPrompt, setUserPrompt] = useState<string>("");
-  const [promptOutput, setPromptOutput] = useState<string>("");
-  const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
-  const [currentPromptId, setCurrentPromptId] = useState<string>("");
+  const [promptOutput, setPromptOutput] = useState<string>("");
+  const [promptId, setPromptId] = useState<string>("");
+
+  const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
   const [promptOutputLoading, setPromptOutputLoading] =
     useState<boolean>(false);
   const [improvedPromptLoading, setImprovedPromptLoading] =
     useState<boolean>(false);
   const navigate = useNavigate();
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(promptId);
@@ -50,46 +49,42 @@ export default function PromptTool() {
     // setUserPrompt();
     // setPromptOutput();
     // setImprovedPrompt();
-  }
-
-  useEffect(() => {
-    checkLogIn();
+    
+    setNeedToSignIn(false);
+    checkIfUserHasToLogInAndLogInIfItIsThatWay();
   });
 
-  async function changePromptTitle() {
-    const finalString =
-      userPrompt.length > 55 ? `${userPrompt.slice(0, 20)}...` : userPrompt;
-    await runTextAnimation(finalString, setPromptTitle, 55);
-  }
-
-  function checkLogIn() {
+  function checkIfUserHasToLogInAndLogInIfItIsThatWay(){
     let token = localStorage.getItem("token");
-    if (!token || isJwtExpired(token)) {
+    if(!token){
+      setNeedToSignIn(true);
+    }else if(isJwtExpired(token)){
       navigate("/login");
     }
   }
 
-  function isJwtExpired(jwt: string) {
+  function isJwtExpired(jwt : string) {
     // Step 1: Split the token into its parts
-    const tokenParts = jwt.split(".");
+    const tokenParts = jwt.split('.');
     if (tokenParts.length !== 3) {
-      throw new Error("Invalid JWT format");
+      throw new Error('Invalid JWT format');
     }
-
+  
     // Step 2: Decode the payload
     const payloadBase64Url = tokenParts[1];
-    const payloadBase64 = payloadBase64Url.replace("-", "+").replace("_", "/");
+    const payloadBase64 = payloadBase64Url.replace('-', '+').replace('_', '/');
     const payloadJson = atob(payloadBase64);
     const payload = JSON.parse(payloadJson);
-
+  
     // Step 3: Check the 'exp' claim
-    const currentTime = Math.floor(Date.now() / 1000);
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
     if (payload.exp && payload.exp < currentTime) {
       return true; // Token has expired
-    }
-
+    }    
+  
     return false; // Token has not expired
   }
+
 
   async function fetchImprovedPrompt() {
     //fetch prompt output:
@@ -99,10 +94,10 @@ export default function PromptTool() {
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-
+    // console.log(await response);
     setPromptOutputLoading(false);
     const responseString = await response.prompt.output;
-    setCurrentPromptId(await response.prompt.id);
+    setPromptId(await response.prompt.id);
 
     await runTextAnimation(responseString, setPromptOutput, 14);
   }
@@ -110,7 +105,7 @@ export default function PromptTool() {
   async function fetchFinalOutput() {
     setImprovedPromptLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${currentPromptId}`,
+      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
@@ -118,16 +113,14 @@ export default function PromptTool() {
     setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;
     await runTextAnimation(responseString, setImprovedPrompt, 14);
-    setTimeout(() => {
-      changePromptTitle();
-    }, 1500);
   }
   return (
     <div className="prompt-tool-container">
+      <Popup displayPopup={needToSignIn}/>
       <div className="prompt-tool-top-container">
         <StyledButton
           btnStyle={3}
-          title={promptTitle}
+          title="A fish thats swimming underne..."
           bookIcon={true}
           btnWidth={604}
           btnHeight={68}

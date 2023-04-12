@@ -6,9 +6,7 @@
   border-radius: 30px;
   width: 100%;
   height: 100%;
-
   background: var(--light-blue);
-
   display: flex;
   justify-content: space-around;
 }
