@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
@@ -8,15 +8,16 @@ import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import Api from "../../api/Api";
 import { useNavigate } from "react-router";
 import Popup from "../Popup/popup";
-
+import { PromptContext } from "../../context/PromptContext";
 
 export default function PromptTool() {
-  const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
+  const { promptId } = useContext(PromptContext);
 
+  const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
   const [userPrompt, setUserPrompt] = useState<string>("");
 
   const [promptOutput, setPromptOutput] = useState<string>("");
-  const [promptId, setPromptId] = useState<string>("");
+  const [currentPromptId, setCurrentPromptId] = useState<string>("");
 
   const [improvedPrompt, setImprovedPrompt] = useState<string>("");
 
@@ -27,7 +28,7 @@ export default function PromptTool() {
   const navigate = useNavigate();
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setNeedToSignIn(false);
     checkIfUserHasToLogInAndLogInIfItIsThatWay();
   });
@@ -43,7 +44,6 @@ export default function PromptTool() {
     // if (typeof promptId === "string") {
     //   console.log("is string");
     // }
-
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
       method: "GET",
@@ -54,41 +54,38 @@ export default function PromptTool() {
     // setUserPrompt();
     // setPromptOutput();
     // setImprovedPrompt();
-    
-    
-  };
+  }
 
-  function checkIfUserHasToLogInAndLogInIfItIsThatWay(){
+  function checkIfUserHasToLogInAndLogInIfItIsThatWay() {
     let token = localStorage.getItem("token");
-    if(!token){
+    if (!token) {
       setNeedToSignIn(true);
-    }else if(isJwtExpired(token)){
+    } else if (isJwtExpired(token)) {
       navigate("/login");
     }
   }
 
-  function isJwtExpired(jwt : string) {
+  function isJwtExpired(jwt: string) {
     // Step 1: Split the token into its parts
-    const tokenParts = jwt.split('.');
+    const tokenParts = jwt.split(".");
     if (tokenParts.length !== 3) {
-      throw new Error('Invalid JWT format');
+      throw new Error("Invalid JWT format");
     }
-  
+
     // Step 2: Decode the payload
     const payloadBase64Url = tokenParts[1];
-    const payloadBase64 = payloadBase64Url.replace('-', '+').replace('_', '/');
+    const payloadBase64 = payloadBase64Url.replace("-", "+").replace("_", "/");
     const payloadJson = atob(payloadBase64);
     const payload = JSON.parse(payloadJson);
-  
+
     // Step 3: Check the 'exp' claim
     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
     if (payload.exp && payload.exp < currentTime) {
       return true; // Token has expired
-    }    
-  
+    }
+
     return false; // Token has not expired
   }
-
 
   async function fetchImprovedPrompt() {
     //fetch prompt output:
@@ -101,7 +98,7 @@ export default function PromptTool() {
     // console.log(await response);
     setPromptOutputLoading(false);
     const responseString = await response.prompt.output;
-    setPromptId(await response.prompt.id);
+    setCurrentPromptId(await response.prompt.id);
 
     await runTextAnimation(responseString, setPromptOutput, 14);
   }
@@ -109,7 +106,7 @@ export default function PromptTool() {
   async function fetchFinalOutput() {
     setImprovedPromptLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${promptId}`,
+      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${currentPromptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
@@ -120,7 +117,7 @@ export default function PromptTool() {
   }
   return (
     <div className="prompt-tool-container">
-      <Popup displayPopup={needToSignIn}/>
+      <Popup displayPopup={needToSignIn} />
       <div className="prompt-tool-top-container">
         <StyledButton
           btnStyle={3}
