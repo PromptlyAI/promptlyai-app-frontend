@@ -39,6 +39,7 @@ export default function LoginPage() {
     setLoading(false);
   }
 
+  async function forgotPassword() {}
   return (
     <div className="login-page-container">
       <div className="login-page">
