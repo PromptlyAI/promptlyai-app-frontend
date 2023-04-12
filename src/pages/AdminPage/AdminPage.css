@@ -25,13 +25,32 @@
   align-items: center;
   gap: 5px;
 }
-.user-container{
+.user-container {
+  position: relative;
   width: fit-content;
   height: 600px;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-  grid-template-rows: repeat(2, 1fr); 
+  grid-template-rows: repeat(2, 1fr);
 
-  grid-gap: 20px; 
+  grid-gap: 20px;
+}
+.bottom-gradient-admin {
+  position: absolute;
+  bottom: 0;
+  width: 98.7%;
+  height: 50px;
+
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  user-select: none;
+}
+.user-main-container {
+  position: relative;
 }

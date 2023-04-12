@@ -10,8 +10,10 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
+import { PromptContext } from "./context/PromptContext";
 
 function App() {
+  const [promptId, setPromptId] = useState<string>("");
   return (
     <Router>
       <div className="App">
@@ -20,8 +22,10 @@ function App() {
             path="/"
             element={
               <>
-                <SideBar />
-                <PromptPage />
+                <PromptContext.Provider value={{ promptId, setPromptId }}>
+                  <SideBar />
+                  <PromptPage />
+                </PromptContext.Provider>
               </>
             }
           />

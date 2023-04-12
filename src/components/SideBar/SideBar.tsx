@@ -1,33 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SideBar.css";
 import Logo from "../../images/PromptlyLogo.png";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Api from "../../api/Api";
+import { PromptContext } from "../../context/PromptContext";
 interface buttonProps {
   input: string;
   path?: string;
   pressed: boolean;
-  id: number;
+  id: string;
   icon?: string;
 }
 
 export default function SideBar() {
+  const { setPromptId } = useContext(PromptContext);
+
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
+  const [promptHistoryLoading, setPromptHistoryLoading] =
+    useState<boolean>(false);
   const [modes, setModes] = useState<buttonProps[]>(() => [
     {
       input: "PROMPT-EDITOR",
       path: "",
       pressed: true,
-      id: Math.round(Math.random() * 100) / 100,
+      id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
     },
     {
       input: "IMAGE-EDITOR",
       path: "",
       pressed: false,
-      id: Math.round(Math.random() * 100) / 100,
+      id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
     },
   ]);
@@ -58,6 +63,7 @@ export default function SideBar() {
   }, []);
 
   async function getPromptHistory() {
+    setPromptHistoryLoading(true);
     const response = await Api({
       path: "prompt/prompts",
       method: "GET",
@@ -72,14 +78,18 @@ export default function SideBar() {
     }));
 
     setPromptHistory([...arr]);
+    setPromptHistoryLoading(false);
   }
 
-  function pressHistoryBtn(_id: number) {
+  function pressHistoryBtn(_id: string) {
     let arr = [...promptHistory];
     arr.map((btn) =>
       btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     );
     setPromptHistory(arr);
+
+    //set prompt id: load prompt
+    setPromptId(_id);
 
     //deselect all mode buttons
     let modeButtons = [...modes];
@@ -87,7 +97,7 @@ export default function SideBar() {
     setModes(modeButtons);
   }
 
-  function pressModeBtn(_id: number) {
+  function pressModeBtn(_id: string) {
     let arr = [...modes];
     arr.map((btn) =>
       btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
@@ -101,8 +111,10 @@ export default function SideBar() {
   }
   return (
     <div className="side-bar-container">
-      <div className="logo-container">
-        <img className="logo" src={Logo} alt="" />
+      <div className="logo-main-container">
+        <div className="logo-container">
+          <img className="logo" src={Logo} alt="" />
+        </div>
       </div>
       <div style={{ padding: "20px" }}>
         <div
@@ -143,34 +155,50 @@ export default function SideBar() {
           }}
         >
           <div className="prompt-history-container">
-            {promptHistory.map((historyBtn) => (
-              <StyledButton
-                key={historyBtn.id}
-                click={() => {
-                  pressHistoryBtn(historyBtn.id);
+            {!promptHistoryLoading ? (
+              <>
+                {promptHistory.map((historyBtn) => (
+                  <StyledButton
+                    key={historyBtn.id}
+                    click={() => {
+                      pressHistoryBtn(historyBtn.id);
+                    }}
+                    deleteIconClick={() => {
+                      // setPromptHistory((prevValue) =>
+                      //   prevValue.splice(historyBtn.id)
+                      // );
+                    }}
+                    pressed={historyBtn.pressed}
+                    btnWidth={smallBtnsSize}
+                    btnHeight={56}
+                    btnStyle={2}
+                    textColor="white"
+                    title={
+                      historyBtn.input.length > 20
+                        ? `${historyBtn.input.slice(0, 20)}...`
+                        : historyBtn.input
+                    }
+                    bookIcon={true}
+                    trashIcon={true}
+                    animationPopup={true}
+                  />
+                ))}
+              </>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  height: "15%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
                 }}
-                deleteIconClick={() => {
-                  setPromptHistory((prevValue) =>
-                    prevValue.splice(historyBtn.id)
-                  );
-                }}
-                pressed={historyBtn.pressed}
-                btnWidth={smallBtnsSize}
-                btnHeight={56}
-                btnStyle={2}
-                textColor="white"
-                title={
-                  historyBtn.input.length > 20
-                    ? `${historyBtn.input.slice(0, 20)}...`
-                    : historyBtn.input
-                }
-                bookIcon={true}
-                trashIcon={true}
-                animationPopup={true}
-              />
-            ))}
-            {/* </div> */}
+              >
+                <div className="loader"></div>
+              </div>
+            )}
           </div>
+
           <div className="bottom-gradient"></div>
           <div className="clear-history-container">
             <StyledButton
