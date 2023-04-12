@@ -28,6 +28,28 @@ export default function PromptTool() {
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(promptId);
+    if (promptId) {
+      loadPromptHistory();
+    }
+  }, [promptId]);
+
+  async function loadPromptHistory() {
+    // if (typeof promptId === "string") {
+    //   console.log("is string");
+    // }
+
+    const response = await Api({
+      path: `prompt/get-prompt-info?promptId=${promptId}`,
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+
+    console.log(await response);
+    // setUserPrompt();
+    // setPromptOutput();
+    // setImprovedPrompt();
+    
     setNeedToSignIn(false);
     checkIfUserHasToLogInAndLogInIfItIsThatWay();
   });

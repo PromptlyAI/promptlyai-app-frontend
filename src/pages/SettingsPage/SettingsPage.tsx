@@ -3,6 +3,8 @@ import Api from "../../api/Api";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SettingsPage.css";
 import HomeButton from "../../shared/HomeButton/HomeButton";
+import { useNavigate } from "react-router";
+import StyledInput from "../../shared/input-styles/StyledInput";
 interface User {
   name: string;
   password: string;
@@ -11,16 +13,22 @@ interface User {
 export default function SettingsPage() {
   const [userInfo, setUserInfo] = useState<User>();
   const [showWarning, setShowWarning] = useState<boolean>(false);
-  const [token, setToken] = useState<string>("");
+  const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
+
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+
+  const navigate = useNavigate();
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
-    setToken(localStorage.getItem("token") as string);
-    // const getUserInfo = async () => {
-    //     const response = await Api({
-    //         path: "user/get-user-info",
-    //         method: "GET"
-    //       });
-    // }
+    const getUserInfo = async () => {
+      const response = await Api({
+        path: "user/get-user-info",
+        method: "GET",
+        token: localStorage.getItem("token") as string,
+      });
+      console.log(await response);
+    };
+    getUserInfo();
   }, []);
 
   function deleteAccount() {
@@ -28,12 +36,29 @@ export default function SettingsPage() {
       const response = await Api({
         path: "user/",
         method: "DELETE",
-        token: token,
+        token: localStorage.getItem("token") as string,
       });
       console.log(await response);
       localStorage.removeItem("token");
+
+      alert("account deleted");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     };
     deleteUser();
+  }
+
+  async function changePassword() {
+    const response = await Api({
+      path: "user/resetPassword",
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        newPassword: newPassword,
+      },
+    });
+    console.log(await response);
   }
 
   return (
@@ -41,22 +66,108 @@ export default function SettingsPage() {
       <div style={{ position: "absolute", left: "100px", top: "20px" }}>
         <HomeButton />
       </div>
+
       <div
         style={{
-          height: "200px",
+          height: "",
           display: "flex",
           padding: "50px",
           flexDirection: "column",
-          gap: "100px",
+          gap: "20px",
         }}
       >
         <h2>[name]</h2>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <label style={{ fontSize: "20px" }} htmlFor="">
+            Username
+          </label>
+          <StyledInput
+            title="example@example"
+            inpHeight={20}
+            inpWidht={200}
+            inpStyle={1}
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <label style={{ fontSize: "20px" }} htmlFor="">
+            Email
+          </label>
+          <StyledInput
+            title="example@example"
+            inpHeight={20}
+            inpWidht={200}
+            inpStyle={1}
+          />
+        </div>
+        <StyledButton
+          click={() => setShowChangePassword(true)}
+          btnHeight={50}
+          btnStyle={3}
+          title="Change password"
+        />
         <StyledButton
           click={() => setShowWarning(true)}
           btnStyle={4}
           title="Delete Account"
         />
       </div>
+
+      {showChangePassword && (
+        <div className="delete-warning-container">
+          <div className="delete-warning">
+            <h2>Change Password</h2>
+            <div className="center">
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "20px",
+                  gap: "20px",
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                {/* <div style={{ display: "flex", flexDirection: "column" }}>
+                  <label style={{ fontSize: "20px" }} htmlFor="">
+                    Current password
+                  </label>
+                  <StyledInput
+                    title={currentPassword}
+                    change={(ev) => setCurrentPassword(ev.target.value)}
+                    inpHeight={20}
+                    inpWidht={200}
+                    inpStyle={1}
+                  />
+                </div> */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <label style={{ fontSize: "20px" }} htmlFor="">
+                    New password
+                  </label>
+                  <StyledInput
+                    title={newPassword}
+                    change={(ev) => setNewPassword(ev.target.value)}
+                    inpHeight={20}
+                    inpWidht={200}
+                    inpStyle={1}
+                  />
+                </div>
+
+                <StyledButton
+                  click={() => changePassword()}
+                  btnHeight={50}
+                  btnStyle={3}
+                  title="Change password"
+                />
+                <StyledButton
+                  click={() => setShowChangePassword(false)}
+                  btnStyle={5}
+                  title="Back"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showWarning && (
         <div className="delete-warning-container">
