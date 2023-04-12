@@ -27,6 +27,11 @@ export default function PromptTool() {
   const navigate = useNavigate();
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
+  useEffect(()=>{
+    setNeedToSignIn(false);
+    checkIfUserHasToLogInAndLogInIfItIsThatWay();
+  });
+
   useEffect(() => {
     console.log(promptId);
     if (promptId) {
@@ -50,9 +55,8 @@ export default function PromptTool() {
     // setPromptOutput();
     // setImprovedPrompt();
     
-    setNeedToSignIn(false);
-    checkIfUserHasToLogInAndLogInIfItIsThatWay();
-  });
+    
+  };
 
   function checkIfUserHasToLogInAndLogInIfItIsThatWay(){
     let token = localStorage.getItem("token");
