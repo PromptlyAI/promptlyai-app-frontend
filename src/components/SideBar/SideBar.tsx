@@ -105,6 +105,8 @@ export default function SideBar() {
     );
     setModes(arr);
 
+    setPromptId("new");
+
     //deselect all history buttons
     let historyArr = [...promptHistory];
     historyArr.map((btn) => (btn.pressed = false));

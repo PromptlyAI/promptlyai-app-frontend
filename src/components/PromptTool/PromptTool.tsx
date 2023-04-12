@@ -12,10 +12,11 @@ import { PromptContext } from "../../context/PromptContext";
 
 export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
+  const [promptTitle, setPromptTitle] = useState<string>("");
 
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
-  const [userPrompt, setUserPrompt] = useState<string>("");
 
+  const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
   const [currentPromptId, setCurrentPromptId] = useState<string>("");
 
@@ -30,12 +31,17 @@ export default function PromptTool() {
 
   useEffect(() => {
     setNeedToSignIn(false);
-    checkIfUserHasToLogInAndLogInIfItIsThatWay();
+    checkIfLogIn();
   });
 
   useEffect(() => {
     console.log(promptId);
-    if (promptId) {
+    if (promptId === "new") {
+      setUserPrompt("");
+      setPromptOutput("");
+      setImprovedPrompt("");
+    } else if (promptId) {
+      console.log("Hheheh");
       loadPromptHistory();
     }
   }, [promptId]);
@@ -50,13 +56,13 @@ export default function PromptTool() {
       token: localStorage.getItem("token") as string,
     });
 
-    console.log(await response);
-    // setUserPrompt();
-    // setPromptOutput();
-    // setImprovedPrompt();
+    setUserPrompt(await response.input);
+    setPromptOutput(await response.output);
+    setImprovedPrompt(await response.answer);
+    setPromptTitle(await response.input);
   }
 
-  function checkIfUserHasToLogInAndLogInIfItIsThatWay() {
+  function checkIfLogIn() {
     let token = localStorage.getItem("token");
     if (!token) {
       setNeedToSignIn(true);
@@ -114,6 +120,8 @@ export default function PromptTool() {
     setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;
     await runTextAnimation(responseString, setImprovedPrompt, 14);
+
+    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
   return (
     <div className="prompt-tool-container">
@@ -121,7 +129,13 @@ export default function PromptTool() {
       <div className="prompt-tool-top-container">
         <StyledButton
           btnStyle={3}
-          title="A fish thats swimming underne..."
+          title={
+            promptTitle
+              ? promptTitle.length > 55
+                ? `${promptTitle.slice(0, 55)}...`
+                : promptTitle
+              : "new"
+          }
           bookIcon={true}
           btnWidth={604}
           btnHeight={68}
