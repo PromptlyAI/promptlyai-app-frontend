@@ -7,6 +7,7 @@ import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import Api from "../../api/Api";
 import { useNavigate } from "react-router";
+import Popup from "../Popup/popup";
 
 
 export default function PromptTool() {
@@ -24,15 +25,20 @@ export default function PromptTool() {
   const [improvedPromptLoading, setImprovedPromptLoading] =
     useState<boolean>(false);
   const navigate = useNavigate();
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+
 
 
   useEffect(() => {
+    setNeedToSignIn(false);
     checkIfUserHasToLogInAndLogInIfItIsThatWay();
   });
 
   function checkIfUserHasToLogInAndLogInIfItIsThatWay(){
     let token = localStorage.getItem("token");
-    if(!token || isJwtExpired(token)){
+    if(!token){
+      setNeedToSignIn(true);
+    }else if(isJwtExpired(token)){
       navigate("/login");
     }
   }
@@ -90,6 +96,7 @@ export default function PromptTool() {
   }
   return (
     <div className="prompt-tool-container">
+      <Popup displayPopup={needToSignIn}/>
       <div className="prompt-tool-top-container">
         <StyledButton
           btnStyle={3}
