@@ -15,7 +15,7 @@ interface buttonProps {
 }
 
 export default function SideBar() {
-  const { setPromptId } = useContext(PromptContext);
+  const { setPromptId, promptId } = useContext(PromptContext);
 
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [promptHistoryLoading, setPromptHistoryLoading] =
@@ -90,6 +90,7 @@ export default function SideBar() {
 
     //set prompt id: load prompt
     setPromptId(_id);
+    console.log(promptId);
 
     //deselect all mode buttons
     let modeButtons = [...modes];
