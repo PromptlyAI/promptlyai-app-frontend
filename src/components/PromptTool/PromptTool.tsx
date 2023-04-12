@@ -40,6 +40,7 @@ export default function PromptTool() {
       setUserPrompt("");
       setPromptOutput("");
       setImprovedPrompt("");
+      setPromptTitle("new");
     } else if (promptId) {
       console.log("Hheheh");
       loadPromptHistory();
