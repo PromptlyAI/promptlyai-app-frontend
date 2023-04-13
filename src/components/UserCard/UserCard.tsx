@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./UserCard.css";
+import StyledInput from "../../shared/input-styles/StyledInput";
 interface IProps {
+  click?: () => void;
   name: string;
   email: string;
   id: string;
@@ -10,6 +12,7 @@ interface IProps {
 }
 
 export default function UserCard({
+  click,
   name,
   email,
   id,
@@ -18,13 +21,24 @@ export default function UserCard({
   isBanned,
 }: IProps) {
   return (
-    <div className="user-card-container">
-      <span>name: {name}</span>
-      <span>email: {email}</span>
-      <span>user id: {id}</span>
-      <span>role: {role}</span>
-      <span>balance: {totalTokenBalance}</span>
-      {isBanned ? <span>banned: true</span> : <span>banned: false</span>}
+    <div
+      onClick={() => click !== undefined && click()}
+      className="user-card-container"
+    >
+      <h2>{name}</h2>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          left: "0",
+          width: "100%",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          {isBanned ? <span>banned: true</span> : <span>banned: false</span>}
+          <span>role: {role}</span>
+        </div>
+      </div>
     </div>
   );
 }

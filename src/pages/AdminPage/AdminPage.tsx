@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AdminPage.css";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import Api from "../../api/Api";
 import UserCard from "../../components/UserCard/UserCard";
+import HomeButton from "../../shared/HomeButton/HomeButton";
 
 interface UserProps {
   name: string;
@@ -15,9 +16,14 @@ interface UserProps {
 }
 
 export default function AdminPage() {
+  const [newBalance, setNewBalance] = useState<number>();
+
   const [search, setSearch] = useState<string>("");
   const [users, setUsers] = useState<UserProps[]>();
+  const [selectedUser, setSelectedUser] = useState<UserProps>();
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isChangingBalance, setIsChangingBalance] = useState<boolean>(false);
+
   async function searchUsers() {
     setIsSearching(true);
     const response = await Api({
@@ -37,10 +43,50 @@ export default function AdminPage() {
     setUsers(arr);
     setIsSearching(false);
   }
+
+  async function changeRole(ev: React.ChangeEvent<HTMLSelectElement>) {
+    if (!selectedUser) {
+      return;
+    }
+
+    console.log(selectedUser);
+    const response = await Api({
+      path: `admin/changeUserRole`,
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        userId: selectedUser.id,
+        newRole: ev.target.value,
+      },
+    });
+    console.log(await response);
+  }
+
+  async function changeBalance() {
+    if (!selectedUser) {
+      return;
+    }
+    setIsChangingBalance(true);
+    const response = await Api({
+      path: `admin/changeTokenBalance`,
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        userId: selectedUser.id,
+        balance: newBalance,
+      },
+    });
+    console.log(await response);
+    setIsChangingBalance(false);
+  }
+
   return (
     <div className="admin-container">
       <div>
         <div className="admin-tools-container">
+          <div style={{ position: "absolute" }}>
+            <HomeButton />
+          </div>
           <h2>Admin Tools:</h2>
           <div className="search-container">
             <label>Search Users</label>
@@ -68,6 +114,10 @@ export default function AdminPage() {
                 <div className="user-container">
                   {users?.map((user) => (
                     <UserCard
+                      click={() => {
+                        setSelectedUser(user);
+                        setNewBalance(user.totalTokenBalance);
+                      }}
                       key={user.id}
                       name={user.name}
                       email={user.email}
@@ -90,6 +140,60 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
+      {selectedUser !== undefined && (
+        <div className="info-container">
+          <div className="info-elements">
+            <div
+              style={{ gap: "20px", display: "flex", flexDirection: "column" }}
+            >
+              <h1>{selectedUser.name}</h1>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "5px",
+                }}
+              >
+                <label htmlFor="">balance</label>
+                <StyledInput
+                  change={(ev) => setNewBalance(parseInt(ev.target.value))}
+                  title={`${newBalance}`}
+                  inpStyle={1}
+                  inpHeight={50}
+                  inpWidht={200}
+                />
+                <StyledButton
+                  click={() => changeBalance()}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={40}
+                  textSize={15}
+                  title="CHANGE BALANCE"
+                  loading={isChangingBalance}
+                />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="">Role</label>
+                <select style={{ width: "100%" }} onChange={changeRole}>
+                  <option value="user">USER</option>
+                  <option value="admin">ADMIN</option>
+                </select>
+              </div>
+              {selectedUser.isBanned ? (
+                <StyledButton btnStyle={3} title="UNBAN USER" />
+              ) : (
+                <StyledButton btnStyle={4} title="BAN USER" />
+              )}
+              <StyledButton
+                click={() => setSelectedUser(undefined)}
+                textSize={15}
+                btnStyle={5}
+                title="BACK"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

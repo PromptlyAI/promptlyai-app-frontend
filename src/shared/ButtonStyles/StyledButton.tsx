@@ -23,6 +23,7 @@ interface IProps {
   animationPopup?: boolean;
   arrowIcon?: boolean;
   loading?: boolean;
+  textSize?: number;
 }
 
 export default function StyledButton({
@@ -41,6 +42,7 @@ export default function StyledButton({
   animationPopup = false,
   arrowIcon,
   loading = false,
+  textSize,
 }: IProps) {
   return (
     <button
@@ -63,6 +65,7 @@ export default function StyledButton({
         minHeight: btnHeight,
         background: color,
         color: textColor,
+        fontSize: textSize,
       }}
     >
       {bookIcon &&
