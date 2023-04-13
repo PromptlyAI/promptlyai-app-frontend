@@ -80,6 +80,22 @@ export default function AdminPage() {
     setIsChangingBalance(false);
   }
 
+  async function banUser() {
+    if (!selectedUser) {
+      return;
+    }
+    const response = await Api({
+      path: `admin/banUser`,
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        ban: selectedUser.id,
+        banExpirationDate: new Date(2023, 11, 10),
+      },
+    });
+    console.log(await response);
+  }
+
   return (
     <div className="admin-container">
       <div>
@@ -182,7 +198,11 @@ export default function AdminPage() {
               {selectedUser.isBanned ? (
                 <StyledButton btnStyle={3} title="UNBAN USER" />
               ) : (
-                <StyledButton btnStyle={4} title="BAN USER" />
+                <StyledButton
+                  click={() => banUser()}
+                  btnStyle={4}
+                  title="BAN USER"
+                />
               )}
               <StyledButton
                 click={() => setSelectedUser(undefined)}
