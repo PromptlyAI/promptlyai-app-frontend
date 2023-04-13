@@ -29,6 +29,7 @@
   position: relative;
   width: fit-content;
   height: 600px;
+  padding: 5px;
   overflow-x: hidden;
   overflow-y: auto;
   display: grid;
@@ -53,4 +54,28 @@
 }
 .user-main-container {
   position: relative;
+}
+.info-container {
+  background: var(--primary-gray);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.info-elements {
+  width: 250px;
+  height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+select {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
 }

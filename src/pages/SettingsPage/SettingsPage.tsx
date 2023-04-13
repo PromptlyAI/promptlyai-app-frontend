@@ -8,6 +8,7 @@ import StyledInput from "../../shared/input-styles/StyledInput";
 interface User {
   name: string;
   password: string;
+  role: string;
 }
 
 export default function SettingsPage() {
@@ -115,6 +116,21 @@ export default function SettingsPage() {
           click={() => setShowWarning(true)}
           btnStyle={4}
           title="Delete Account"
+        />
+        {userInfo?.role === "admin" && (
+          <StyledButton
+            title="Admin tools"
+            click={() => {
+              navigate("/admin");
+            }}
+          />
+        )}
+        <StyledButton
+          btnStyle={5}
+          title="Admin tools"
+          click={() => {
+            navigate("/admin");
+          }}
         />
       </div>
 
