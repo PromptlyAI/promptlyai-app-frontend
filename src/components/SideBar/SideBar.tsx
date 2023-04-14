@@ -69,7 +69,6 @@ export default function SideBar() {
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-    console.log(await response);
 
     const arr: buttonProps[] = await response.map((item: any) => ({
       input: item.input,
@@ -90,7 +89,6 @@ export default function SideBar() {
 
     //set prompt id: load prompt
     setPromptId(_id);
-    console.log(promptId);
 
     //deselect all mode buttons
     let modeButtons = [...modes];
@@ -111,6 +109,18 @@ export default function SideBar() {
     let historyArr = [...promptHistory];
     historyArr.map((btn) => (btn.pressed = false));
     setPromptHistory(historyArr);
+  }
+
+  async function deletePrompt(_id: string) {
+    const response = await Api({
+      path: "prompt/",
+      method: "DELETE",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        promptId: _id,
+      },
+    });
+    console.log(await response);
   }
   return (
     <div className="side-bar-container">
@@ -167,9 +177,7 @@ export default function SideBar() {
                       pressHistoryBtn(historyBtn.id);
                     }}
                     deleteIconClick={() => {
-                      // setPromptHistory((prevValue) =>
-                      //   prevValue.splice(historyBtn.id)
-                      // );
+                      deletePrompt(historyBtn.id);
                     }}
                     pressed={historyBtn.pressed}
                     btnWidth={smallBtnsSize}

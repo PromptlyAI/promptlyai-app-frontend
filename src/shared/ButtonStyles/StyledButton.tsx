@@ -97,7 +97,7 @@ export default function StyledButton({
         <>
           {trashIcon && pressed && (
             <img
-              // onClick={() => deleteIconClick()}
+              onClick={() => deleteIconClick && deleteIconClick()}
               className="right-icon"
               src={Trash}
               alt=""
