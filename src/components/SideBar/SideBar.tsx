@@ -12,6 +12,7 @@ interface buttonProps {
   pressed: boolean;
   id: string;
   icon?: string;
+  loading: boolean;
 }
 
 export default function SideBar() {
@@ -27,6 +28,7 @@ export default function SideBar() {
       pressed: true,
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
+      loading: false,
     },
     {
       input: "IMAGE-EDITOR",
@@ -34,6 +36,7 @@ export default function SideBar() {
       pressed: false,
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
+      loading: false,
     },
   ]);
 
@@ -112,6 +115,10 @@ export default function SideBar() {
   }
 
   async function deletePrompt(_id: string) {
+    const arr = [...promptHistory];
+    arr.map((btn) =>
+      btn.id === _id ? (btn.loading = true) : (btn.loading = false)
+    );
     const response = await Api({
       path: "prompt",
       method: "DELETE",
@@ -121,7 +128,6 @@ export default function SideBar() {
       },
     });
 
-    const arr = [...promptHistory];
     const a = arr.filter((btn) => btn.id !== _id);
     setPromptHistory(a);
   }
@@ -195,6 +201,7 @@ export default function SideBar() {
                     bookIcon={true}
                     trashIcon={true}
                     animationPopup={true}
+                    loading={historyBtn.loading}
                   />
                 ))}
               </>
