@@ -87,7 +87,7 @@ export default function SideBar() {
     );
     setPromptHistory(arr);
 
-    //set prompt id: load prompt
+    //set prompt id --> load prompt
     setPromptId(_id);
 
     //deselect all mode buttons
@@ -113,14 +113,17 @@ export default function SideBar() {
 
   async function deletePrompt(_id: string) {
     const response = await Api({
-      path: "prompt/",
+      path: "prompt",
       method: "DELETE",
       token: localStorage.getItem("token") as string,
       bodyParams: {
         promptId: _id,
       },
     });
-    console.log(await response);
+
+    const arr = [...promptHistory];
+    const a = arr.filter((btn) => btn.id !== _id);
+    setPromptHistory(a);
   }
   return (
     <div className="side-bar-container">
