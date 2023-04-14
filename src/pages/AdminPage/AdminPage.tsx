@@ -24,6 +24,10 @@ export default function AdminPage() {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isChangingBalance, setIsChangingBalance] = useState<boolean>(false);
 
+  useEffect(() => {
+    console.log("updated");
+  }, [selectedUser]);
+
   async function searchUsers() {
     setIsSearching(true);
     const response = await Api({
@@ -49,14 +53,15 @@ export default function AdminPage() {
       return;
     }
 
-    console.log(selectedUser);
+    console.log(ev.target.value);
+    console.log(selectedUser.id);
     const response = await Api({
-      path: `admin/changeUserRole`,
+      path: `admin/user`,
       method: "PATCH",
       token: localStorage.getItem("token") as string,
       bodyParams: {
-        userId: selectedUser.id,
-        newRole: ev.target.value,
+        id: selectedUser.id,
+        role: ev.target.value,
       },
     });
     console.log(await response);
@@ -78,6 +83,23 @@ export default function AdminPage() {
     });
     console.log(await response);
     setIsChangingBalance(false);
+  }
+
+  async function banUser() {
+    if (!selectedUser) {
+      return;
+    }
+
+    const response = await Api({
+      path: `admin/banUser`,
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        userId: selectedUser.id,
+        banExpartionDate: new Date(2024, 3, 13),
+      },
+    });
+    console.log(await response);
   }
 
   return (
@@ -175,14 +197,19 @@ export default function AdminPage() {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <label htmlFor="">Role</label>
                 <select style={{ width: "100%" }} onChange={changeRole}>
-                  <option value="user">USER</option>
-                  <option value="admin">ADMIN</option>
+                  <option value="USER">USER</option>
+                  <option value="PREMIUMUSER">PREMIUM USER</option>
+                  <option value="ADMIN">ADMIN</option>
                 </select>
               </div>
               {selectedUser.isBanned ? (
                 <StyledButton btnStyle={3} title="UNBAN USER" />
               ) : (
-                <StyledButton btnStyle={4} title="BAN USER" />
+                <StyledButton
+                  click={() => banUser()}
+                  btnStyle={4}
+                  title="BAN USER"
+                />
               )}
               <StyledButton
                 click={() => setSelectedUser(undefined)}
