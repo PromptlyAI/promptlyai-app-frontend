@@ -12,6 +12,7 @@ interface buttonProps {
   pressed: boolean;
   id: string;
   icon?: string;
+  loading: boolean;
 }
 
 export default function SideBar() {
@@ -27,6 +28,7 @@ export default function SideBar() {
       pressed: true,
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
+      loading: false,
     },
     {
       input: "IMAGE-EDITOR",
@@ -34,6 +36,7 @@ export default function SideBar() {
       pressed: false,
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
+      loading: false,
     },
   ]);
 
@@ -69,7 +72,6 @@ export default function SideBar() {
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-    console.log(await response);
 
     const arr: buttonProps[] = await response.map((item: any) => ({
       input: item.input,
@@ -88,9 +90,8 @@ export default function SideBar() {
     );
     setPromptHistory(arr);
 
-    //set prompt id: load prompt
+    //set prompt id --> load prompt
     setPromptId(_id);
-    console.log(promptId);
 
     //deselect all mode buttons
     let modeButtons = [...modes];
@@ -111,6 +112,24 @@ export default function SideBar() {
     let historyArr = [...promptHistory];
     historyArr.map((btn) => (btn.pressed = false));
     setPromptHistory(historyArr);
+  }
+
+  async function deletePrompt(_id: string) {
+    const arr = [...promptHistory];
+    arr.map((btn) =>
+      btn.id === _id ? (btn.loading = true) : (btn.loading = false)
+    );
+    const response = await Api({
+      path: "prompt",
+      method: "DELETE",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        promptId: _id,
+      },
+    });
+
+    const a = arr.filter((btn) => btn.id !== _id);
+    setPromptHistory(a);
   }
   return (
     <div className="side-bar-container">
@@ -167,9 +186,7 @@ export default function SideBar() {
                       pressHistoryBtn(historyBtn.id);
                     }}
                     deleteIconClick={() => {
-                      // setPromptHistory((prevValue) =>
-                      //   prevValue.splice(historyBtn.id)
-                      // );
+                      deletePrompt(historyBtn.id);
                     }}
                     pressed={historyBtn.pressed}
                     btnWidth={smallBtnsSize}
@@ -184,6 +201,7 @@ export default function SideBar() {
                     bookIcon={true}
                     trashIcon={true}
                     animationPopup={true}
+                    loading={historyBtn.loading}
                   />
                 ))}
               </>
