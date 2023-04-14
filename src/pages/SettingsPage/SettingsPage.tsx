@@ -21,6 +21,7 @@ export default function SettingsPage() {
 
   const navigate = useNavigate();
   useEffect(() => {
+    console.log(localStorage.getItem("token") as string);
     const getUserInfo = async () => {
       const response = await Api({
         path: "user/get-user-info",

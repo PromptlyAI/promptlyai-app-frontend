@@ -137,10 +137,13 @@ export default function SideBar() {
   async function deleteAllPrompts() {
     setDeleteAllLoading(true);
     const response = await Api({
-      path: "prompt",
+      path: "prompt/all",
       method: "DELETE",
       token: localStorage.getItem("token") as string,
     });
+    console.log(await response);
+
+    setPromptHistory([]);
 
     setDeleteAllLoading(false);
   }
