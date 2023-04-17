@@ -127,8 +127,9 @@ export default function SettingsPage() {
           btnStyle={4}
           title="Delete Account"
         />
-        {userInfo?.role === "admin" && (
+        {userInfo?.role === "ADMIN" && (
           <StyledButton
+            btnStyle={5}
             title="Admin tools"
             click={() => {
               navigate("/admin");
