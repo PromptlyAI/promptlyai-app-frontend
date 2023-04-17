@@ -30,6 +30,8 @@ export default function PromptTool() {
   const navigate = useNavigate();
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
+  const textSpeed = 4;
+
   useEffect(() => {
     setNeedToSignIn(false);
     checkIfLogIn();
@@ -110,7 +112,7 @@ export default function PromptTool() {
     const responseString = await response.prompt.output;
     setCurrentPromptId(await response.prompt.id);
 
-    await runTextAnimation(responseString, setPromptOutput, 14);
+    await runTextAnimation(responseString, setPromptOutput, textSpeed);
   }
 
   async function fetchFinalOutput() {
@@ -123,7 +125,7 @@ export default function PromptTool() {
 
     setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;
-    await runTextAnimation(responseString, setImprovedPrompt, 14);
+    await runTextAnimation(responseString, setImprovedPrompt, textSpeed);
 
     await runTextAnimation(userPrompt, setPromptTitle, 55);
   }

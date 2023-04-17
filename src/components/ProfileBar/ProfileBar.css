@@ -16,6 +16,13 @@ h2 {
   user-select: none;
 }
 .profile-picture {
+  font-family: "Roboto", sans-serif;
+  background: var(--button-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  color: white;
   cursor: pointer;
   border-radius: 100px;
   width: 65px;
