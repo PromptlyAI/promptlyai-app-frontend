@@ -70,6 +70,10 @@
   align-items: center;
   justify-content: center;
 }
+.info-elements h4 {
+  color: white;
+  text-align: center;
+}
 select {
   width: 200px;
   padding: 5px;
