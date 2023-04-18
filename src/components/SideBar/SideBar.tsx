@@ -98,6 +98,7 @@ export default function SideBar() {
     modeButtons.map((btn) => (btn.pressed = false));
     setModes(modeButtons);
   }
+  
 
   function pressModeBtn(_id: string) {
     let arr = [...modes];
