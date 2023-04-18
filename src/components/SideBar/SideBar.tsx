@@ -44,8 +44,6 @@ export default function SideBar() {
   const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
   const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
 
-  const [deleteAllLoading, setDeleteAllLoading] = useState<boolean>(false);
-
   useEffect(() => {
     if (screenWidth < 1000) {
       setSmallBtnSize(200);
@@ -133,21 +131,6 @@ export default function SideBar() {
     const a = arr.filter((btn) => btn.id !== _id);
     setPromptHistory(a);
   }
-
-  async function deleteAllPrompts() {
-    setDeleteAllLoading(true);
-    const response = await Api({
-      path: "prompt/all",
-      method: "DELETE",
-      token: localStorage.getItem("token") as string,
-    });
-    console.log(await response);
-
-    setPromptHistory([]);
-
-    setDeleteAllLoading(false);
-  }
-
   return (
     <div className="side-bar-container">
       <div className="logo-main-container">
@@ -216,7 +199,7 @@ export default function SideBar() {
                         : historyBtn.input
                     }
                     bookIcon={true}
-                    trashIcon={true}
+                    trashIcon={!historyBtn.loading}
                     animationPopup={true}
                     loading={historyBtn.loading}
                   />
@@ -240,8 +223,6 @@ export default function SideBar() {
           <div className="bottom-gradient"></div>
           <div className="clear-history-container">
             <StyledButton
-              loading={deleteAllLoading}
-              click={() => deleteAllPrompts()}
               btnWidth={bigBtnsSize}
               btnHeight={56}
               btnStyle={2}
