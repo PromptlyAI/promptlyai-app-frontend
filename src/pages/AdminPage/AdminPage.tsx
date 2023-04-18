@@ -24,10 +24,6 @@ export default function AdminPage() {
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isChangingBalance, setIsChangingBalance] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("updated");
-  }, [selectedUser]);
-
   async function searchUsers() {
     setIsSearching(true);
     const response = await Api({
@@ -169,6 +165,7 @@ export default function AdminPage() {
               style={{ gap: "20px", display: "flex", flexDirection: "column" }}
             >
               <h1>{selectedUser.name}</h1>
+              <h4>{selectedUser.email}</h4>
               <div
                 style={{
                   display: "flex",

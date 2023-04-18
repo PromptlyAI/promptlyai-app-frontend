@@ -5,14 +5,16 @@ import "./SettingsPage.css";
 import HomeButton from "../../shared/HomeButton/HomeButton";
 import { useNavigate } from "react-router";
 import StyledInput from "../../shared/input-styles/StyledInput";
-interface User {
+interface UserProps {
   name: string;
-  password: string;
+  email: string;
   role: string;
+  id: string;
+  createdAt: string;
 }
 
 export default function SettingsPage() {
-  const [userInfo, setUserInfo] = useState<User>();
+  const [userInfo, setUserInfo] = useState<UserProps>();
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
 
@@ -28,6 +30,15 @@ export default function SettingsPage() {
         token: localStorage.getItem("token") as string,
       });
       console.log(await response);
+      const data = await response;
+      const user: UserProps = {
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        id: data.id,
+        createdAt: data.createdAt,
+      };
+      setUserInfo(user);
     };
     getUserInfo();
   }, []);
@@ -82,13 +93,12 @@ export default function SettingsPage() {
           gap: "20px",
         }}
       >
-        <h2>[name]</h2>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label style={{ fontSize: "20px" }} htmlFor="">
             Username
           </label>
           <StyledInput
-            title="example@example"
+            title={userInfo ? userInfo.name : ""}
             inpHeight={20}
             inpWidht={200}
             inpStyle={1}
@@ -99,7 +109,7 @@ export default function SettingsPage() {
             Email
           </label>
           <StyledInput
-            title="example@example"
+            title={userInfo ? userInfo.email : ""}
             inpHeight={20}
             inpWidht={200}
             inpStyle={1}
@@ -117,21 +127,15 @@ export default function SettingsPage() {
           btnStyle={4}
           title="Delete Account"
         />
-        {userInfo?.role === "admin" && (
+        {userInfo?.role === "ADMIN" && (
           <StyledButton
+            btnStyle={5}
             title="Admin tools"
             click={() => {
               navigate("/admin");
             }}
           />
         )}
-        <StyledButton
-          btnStyle={5}
-          title="Admin tools"
-          click={() => {
-            navigate("/admin");
-          }}
-        />
       </div>
 
       {showChangePassword && (

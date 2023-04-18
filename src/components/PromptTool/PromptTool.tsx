@@ -15,6 +15,7 @@ export default function PromptTool() {
   const [promptTitle, setPromptTitle] = useState<string>("");
 
   const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
+  const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -28,6 +29,8 @@ export default function PromptTool() {
     useState<boolean>(false);
   const navigate = useNavigate();
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+
+  const textSpeed = 4;
 
   useEffect(() => {
     setNeedToSignIn(false);
@@ -51,6 +54,7 @@ export default function PromptTool() {
     // if (typeof promptId === "string") {
     //   console.log("is string");
     // }
+    setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
       method: "GET",
@@ -61,6 +65,7 @@ export default function PromptTool() {
     setPromptOutput(await response.output);
     setImprovedPrompt(await response.answer);
     setPromptTitle(await response.input);
+    setLoadingPrompt(false);
   }
 
   function checkIfLogIn() {
@@ -107,7 +112,7 @@ export default function PromptTool() {
     const responseString = await response.prompt.output;
     setCurrentPromptId(await response.prompt.id);
 
-    await runTextAnimation(responseString, setPromptOutput, 14);
+    await runTextAnimation(responseString, setPromptOutput, textSpeed);
   }
 
   async function fetchFinalOutput() {
@@ -120,7 +125,7 @@ export default function PromptTool() {
 
     setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;
-    await runTextAnimation(responseString, setImprovedPrompt, 14);
+    await runTextAnimation(responseString, setImprovedPrompt, textSpeed);
 
     await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
@@ -129,11 +134,12 @@ export default function PromptTool() {
       <Popup displayPopup={needToSignIn} />
       <div className="prompt-tool-top-container">
         <StyledButton
+          loading={loadingPrompt}
           btnStyle={3}
           title={
             promptTitle
-              ? promptTitle.length > 55
-                ? `${promptTitle.slice(0, 55)}...`
+              ? promptTitle.length > 35
+                ? `${promptTitle.slice(0, 35)}...`
                 : promptTitle
               : "new"
           }

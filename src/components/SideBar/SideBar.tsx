@@ -200,7 +200,7 @@ export default function SideBar() {
                         : historyBtn.input
                     }
                     bookIcon={true}
-                    trashIcon={true}
+                    trashIcon={!historyBtn.loading}
                     animationPopup={true}
                     loading={historyBtn.loading}
                   />
