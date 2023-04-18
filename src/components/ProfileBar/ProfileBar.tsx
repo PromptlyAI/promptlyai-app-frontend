@@ -25,7 +25,7 @@ export default function ProfileBar() {
     <div className="profile-bar-container">
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
         <div className="profile-picture">
-          {userName.charAt(0).toUpperCase()}
+          {userName?.charAt(0).toUpperCase()}
         </div>
         <h2>
           <u>{userName}</u>
