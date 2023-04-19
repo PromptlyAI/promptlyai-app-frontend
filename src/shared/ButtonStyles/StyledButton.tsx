@@ -24,6 +24,7 @@ interface IProps {
   arrowIcon?: boolean;
   loading?: boolean;
   textSize?: number;
+  btnType?: string;
 }
 
 export default function StyledButton({
@@ -43,9 +44,11 @@ export default function StyledButton({
   arrowIcon,
   loading = false,
   textSize,
+  btnType = "",
 }: IProps) {
   return (
     <button
+      type="submit"
       onClick={() => click !== undefined && click()}
       className={
         pressed !== undefined

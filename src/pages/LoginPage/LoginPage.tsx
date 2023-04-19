@@ -15,7 +15,8 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  async function login() {
+  async function login(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    ev.preventDefault();
     setLoading(true);
     const response = await Api({
       path: "user/login",
@@ -47,63 +48,62 @@ export default function LoginPage() {
           <div className="center">
             <img className="logo" src={Logo} alt="" />
           </div>
-          <div className="login-inputs">
-            <h1>Login</h1>
-            <div style={{ height: "25px" }}>
-              {loginFailed && (
-                <span style={{ color: "red" }}>Invalid email or password</span>
-              )}
-            </div>
+          <form>
+            <div className="login-inputs">
+              <h1>Login</h1>
+              <div style={{ height: "25px" }}>
+                {loginFailed && (
+                  <span style={{ color: "red" }}>
+                    Invalid email or password
+                  </span>
+                )}
+              </div>
 
-            <div style={{ display: "flex", width: "200px" }}>
-              <label className="login-label" htmlFor="">
-                Enter email
-              </label>
+              <div style={{ display: "flex", width: "200px" }}>
+                <label className="login-label" htmlFor="">
+                  Enter email
+                </label>
+              </div>
+
+              <input
+                className="login-input"
+                type="text"
+                value={email}
+                onChange={(ev) => setEmail(ev.target.value)}
+              />
+              <div style={{ display: "flex", width: "200px" }}>
+                <label className="login-label" htmlFor="">
+                  Enter password
+                </label>
+              </div>
+              <input
+                className="login-input"
+                type="password"
+                value={password}
+                onChange={(ev) => setPassword(ev.target.value)}
+              />
+              <button
+                style={{
+                  width: "175px",
+                  height: "40px",
+                }}
+                className="loggin-btn"
+                onClick={(ev) => login(ev)}
+              >
+                {loading ? (
+                  <div className="center">
+                    <div className="loader"></div>
+                  </div>
+                ) : (
+                  <>Login</>
+                )}
+              </button>
+
+              <Link className="register-button" to="/register">
+                Don't have have an account? <br /> Sign up for PromptlyAI
+              </Link>
             </div>
-            <input
-              className="login-input"
-              type="text"
-              value={email}
-              onChange={(ev) => setEmail(ev.target.value)}
-            />
-            {/* <StyledInput
-              inpStyle={1}
-              title={email}
-              change={(ev) => setEmail(ev.target.value)}
-              inpHeight={30}
-              inpWidht={200}
-            /> */}
-            <div style={{ display: "flex", width: "200px" }}>
-              <label className="login-label" htmlFor="">
-                Enter password
-              </label>
-            </div>
-            <input
-              className="login-input"
-              type="password"
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
-            />
-            {/* <StyledInput
-              inpStyle={1}
-              title={password}
-              change={(ev) => setPassword(ev.target.value)}
-              inpHeight={30}
-              inpWidht={200}
-            /> */}
-            <div></div>
-            <StyledButton
-              btnWidth={175}
-              btnHeight={40}
-              click={() => login()}
-              btnStyle={3}
-              title="Login"
-              loading={loading}
-            />
-            <Link className="register-button" to="/register">
-              Don't have have an account? <br /> Sign up for PromptlyAI
-            </Link>
-          </div>
+          </form>
         </div>
       </div>
     </div>

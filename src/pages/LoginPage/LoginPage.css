@@ -48,3 +48,12 @@
   border-radius: 10px;
   font-size: 15px;
 }
+.loggin-btn {
+  cursor: pointer;
+  font-weight: 700;
+  background: var(--button-select-color);
+  border: solid white 2px;
+  font-size: 20px;
+  color: white;
+  border-radius: 10px;
+}
