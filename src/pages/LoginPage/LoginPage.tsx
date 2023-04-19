@@ -60,25 +60,37 @@ export default function LoginPage() {
                 Enter email
               </label>
             </div>
-            <StyledInput
+            <input
+              className="login-input"
+              type="text"
+              value={email}
+              onChange={(ev) => setEmail(ev.target.value)}
+            />
+            {/* <StyledInput
               inpStyle={1}
               title={email}
               change={(ev) => setEmail(ev.target.value)}
               inpHeight={30}
               inpWidht={200}
-            />
+            /> */}
             <div style={{ display: "flex", width: "200px" }}>
               <label className="login-label" htmlFor="">
                 Enter password
               </label>
             </div>
-            <StyledInput
+            <input
+              className="login-input"
+              type="password"
+              value={password}
+              onChange={(ev) => setPassword(ev.target.value)}
+            />
+            {/* <StyledInput
               inpStyle={1}
               title={password}
               change={(ev) => setPassword(ev.target.value)}
               inpHeight={30}
               inpWidht={200}
-            />
+            /> */}
             <div></div>
             <StyledButton
               btnWidth={175}
