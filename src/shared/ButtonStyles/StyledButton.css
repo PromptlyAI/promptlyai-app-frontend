@@ -20,7 +20,7 @@ img {
   border: solid black 2px;
 
   color: white;
-  border-radius: 17px;
+  border-radius: 0px;
 }
 .btn-style-3 {
   font-weight: 700;
@@ -28,7 +28,7 @@ img {
   border: solid white 2px;
 
   color: white;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 .btn-style-4 {
   font-weight: 700;

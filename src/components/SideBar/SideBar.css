@@ -30,13 +30,13 @@
   background: #2b2b32;
   display: flex;
   flex-direction: column;
-  height: 480px;
+  height: 950px;
   grid-gap: 10px;
   border-radius: 20px;
   padding: 5px;
   overflow-y: scroll;
 
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
 }
 .prompt-history-container::-webkit-scrollbar-thumb {
 }
@@ -61,12 +61,12 @@ label {
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 50px;
+  bottom: 0px;
   background-color: #2b2b32;
 }
 .bottom-gradient {
   position: absolute;
-  bottom: 130px;
+  bottom: 90px;
   width: 97%;
   height: 45px;
   background: rgb(0, 0, 0);

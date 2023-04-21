@@ -22,7 +22,7 @@ export default function UpgradeButton() {
   return (
     <div className="upgrade-container">
       <div className="left-upgrade">
-        <span>{wordsUsed}/10,000 FREE TOKENS USED</span>
+        <span> {wordsUsed}/10,000 FREE TOKENS USED</span>
         <div className="words-left-bar-container">
           <div
             style={{ width: wordsUsed / 44 }}

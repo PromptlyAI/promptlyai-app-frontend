@@ -6,6 +6,7 @@ import Logo from "../../images/PromptlyLogo.png";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Api from "../../api/Api";
 import { PromptContext } from "../../context/PromptContext";
+import UpgradeButton from "../UpgradeSection/UpgradeSection";
 interface buttonProps {
   input: string;
   path?: string;
@@ -98,7 +99,6 @@ export default function SideBar() {
     modeButtons.map((btn) => (btn.pressed = false));
     setModes(modeButtons);
   }
-  
 
   function pressModeBtn(_id: string) {
     let arr = [...modes];
@@ -134,47 +134,31 @@ export default function SideBar() {
   }
   return (
     <div className="side-bar-container">
-      <div className="logo-main-container">
+      <div className="center">
+        <UpgradeButton />
+      </div>
+      {/* <div className="logo-main-container">
         <div className="logo-container">
           <img className="logo" src={Logo} alt="" />
         </div>
-      </div>
-      <div style={{ padding: "20px" }}>
+      </div> */}
+      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-            marginBottom: "40px",
+            // marginBottom: "40px",
           }}
         >
-          <label htmlFor="">MODE</label>
-          <div className="mode-container">
-            {modes.map((modeBtn) => (
-              <StyledButton
-                click={() => {
-                  pressModeBtn(modeBtn.id);
-                }}
-                pressed={modeBtn.pressed}
-                btnWidth={bigBtnsSize}
-                btnHeight={56}
-                btnStyle={2}
-                textColor="white"
-                title={modeBtn.input}
-                customIcon={modeBtn.icon}
-                bookIcon={false}
-                trashIcon={false}
-                arrowIcon={true}
-              />
-            ))}
-          </div>
+          <div className="mode-container"></div>
         </div>
         <label htmlFor="">PROMPT HISTORY</label>
         <div
           style={{
             position: "relative",
             height: "fit-content",
-            paddingBottom: "50px",
+            // paddingBottom: "50px",
           }}
         >
           <div className="prompt-history-container">
@@ -220,22 +204,23 @@ export default function SideBar() {
               </div>
             )}
           </div>
-
-          <div className="bottom-gradient"></div>
-          <div className="clear-history-container">
-            <StyledButton
-              btnWidth={bigBtnsSize}
-              btnHeight={56}
-              btnStyle={2}
-              textColor="white"
-              title="CLEAR PROMPT HISTORY"
-              deleteIconClick={() => {}}
-              animationPopup={true}
-            />
+          <div>
+            <div className="bottom-gradient"></div>
+            <div className="clear-history-container">
+              <StyledButton
+                btnWidth={bigBtnsSize}
+                btnHeight={56}
+                btnStyle={2}
+                textColor="white"
+                title="CLEAR PROMPT HISTORY"
+                deleteIconClick={() => {}}
+                animationPopup={true}
+              />
+            </div>
           </div>
         </div>
       </div>
-      <ProfileBar />
+      {/* <ProfileBar /> */}
     </div>
   );
 }

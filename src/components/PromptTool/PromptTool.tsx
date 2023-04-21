@@ -149,7 +149,7 @@ export default function PromptTool() {
           pressed={true}
           trashIcon={false}
         />
-        {!isPremiumUser && <UpgradeButton />}
+        {/* {!isPremiumUser && <UpgradeButton />} */}
       </div>
       <div className="prompt-tool-main-container">
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
