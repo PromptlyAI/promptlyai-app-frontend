@@ -32,6 +32,8 @@ export default function PromptTool() {
 
   const textSpeed = 4;
 
+  // const [copyColor, setCopyColor] = useState<string>("");
+
   useEffect(() => {
     setNeedToSignIn(false);
     checkIfLogIn();
@@ -45,7 +47,6 @@ export default function PromptTool() {
       setImprovedPrompt("");
       setPromptTitle("new");
     } else if (promptId) {
-      console.log("Hheheh");
       loadPromptHistory();
     }
   }, [promptId]);
@@ -60,6 +61,8 @@ export default function PromptTool() {
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
+
+    console.log(await response);
 
     setUserPrompt(await response.input);
     setPromptOutput(await response.output);
@@ -190,7 +193,7 @@ export default function PromptTool() {
                 />
               </div>
             </div>
-            <label htmlFor="">Improved prompt:</label>
+            <h1 style={{ textAlign: "left" }}>Improved prompt:</h1>
             <div
               style={{
                 display: "flex",
@@ -233,7 +236,7 @@ export default function PromptTool() {
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <StyledInput
                 inpWidht={550}
-                inpHeight={610}
+                inpHeight={660}
                 inpStyle={1}
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
@@ -244,7 +247,7 @@ export default function PromptTool() {
                   width: "100%",
                   display: "flex",
                   gap: "20px",
-                  paddingTop: "20px",
+                  paddingTop: "0px",
                 }}
               >
                 <StyledButton
