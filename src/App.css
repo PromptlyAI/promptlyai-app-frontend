@@ -11,10 +11,11 @@
   --light-blue: #605c9d;
   --dark-blue: #262636;
 
-  --primary-background: #43424F;
-  --background: #50505B;
-
-  --secondary-background: #32333B;
+  --primary-background: #43424f;
+  --secondary-background: #32333b;
+  --background: #50505b;
+  --background-gray: #43424f;
+  --input-text: #949494;
 }
 
 * {
@@ -30,20 +31,20 @@
   z-index: 10;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-color: #3A3A40;
+  background-color: #3a3a40;
 }
 
 ::-webkit-scrollbar {
   z-index: 10;
   width: 12px;
-  background-color: #3A3A40;
+  background-color: #3a3a40;
 }
 
 ::-webkit-scrollbar-thumb {
   z-index: 10;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #46464B;
+  background-color: #46464b;
 }
 
 .loader {

@@ -10,6 +10,11 @@ import { useNavigate } from "react-router";
 import Popup from "../Popup/popup";
 import { PromptContext } from "../../context/PromptContext";
 
+import BookWhite from "../../images/BookWhite.png";
+import TrashWhite from "../../images/TrashWhite.png";
+import Edit from "../../images/Edit.png";
+import PromptlyLogo from "../../images/PromptlyLogo.png";
+
 export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
   const [promptTitle, setPromptTitle] = useState<string>("");
@@ -133,148 +138,194 @@ export default function PromptTool() {
     await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
   return (
-    <div className="prompt-tool-container">
-      <Popup displayPopup={needToSignIn} />
+    <div>
       <div className="prompt-tool-top-container">
-        <StyledButton
+        <div className="prompt-title-container">
+          <img
+            style={{ width: "47.2px", height: "38.4px" }}
+            src={BookWhite}
+            alt=""
+          />
+          <div style={{ width: "500px" }}>
+            {loadingPrompt ? (
+              <div className="center">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <h1>
+                {promptTitle
+                  ? promptTitle.length > 35
+                    ? `${promptTitle.slice(0, 35)}...`
+                    : promptTitle
+                  : "new"}
+              </h1>
+            )}
+          </div>
+          <div
+            style={{
+              width: "110px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <img style={{ width: "38px", height: "38px" }} src={Edit} alt="" />
+            <img
+              style={{ width: "51px", height: "48px" }}
+              src={TrashWhite}
+              alt=""
+            />
+          </div>
+        </div>
+        <div
+          style={{ display: "flex", width: "400px", justifyContent: "center" }}
+        >
+          <img src={PromptlyLogo} alt="" />
+        </div>
+        {/* <StyledButton
           loading={loadingPrompt}
           btnStyle={3}
-          title={
-            promptTitle
-              ? promptTitle.length > 35
-                ? `${promptTitle.slice(0, 35)}...`
-                : promptTitle
-              : "new"
-          }
+          title=
           bookIcon={true}
           btnWidth={604}
           btnHeight={68}
           pressed={true}
           trashIcon={false}
-        />
+        /> */}
         {/* {!isPremiumUser && <UpgradeButton />} */}
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "500px",
-        }}
-      ></div>
-      <div className="prompt-tool-main-container">
-        <div>
-          <h1 className="big-title">PROMPT TOOL</h1>
-          <div className="prompt-tool-main-inner">
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
-
-              <StyledInput
-                inpWidht={640}
-                inpHeight={255}
-                inpStyle={1}
-                title={userPrompt}
-                change={(ev) => setUserPrompt(ev.target.value)}
-                placeHolder="Write your prompt input here..."
-              />
-              <div>
-                <StyledButton
-                  click={() => {
-                    if (!promptOutputLoading) {
-                      fetchImprovedPrompt();
-                    }
-                  }}
-                  btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
-                  title="Improve"
-                  loading={promptOutputLoading}
-                />
-              </div>
-            </div>
-            <h1 style={{ textAlign: "left" }}>Improved prompt:</h1>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-              }}
-            >
-              <StyledInput
-                inpStyle={1}
-                title={promptOutput}
-                change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={255}
-                inpWidht={640}
-                placeHolder="Your generated prompt will appear here..."
-              />
-              <div>
-                <StyledButton
-                  click={() => {
-                    if (!improvedPromptLoading) {
-                      fetchFinalOutput();
-                    }
-                  }}
-                  btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
-                  title="Generate"
-                  loading={improvedPromptLoading}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* {improvedPrompt && ( */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h1 className="big-title">AI GENERATED</h1>
-          <div className="right-generate-container">
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
-              <h1 style={{ textAlign: "left" }}>Output:</h1>
-              <StyledInput
-                inpWidht={550}
-                inpHeight={660}
-                inpStyle={1}
-                title={improvedPrompt}
-                change={(ev) => setImprovedPrompt(ev.target.value)}
-                placeHolder="Your generated output will appear here..."
-              />
+      <div className="prompt-tool-container">
+        <Popup displayPopup={needToSignIn} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "500px",
+          }}
+        ></div>
+        <div className="prompt-tool-main-container">
+          <div>
+            <h1 className="big-title">PROMPT TOOL</h1>
+            <div className="prompt-tool-main-inner">
               <div
                 style={{
-                  width: "100%",
                   display: "flex",
-                  gap: "20px",
-                  paddingTop: "0px",
+                  flexDirection: "column",
+                  gap: "10px",
                 }}
               >
-                <StyledButton
-                  click={() => {
-                    if (!improvedPromptLoading) {
-                      fetchFinalOutput();
-                    }
-                  }}
-                  btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
-                  title="SAVE"
-                  loading={improvedPromptLoading}
+                <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
+
+                <StyledInput
+                  inpWidht={640}
+                  inpHeight={255}
+                  inpStyle={1}
+                  title={userPrompt}
+                  change={(ev) => setUserPrompt(ev.target.value)}
+                  placeHolder="Write your prompt input here..."
                 />
-                <StyledButton
-                  click={() => navigator.clipboard.writeText(improvedPrompt)}
-                  btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
-                  title="COPY"
-                  loading={improvedPromptLoading}
+                <div>
+                  <StyledButton
+                    click={() => {
+                      if (!promptOutputLoading) {
+                        fetchImprovedPrompt();
+                      }
+                    }}
+                    btnStyle={3}
+                    btnWidth={200}
+                    btnHeight={50}
+                    title="Improve"
+                    loading={promptOutputLoading}
+                  />
+                </div>
+              </div>
+              <h1 style={{ textAlign: "left" }}>Improved prompt:</h1>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <StyledInput
+                  inpStyle={1}
+                  title={promptOutput}
+                  change={(ev) => setPromptOutput(ev.target.value)}
+                  inpHeight={255}
+                  inpWidht={640}
+                  placeHolder="Your generated prompt will appear here..."
                 />
+                <div>
+                  <StyledButton
+                    click={() => {
+                      if (!improvedPromptLoading) {
+                        fetchFinalOutput();
+                      }
+                    }}
+                    btnStyle={3}
+                    btnWidth={200}
+                    btnHeight={50}
+                    title="Generate"
+                    loading={improvedPromptLoading}
+                  />
+                </div>
               </div>
             </div>
           </div>
+          {/* {improvedPrompt && ( */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <h1 className="big-title">AI GENERATED</h1>
+            <div className="right-generate-container">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <h1 style={{ textAlign: "left" }}>Output:</h1>
+                <StyledInput
+                  inpWidht={550}
+                  inpHeight={660}
+                  inpStyle={1}
+                  title={improvedPrompt}
+                  change={(ev) => setImprovedPrompt(ev.target.value)}
+                  placeHolder="Your generated output will appear here..."
+                />
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    gap: "20px",
+                    paddingTop: "0px",
+                  }}
+                >
+                  <StyledButton
+                    click={() => {
+                      if (!improvedPromptLoading) {
+                        fetchFinalOutput();
+                      }
+                    }}
+                    btnStyle={3}
+                    btnWidth={200}
+                    btnHeight={50}
+                    title="SAVE"
+                    loading={improvedPromptLoading}
+                  />
+                  <StyledButton
+                    click={() => navigator.clipboard.writeText(improvedPrompt)}
+                    btnStyle={3}
+                    btnWidth={200}
+                    btnHeight={50}
+                    title="COPY"
+                    loading={improvedPromptLoading}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* )} */}
         </div>
-        {/* )} */}
       </div>
     </div>
   );
