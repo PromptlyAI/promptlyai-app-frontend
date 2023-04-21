@@ -268,6 +268,13 @@ export default function PromptTool() {
                     title="Generate"
                     loading={improvedPromptLoading}
                   />
+                  {improvedPromptLoading && (
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <span style={{ color: "white", fontSize: "15px" }}>
+                        this may take some time...
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -310,7 +317,6 @@ export default function PromptTool() {
                     btnWidth={200}
                     btnHeight={50}
                     title="SAVE"
-                    loading={improvedPromptLoading}
                   />
                   <StyledButton
                     click={() => navigator.clipboard.writeText(improvedPrompt)}
@@ -318,8 +324,8 @@ export default function PromptTool() {
                     btnWidth={200}
                     btnHeight={50}
                     title="COPY"
-                    loading={improvedPromptLoading}
                   />
+                  <div className="blurred-text">dafsdffdfd</div>
                 </div>
               </div>
             </div>
