@@ -260,7 +260,7 @@ export default function PromptTool() {
                   loading={improvedPromptLoading}
                 />
                 <StyledButton
-                  click={() => {}}
+                  click={() => navigator.clipboard.writeText(improvedPrompt)}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}
