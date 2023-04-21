@@ -325,7 +325,6 @@ export default function PromptTool() {
                     btnHeight={50}
                     title="COPY"
                   />
-                  <div className="blurred-text">dafsdffdfd</div>
                 </div>
               </div>
             </div>
