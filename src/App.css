@@ -10,6 +10,11 @@
 
   --light-blue: #605c9d;
   --dark-blue: #262636;
+
+  --primary-background: #43424F;
+  --background: #50505B;
+
+  --secondary-background: #32333B;
 }
 
 * {
@@ -18,7 +23,7 @@
   margin: 0;
 }
 .App {
-  background: var(--dark-blue);
+  background: var(--background);
   display: flex;
 }
 ::-webkit-scrollbar-track {

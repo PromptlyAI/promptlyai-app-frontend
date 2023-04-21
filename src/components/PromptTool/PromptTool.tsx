@@ -151,79 +151,121 @@ export default function PromptTool() {
         />
         {/* {!isPremiumUser && <UpgradeButton />} */}
       </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "500px",
+        }}
+      ></div>
       <div className="prompt-tool-main-container">
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div className="center">
-            <h1>Prompt Tool</h1>
-          </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-          >
-            <label htmlFor="">Write a prompt</label>
-            <StyledInput
-              inpWidht={450}
-              inpHeight={200}
-              inpStyle={1}
-              title={userPrompt}
-              change={(ev) => setUserPrompt(ev.target.value)}
-            />
-            <div className="center">
-              <StyledButton
-                click={() => {
-                  if (!promptOutputLoading) {
-                    fetchImprovedPrompt();
-                  }
-                }}
-                btnStyle={3}
-                btnWidth={200}
-                btnHeight={50}
-                title="promptify"
-                loading={promptOutputLoading}
-              />
-            </div>
-          </div>
-          <label htmlFor="">Improved prompt:</label>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <StyledInput
-              inpStyle={1}
-              title={promptOutput}
-              change={(ev) => setPromptOutput(ev.target.value)}
-              inpHeight={200}
-              inpWidht={450}
-            />
+        <div>
+          <h1 className="big-title">PROMPT TOOL</h1>
+          <div className="prompt-tool-main-inner">
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
 
-            <StyledButton
-              click={() => {
-                if (!improvedPromptLoading) {
-                  fetchFinalOutput();
-                }
+              <StyledInput
+                inpWidht={640}
+                inpHeight={255}
+                inpStyle={1}
+                title={userPrompt}
+                change={(ev) => setUserPrompt(ev.target.value)}
+              />
+              <div>
+                <StyledButton
+                  click={() => {
+                    if (!promptOutputLoading) {
+                      fetchImprovedPrompt();
+                    }
+                  }}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={50}
+                  title="Improve"
+                  loading={promptOutputLoading}
+                />
+              </div>
+            </div>
+            <label htmlFor="">Improved prompt:</label>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
               }}
-              btnStyle={3}
-              btnWidth={200}
-              btnHeight={50}
-              title="Generate Text"
-              loading={improvedPromptLoading}
-            />
+            >
+              <StyledInput
+                inpStyle={1}
+                title={promptOutput}
+                change={(ev) => setPromptOutput(ev.target.value)}
+                inpHeight={255}
+                inpWidht={640}
+              />
+              <div>
+                <StyledButton
+                  click={() => {
+                    if (!improvedPromptLoading) {
+                      fetchFinalOutput();
+                    }
+                  }}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={50}
+                  title="Generate"
+                  loading={improvedPromptLoading}
+                />
+              </div>
+            </div>
           </div>
         </div>
         {/* {improvedPrompt && ( */}
-        <div style={{ height: "85%", display: "flex", alignItems: "center" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="">Generated Text:</label>
-            <StyledInput
-              inpWidht={450}
-              inpHeight={600}
-              inpStyle={1}
-              title={improvedPrompt}
-              change={(ev) => setImprovedPrompt(ev.target.value)}
-            />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h1 className="big-title">AI GENERATED</h1>
+          <div className="right-generate-container">
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <h1 style={{ textAlign: "left" }}>Output:</h1>
+              <StyledInput
+                inpWidht={550}
+                inpHeight={610}
+                inpStyle={1}
+                title={improvedPrompt}
+                change={(ev) => setImprovedPrompt(ev.target.value)}
+              />
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  gap: "20px",
+                  paddingTop: "20px",
+                }}
+              >
+                <StyledButton
+                  click={() => {
+                    if (!improvedPromptLoading) {
+                      fetchFinalOutput();
+                    }
+                  }}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={50}
+                  title="SAVE"
+                  loading={improvedPromptLoading}
+                />
+                <StyledButton
+                  click={() => {}}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={50}
+                  title="COPY"
+                  loading={improvedPromptLoading}
+                />
+              </div>
+            </div>
           </div>
         </div>
         {/* )} */}

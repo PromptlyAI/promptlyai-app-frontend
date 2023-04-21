@@ -6,4 +6,7 @@ textarea {
   outline: none;
   border-radius: 10px;
   resize: none;
+  background: var(--secondary-background);
+  color: #949494;
+  font-size: 25px;
 }
