@@ -9,6 +9,7 @@ interface IProps {
   inpWidht?: number;
   inpHeight?: number;
   scroll?: boolean;
+  placeHolder?: string; 
 }
 
 export default function StyledInput({
@@ -19,16 +20,20 @@ export default function StyledInput({
   inpWidht,
   inpHeight,
   scroll = true,
+  placeHolder = ""
 }: IProps) {
   return (
     <textarea
       onChange={(ev) => change !== undefined && change(ev)}
       className={`input-style-${inpStyle}`}
+      placeholder={placeHolder}
       value={title}
       style={{
         width: inpWidht,
         height: inpHeight,
         overflow: scroll ? "auto" : "hidden",
+        borderRadius: 0,
+        borderColor: "transparent",
       }}
     />
   );

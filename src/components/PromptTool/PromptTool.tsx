@@ -173,6 +173,7 @@ export default function PromptTool() {
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
+                placeHolder="Write your prompt input here..."
               />
               <div>
                 <StyledButton
@@ -203,6 +204,7 @@ export default function PromptTool() {
                 change={(ev) => setPromptOutput(ev.target.value)}
                 inpHeight={255}
                 inpWidht={640}
+                placeHolder="Your generated prompt will appear here..."
               />
               <div>
                 <StyledButton
@@ -235,6 +237,7 @@ export default function PromptTool() {
                 inpStyle={1}
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
+                placeHolder="Your generated output will appear here..."
               />
               <div
                 style={{
