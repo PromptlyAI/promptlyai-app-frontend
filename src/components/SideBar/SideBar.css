@@ -63,7 +63,7 @@
   flex-direction: column;
   height: 950px;
   grid-gap: 10px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   padding: 5px;
   overflow-y: scroll;
 
