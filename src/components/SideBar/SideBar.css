@@ -2,9 +2,39 @@
   width: 440px;
   height: 100vh;
   position: relative;
+  z-index: 1;
+}
 
+.show-sidebar-container {
+  height: 100%;
   background: #1f1f24;
 }
+.hide-sidebar {
+  animation: go-left 0.5s ease;
+  transform: translateX(-500px);
+}
+.show-sidebar {
+  animation: go-right 0.5s ease;
+  transform: translateX(0px);
+}
+
+@keyframes go-left {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+@keyframes go-right {
+  0% {
+    transform: translateX(-500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
 .logo {
   width: 267.49px;
   height: 66.14px;
@@ -17,6 +47,7 @@
   align-items: center;
   display: flex;
 }
+
 .logo-container {
   display: flex;
   justify-content: center;

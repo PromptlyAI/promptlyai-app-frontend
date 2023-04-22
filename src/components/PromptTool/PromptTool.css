@@ -74,3 +74,10 @@
 .loading-text {
   background: var(--background-gray);
 }
+.hide-bar {
+  position: absolute;
+  left: 0px;
+  height: 100px;
+  width: 600px;
+  background: var(--primary-background);
+}

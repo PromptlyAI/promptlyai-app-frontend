@@ -140,6 +140,7 @@ export default function PromptTool() {
   return (
     <div>
       <div className="prompt-tool-top-container">
+        <div className="hide-bar"></div>
         <div className="prompt-title-container">
           <img
             style={{ width: "47.2px", height: "38.4px" }}

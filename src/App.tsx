@@ -12,9 +12,11 @@ import IntroPage from "./pages/IntroPage/IntroPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import { PromptContext } from "./context/PromptContext";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
+import { SidebarContext } from "./context/SidebarContext";
 
 function App() {
   const [promptId, setPromptId] = useState<string>("");
+  const [showSidebar, setShowSidebar] = useState<boolean>(true);
   return (
     <Router>
       <div className="App">
@@ -23,11 +25,15 @@ function App() {
             path="/"
             element={
               <>
-                <PromptContext.Provider value={{ promptId, setPromptId }}>
-                  <NavigationBar />
-                  <SideBar />
-                  <PromptPage />
-                </PromptContext.Provider>
+                <SidebarContext.Provider
+                  value={{ showSidebar, setShowSidebar }}
+                >
+                  <PromptContext.Provider value={{ promptId, setPromptId }}>
+                    <NavigationBar />
+                    <SideBar />
+                    <PromptPage />
+                  </PromptContext.Provider>
+                </SidebarContext.Provider>
               </>
             }
           />

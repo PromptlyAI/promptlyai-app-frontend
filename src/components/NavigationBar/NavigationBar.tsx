@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./NavigationBar.css";
 import Search from "../../images/Search.png";
 import ImgBox from "../../images/ImgBox.png";
@@ -7,7 +7,10 @@ import MenuBtn from "../../images/MenuBtn.png";
 import { useNavigate } from "react-router";
 import Api from "../../api/Api";
 import { RxExit } from "react-icons/rx";
+import { SidebarContext } from "../../context/SidebarContext";
 export default function NavigationBar() {
+  const { showSidebar, setShowSidebar } = useContext(SidebarContext);
+
   const [userName, setUserName] = useState<string>("");
   const navigate = useNavigate();
 
@@ -61,6 +64,7 @@ export default function NavigationBar() {
         <div
           style={{ background: "#605C9D", borderRadius: "13px" }}
           className="nav-btn"
+          onClick={() => setShowSidebar(!showSidebar)}
         >
           <img src={Time} alt="" />
         </div>

@@ -7,6 +7,7 @@ import ProfileBar from "../ProfileBar/ProfileBar";
 import Api from "../../api/Api";
 import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
+import { SidebarContext } from "../../context/SidebarContext";
 interface buttonProps {
   input: string;
   path?: string;
@@ -18,6 +19,7 @@ interface buttonProps {
 
 export default function SideBar() {
   const { setPromptId, promptId } = useContext(PromptContext);
+  const { showSidebar, setShowSidebar } = useContext(SidebarContext);
 
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [promptHistoryLoading, setPromptHistoryLoading] =
@@ -134,93 +136,102 @@ export default function SideBar() {
   }
   return (
     <div className="side-bar-container">
-      <div className="center">
-        <UpgradeButton />
-      </div>
-      {/* <div className="logo-main-container">
+      {/* {showSidebar && ( */}
+      <div
+        className={
+          showSidebar
+            ? "show-sidebar-container show-sidebar"
+            : "show-sidebar-container hide-sidebar"
+        }
+      >
+        <div className="center">
+          <UpgradeButton />
+        </div>
+        {/* <div className="logo-main-container">
         <div className="logo-container">
           <img className="logo" src={Logo} alt="" />
         </div>
       </div> */}
-      <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            // marginBottom: "40px",
-          }}
-        >
-          <div className="mode-container"></div>
-        </div>
-        <label htmlFor="">PROMPT HISTORY</label>
-        <div
-          style={{
-            position: "relative",
-            height: "fit-content",
-            // paddingBottom: "50px",
-          }}
-        >
-          <div className="prompt-history-container">
-            {!promptHistoryLoading ? (
-              <>
-                {promptHistory.map((historyBtn) => (
-                  <StyledButton
-                    key={historyBtn.id}
-                    click={() => {
-                      pressHistoryBtn(historyBtn.id);
-                    }}
-                    deleteIconClick={() => {
-                      deletePrompt(historyBtn.id);
-                    }}
-                    pressed={historyBtn.pressed}
-                    btnWidth={smallBtnsSize}
-                    btnHeight={56}
-                    btnStyle={2}
-                    textColor="white"
-                    title={
-                      historyBtn.input.length > 20
-                        ? `${historyBtn.input.slice(0, 20)}...`
-                        : historyBtn.input
-                    }
-                    bookIcon={true}
-                    trashIcon={!historyBtn.loading}
-                    animationPopup={true}
-                    loading={historyBtn.loading}
-                  />
-                ))}
-              </>
-            ) : (
-              <div
-                style={{
-                  width: "100%",
-                  height: "15%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  display: "flex",
-                }}
-              >
-                <div className="loader"></div>
-              </div>
-            )}
+        <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              // marginBottom: "40px",
+            }}
+          >
+            <div className="mode-container"></div>
           </div>
-          <div>
-            <div className="bottom-gradient"></div>
-            <div className="clear-history-container">
-              <StyledButton
-                btnWidth={bigBtnsSize}
-                btnHeight={56}
-                btnStyle={2}
-                textColor="white"
-                title="CLEAR PROMPT HISTORY"
-                deleteIconClick={() => {}}
-                animationPopup={true}
-              />
+          <label htmlFor="">PROMPT HISTORY</label>
+          <div
+            style={{
+              position: "relative",
+              height: "fit-content",
+              // paddingBottom: "50px",
+            }}
+          >
+            <div className="prompt-history-container">
+              {!promptHistoryLoading ? (
+                <>
+                  {promptHistory.map((historyBtn) => (
+                    <StyledButton
+                      key={historyBtn.id}
+                      click={() => {
+                        pressHistoryBtn(historyBtn.id);
+                      }}
+                      deleteIconClick={() => {
+                        deletePrompt(historyBtn.id);
+                      }}
+                      pressed={historyBtn.pressed}
+                      btnWidth={smallBtnsSize}
+                      btnHeight={56}
+                      btnStyle={2}
+                      textColor="white"
+                      title={
+                        historyBtn.input.length > 20
+                          ? `${historyBtn.input.slice(0, 20)}...`
+                          : historyBtn.input
+                      }
+                      bookIcon={true}
+                      trashIcon={!historyBtn.loading}
+                      animationPopup={true}
+                      loading={historyBtn.loading}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "15%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <div className="loader"></div>
+                </div>
+              )}
+            </div>
+            <div>
+              <div className="bottom-gradient"></div>
+              <div className="clear-history-container">
+                <StyledButton
+                  btnWidth={bigBtnsSize}
+                  btnHeight={56}
+                  btnStyle={2}
+                  textColor="white"
+                  title="CLEAR PROMPT HISTORY"
+                  deleteIconClick={() => {}}
+                  animationPopup={true}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {/* <ProfileBar /> */}
+      {/* )} */}
     </div>
   );
 }
