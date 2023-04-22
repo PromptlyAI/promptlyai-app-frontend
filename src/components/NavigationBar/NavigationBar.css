@@ -51,11 +51,11 @@
 }
 .fade-in {
   opacity: 1;
-  animation: fade-in-anim 0.5s ease;
+  animation: fade-in-anim 0.3s ease;
 }
 .fade-out {
-  opacity: 1;
-  animation: fade-out-anim 0.1s ease;
+  opacity: 0;
+  animation: fade-out-anim 0.3s ease;
 }
 @keyframes fade-in-anim {
   0% {

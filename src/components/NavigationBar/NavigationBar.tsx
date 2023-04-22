@@ -15,7 +15,6 @@ export default function NavigationBar() {
   const navigate = useNavigate();
 
   const [rotate, setRotate] = useState<boolean>(false);
-  const [fadeOut, setFadeOut] = useState<boolean>(false);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -29,15 +28,6 @@ export default function NavigationBar() {
     getUserInfo();
   }, []);
 
-  useEffect(() => {
-    if (rotate === false) {
-      setFadeOut(true);
-      setTimeout(() => {
-        setFadeOut(false);
-      }, 500);
-    }
-  }, [rotate]);
-
   return (
     <div className="navigation-bar-main-container">
       <div
@@ -46,11 +36,9 @@ export default function NavigationBar() {
       >
         <img src={MenuBtn} alt="" />
       </div>
-      {rotate && (
-        <div className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
-          <RxExit className="exit-icon" />
-        </div>
-      )}
+      <div className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
+        <RxExit className="exit-icon" />
+      </div>
       <div className="nav-btn-container">
         <div
           style={{ background: "#605C9D", borderRadius: "13px" }}
