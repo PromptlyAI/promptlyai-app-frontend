@@ -11,6 +11,7 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import { PromptContext } from "./context/PromptContext";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 function App() {
   const [promptId, setPromptId] = useState<string>("");
@@ -23,6 +24,7 @@ function App() {
             element={
               <>
                 <PromptContext.Provider value={{ promptId, setPromptId }}>
+                  <NavigationBar />
                   <SideBar />
                   <PromptPage />
                 </PromptContext.Provider>
