@@ -154,8 +154,8 @@ export default function PromptTool() {
             ) : (
               <h1>
                 {promptTitle
-                  ? promptTitle.length > 35
-                    ? `${promptTitle.slice(0, 35)}...`
+                  ? promptTitle.length > 31
+                    ? `${promptTitle.slice(0, 31)}...`
                     : promptTitle
                   : "new"}
               </h1>
