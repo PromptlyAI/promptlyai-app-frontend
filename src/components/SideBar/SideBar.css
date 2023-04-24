@@ -96,6 +96,7 @@ label {
   background-color: #2b2b32;
 }
 .bottom-gradient {
+  pointer-events: none;
   position: absolute;
   bottom: 90px;
   width: 97%;

@@ -163,6 +163,29 @@ export default function SideBar() {
           >
             <div className="mode-container"></div>
           </div>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <StyledButton
+              click={() => setPromptId("new")}
+              title="new prompt"
+              btnStyle={2}
+              btnWidth={130}
+              btnHeight={50}
+            />
+            <StyledButton
+              click={() => setPromptId("image")}
+              title="new image"
+              btnStyle={2}
+              btnWidth={130}
+              btnHeight={50}
+            />
+          </div>
+
           <label htmlFor="">PROMPT HISTORY</label>
           <div
             style={{

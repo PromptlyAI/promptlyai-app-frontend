@@ -35,6 +35,9 @@ export default function PromptTool() {
   const navigate = useNavigate();
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
+  // const [imagePrompt, setImagePrompt] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
+
   const textSpeed = 4;
 
   // const [copyColor, setCopyColor] = useState<string>("");
@@ -46,20 +49,18 @@ export default function PromptTool() {
 
   useEffect(() => {
     console.log(promptId);
-    if (promptId === "new") {
+    if (promptId === "new" || promptId === "image") {
       setUserPrompt("");
       setPromptOutput("");
       setImprovedPrompt("");
       setPromptTitle("new");
+      setImageUrl("");
     } else if (promptId) {
       loadPromptHistory();
     }
   }, [promptId]);
 
   async function loadPromptHistory() {
-    // if (typeof promptId === "string") {
-    //   console.log("is string");
-    // }
     setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
@@ -69,9 +70,16 @@ export default function PromptTool() {
 
     console.log(await response);
 
+    // const test = await response.answer;
+    // if (promptId === "image" && test) {
+    //   setImageUrl(test);
+    // } else {
+    // }
+    setImprovedPrompt(await response.answer);
+
     setUserPrompt(await response.input);
     setPromptOutput(await response.output);
-    setImprovedPrompt(await response.answer);
+
     setPromptTitle(await response.input);
     setLoadingPrompt(false);
   }
@@ -137,6 +145,37 @@ export default function PromptTool() {
 
     await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
+
+  async function fetchImprovedImagePrompt() {
+    setPromptOutputLoading(true);
+    const response = await Api({
+      path: `prompt/get-improved-image-prompt?prompt=${promptOutput}&promptId=${currentPromptId}`,
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+    setPromptOutputLoading(true);
+
+    console.log(await response);
+
+    const responseString = await response.prompt.output;
+    setCurrentPromptId(await response.prompt.id);
+
+    await runTextAnimation(responseString, setPromptOutput, textSpeed);
+    // set(await response.image_url);
+  }
+
+  async function fetchImage() {
+    setImprovedPromptLoading(true);
+    const response = await Api({
+      path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${currentPromptId}`,
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+    setImprovedPromptLoading(false);
+    console.log(await response);
+    setImageUrl(await response.image_url);
+  }
+
   return (
     <div>
       <div className="prompt-tool-top-container">
@@ -206,7 +245,12 @@ export default function PromptTool() {
         ></div>
         <div className="prompt-tool-main-container">
           <div>
-            <h1 className="big-title">PROMPT TOOL</h1>
+            {promptId === "image" ? (
+              <h1 className="big-title">IMAGE TOOL</h1>
+            ) : (
+              <h1 className="big-title">PROMPT TOOL</h1>
+            )}
+
             <div className="prompt-tool-main-inner">
               <div
                 style={{
@@ -229,7 +273,11 @@ export default function PromptTool() {
                   <StyledButton
                     click={() => {
                       if (!promptOutputLoading) {
-                        fetchImprovedPrompt();
+                        if (promptId === "image") {
+                          fetchImprovedImagePrompt();
+                        } else {
+                          fetchImprovedPrompt();
+                        }
                       }
                     }}
                     btnStyle={3}
@@ -260,7 +308,11 @@ export default function PromptTool() {
                   <StyledButton
                     click={() => {
                       if (!improvedPromptLoading) {
-                        fetchFinalOutput();
+                        if (promptId === "image") {
+                          fetchImage();
+                        } else {
+                          fetchFinalOutput();
+                        }
                       }
                     }}
                     btnStyle={3}
@@ -292,14 +344,23 @@ export default function PromptTool() {
                 }}
               >
                 <h1 style={{ textAlign: "left" }}>Output:</h1>
-                <StyledInput
-                  inpWidht={550}
-                  inpHeight={660}
-                  inpStyle={1}
-                  title={improvedPrompt}
-                  change={(ev) => setImprovedPrompt(ev.target.value)}
-                  placeHolder="Your generated output will appear here..."
-                />
+                {promptId === "image" ? (
+                  <div className="image-container">
+                    {imageUrl && (
+                      <img className="generated-image" src={imageUrl} alt="" />
+                    )}
+                  </div>
+                ) : (
+                  <StyledInput
+                    inpWidht={550}
+                    inpHeight={660}
+                    inpStyle={1}
+                    title={improvedPrompt}
+                    change={(ev) => setImprovedPrompt(ev.target.value)}
+                    placeHolder="Your generated output will appear here..."
+                  />
+                )}
+
                 <div
                   style={{
                     width: "100%",

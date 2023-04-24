@@ -81,3 +81,16 @@
   width: 600px;
   background: var(--primary-background);
 }
+.image-container {
+  width: 550px;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: var(--secondary-background);
+}
+.generated-image {
+  width: 500px;
+  height: 500px;
+}
