@@ -19,7 +19,6 @@ export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
   const [promptTitle, setPromptTitle] = useState<string>("");
 
-  const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
@@ -222,17 +221,6 @@ export default function PromptTool() {
         >
           <img src={PromptlyLogo} alt="" />
         </div>
-        {/* <StyledButton
-          loading={loadingPrompt}
-          btnStyle={3}
-          title=
-          bookIcon={true}
-          btnWidth={604}
-          btnHeight={68}
-          pressed={true}
-          trashIcon={false}
-        /> */}
-        {/* {!isPremiumUser && <UpgradeButton />} */}
       </div>
       <div className="prompt-tool-container">
         <Popup displayPopup={needToSignIn} />
@@ -243,7 +231,7 @@ export default function PromptTool() {
             width: "500px",
           }}
         ></div>
-        <div className="prompt-tool-main-container">
+        <div style={{ gap: "60px" }} className="prompt-tool-main-container">
           <div>
             {promptId === "image" ? (
               <h1 className="big-title">IMAGE TOOL</h1>
@@ -262,13 +250,14 @@ export default function PromptTool() {
                 <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
 
                 <StyledInput
-                  inpWidht={640}
-                  inpHeight={255}
+                  inpWidht={700}
+                  inpHeight={350}
                   inpStyle={1}
                   title={userPrompt}
                   change={(ev) => setUserPrompt(ev.target.value)}
                   placeHolder="Write your prompt input here..."
                 />
+
                 <div>
                   <StyledButton
                     click={() => {
@@ -300,8 +289,8 @@ export default function PromptTool() {
                   inpStyle={1}
                   title={promptOutput}
                   change={(ev) => setPromptOutput(ev.target.value)}
-                  inpHeight={255}
-                  inpWidht={640}
+                  inpHeight={350}
+                  inpWidht={700}
                   placeHolder="Your generated prompt will appear here..."
                 />
                 <div>
@@ -352,8 +341,8 @@ export default function PromptTool() {
                   </div>
                 ) : (
                   <StyledInput
-                    inpWidht={550}
-                    inpHeight={660}
+                    inpWidht={750}
+                    inpHeight={850}
                     inpStyle={1}
                     title={improvedPrompt}
                     change={(ev) => setImprovedPrompt(ev.target.value)}

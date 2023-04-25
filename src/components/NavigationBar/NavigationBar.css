@@ -21,6 +21,7 @@
   align-items: center;
   width: 57px;
   height: 57px;
+  transition: 0.1s ease;
 }
 .menu-btn {
   position: absolute;

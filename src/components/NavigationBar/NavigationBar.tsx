@@ -50,7 +50,10 @@ export default function NavigationBar() {
           <img src={ImgBox} alt="" />
         </div>
         <div
-          style={{ background: "#605C9D", borderRadius: "13px" }}
+          style={{
+            background: showSidebar ? "#605C9D" : "transparent",
+            borderRadius: "13px",
+          }}
           className="nav-btn"
           onClick={() => setShowSidebar(!showSidebar)}
         >

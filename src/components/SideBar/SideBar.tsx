@@ -135,7 +135,10 @@ export default function SideBar() {
     setPromptHistory(a);
   }
   return (
-    <div className="side-bar-container">
+    <div
+      // style={{ position: showSidebar ? "relative" : "absolute" }}
+      className="side-bar-container"
+    >
       {/* {showSidebar && ( */}
       <div
         className={
