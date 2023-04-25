@@ -138,3 +138,11 @@ label {
     height: 35px;
   }
 }
+.clear-btn {
+  border: none;
+  border-radius: 18px;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  background: var(--button-color);
+}

@@ -8,6 +8,7 @@ import Api from "../../api/Api";
 import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import { SidebarContext } from "../../context/SidebarContext";
+import Trash from "../../images/Trash.png";
 interface buttonProps {
   input: string;
   path?: string;
@@ -243,15 +244,23 @@ export default function SideBar() {
             <div>
               <div className="bottom-gradient"></div>
               <div className="clear-history-container">
-                <StyledButton
+                <button
+                  className="clear-btn"
+                  style={{ width: bigBtnsSize, height: "56px" }}
+                >
+                  <img src={Trash} />
+                  CLEAR PROMPT HISTORY
+                </button>
+                {/* <StyledButton
                   btnWidth={bigBtnsSize}
                   btnHeight={56}
-                  btnStyle={2}
+                  btnStyle={6}
                   textColor="white"
                   title="CLEAR PROMPT HISTORY"
+                  trashIcon={true}
                   deleteIconClick={() => {}}
                   animationPopup={true}
-                />
+                /> */}
               </div>
             </div>
           </div>

@@ -48,6 +48,15 @@ img {
   border-radius: 10px;
 }
 
+.btn-style-6 {
+  font-weight: 700;
+  border-radius: 18px;
+
+  background: var(--button-color);
+
+  color: white;
+}
+
 .left-icon {
   position: absolute;
   left: 20px;
