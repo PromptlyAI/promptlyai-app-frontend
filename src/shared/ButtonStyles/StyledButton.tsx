@@ -3,6 +3,7 @@ import "../ButtonStyles/StyledButton.css";
 import BookClicked from "../../images/BookClicked.png";
 import Book from "../../images/Book.png";
 
+import ImgBox from "../../images/ImgBox.png";
 import Trash from "../../images/Trash.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
@@ -25,6 +26,7 @@ interface IProps {
   loading?: boolean;
   textSize?: number;
   btnType?: string;
+  imgIcon?: boolean;
 }
 
 export default function StyledButton({
@@ -45,6 +47,7 @@ export default function StyledButton({
   loading = false,
   textSize,
   btnType = "",
+  imgIcon,
 }: IProps) {
   return (
     <button
@@ -71,12 +74,35 @@ export default function StyledButton({
         fontSize: textSize,
       }}
     >
-      {bookIcon &&
-        (pressed ? (
-          <img className="left-icon" src={BookClicked} alt="" />
-        ) : (
-          <img className="left-icon" src={Book} alt="" />
-        ))}
+      {imgIcon ? (
+        <>
+          {pressed ? (
+            <img
+              style={{ width: "35px", height: "35px" }}
+              className="left-icon"
+              src={ImgBox}
+              alt=""
+            />
+          ) : (
+            <img
+              style={{ width: "35px", height: "35px" }}
+              className="left-icon"
+              src={ImgBox}
+              alt=""
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {bookIcon &&
+            (pressed ? (
+              <img className="left-icon" src={BookClicked} alt="" />
+            ) : (
+              <img className="left-icon" src={Book} alt="" />
+            ))}
+        </>
+      )}
+
       {customIcon && (
         <>
           {customIcon === "search" ? (

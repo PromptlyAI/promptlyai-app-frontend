@@ -10,50 +10,86 @@ import { useNavigate } from "react-router";
 import Popup from "../Popup/popup";
 import { PromptContext } from "../../context/PromptContext";
 
+import BookWhite from "../../images/BookWhite.png";
+import TrashWhite from "../../images/TrashWhite.png";
+import Edit from "../../images/Edit.png";
+import PromptlyLogo from "../../images/PromptlyLogo.png";
+import LoginCheck from "../../shared/LoginCheck/LoginCheck";
+import TextPrompt from "../TextPrompt/TextPrompt";
+import ImagePrompt from "../ImagePrompt/ImagePrompt";
+
+interface TextPromptProps {
+  answer: string;
+  input: string;
+  output: string;
+}
+interface ImagePromptProps {
+  input: string;
+  output: string;
+  url: string;
+}
+
 export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
+
   const [promptTitle, setPromptTitle] = useState<string>("");
 
-  const [isPremiumUser, setIsPremiumUser] = useState<boolean>(false);
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
 
-  const [userPrompt, setUserPrompt] = useState<string>("");
-  const [promptOutput, setPromptOutput] = useState<string>("");
-  const [currentPromptId, setCurrentPromptId] = useState<string>("");
+  // const [userPrompt, setUserPrompt] = useState<string>("");
+  // const [promptOutput, setPromptOutput] = useState<string>("");
+  // const [currentPromptId, setCurrentPromptId] = useState<string>("");
 
-  const [improvedPrompt, setImprovedPrompt] = useState<string>("");
-
-  const [promptOutputLoading, setPromptOutputLoading] =
-    useState<boolean>(false);
-  const [improvedPromptLoading, setImprovedPromptLoading] =
-    useState<boolean>(false);
-  const navigate = useNavigate();
-  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
-
+  const [imageUrl, setImageUrl] = useState<string>("");
   const textSpeed = 4;
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+  const [promptType, setPromptType] = useState<string>("TEXT");
 
-  useEffect(() => {
-    setNeedToSignIn(false);
-    checkIfLogIn();
+  const [showTextPrompt, setShowTextPrompt] = useState<boolean>(true);
+
+  const [textPrompt, setTextPrompt] = useState<TextPromptProps>({
+    answer: "",
+    input: "",
+    output: "",
+  });
+  const [imagePrompt, setImagePrompt] = useState<ImagePromptProps>({
+    input: "",
+    output: "",
+    url: "",
   });
 
   useEffect(() => {
-    console.log(promptId);
-    if (promptId === "new") {
-      setUserPrompt("");
-      setPromptOutput("");
-      setImprovedPrompt("");
-      setPromptTitle("new");
-    } else if (promptId) {
-      console.log("Hheheh");
-      loadPromptHistory();
+    if (LoginCheck()) {
+      setNeedToSignIn(true);
+      console.log("need to sign in");
+    } else {
+      setNeedToSignIn(false);
+      console.log("signed in");
     }
+  });
+
+  useEffect(() => {
+    if (promptId === "newText") {
+      setShowTextPrompt(true);
+      setTextPrompt({
+        answer: "",
+        input: "",
+        output: "",
+      });
+    } else if (promptId === "newImage") {
+      setShowTextPrompt(false);
+      setImagePrompt({
+        input: "",
+        output: "",
+        url: "",
+      });
+    } else {
+      loadPromptTextHistory();
+    }
+    setPromptTitle("new");
   }, [promptId]);
 
-  async function loadPromptHistory() {
-    // if (typeof promptId === "string") {
-    //   console.log("is string");
-    // }
+  async function loadPromptTextHistory() {
     setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
@@ -61,172 +97,126 @@ export default function PromptTool() {
       token: localStorage.getItem("token") as string,
     });
 
-    setUserPrompt(await response.input);
-    setPromptOutput(await response.output);
-    setImprovedPrompt(await response.answer);
+    console.log(await response);
+
+    const type = await response.type;
+    if (type === "TEXT") {
+      setTextPrompt({
+        answer: await response.answer,
+        input: await response.input,
+        output: await response.output,
+      });
+      setShowTextPrompt(true);
+    } else if (type === "IMAGE") {
+      setImagePrompt({
+        input: await response.input,
+        output: await response.output,
+        url: await response.answer,
+      });
+      setShowTextPrompt(false);
+    }
+
     setPromptTitle(await response.input);
+
     setLoadingPrompt(false);
+    // setImprovedPrompt(await response.answer);
+    // setUserPrompt(await response.input);
+    //check if prompt is a image or prompt:
+    // if ((await response.type) === "Image") {
+    //   setPromptOutput("");
+    //   setImageUrl(await response.type);
+    // } else {
+    //   setImageUrl("");
+    //   setPromptOutput(await response.output);
+    // }
   }
+  // async function loadPromptImageHistory() {
+  //   setLoadingPrompt(true);
+  //   const response = await Api({
+  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
+  //     method: "GET",
+  //     token: localStorage.getItem("token") as string,
+  //   });
+  //   setImagePrompt({
+  //     answer: await response.answer,
+  //     input: await response.input,
+  //     url: await response.output,
+  //   });
+  //   setPromptTitle(await response.answer);
+  //   setLoadingPrompt(false);
+  // }
+  // async function checkType() {
+  //   console.log(promptId);
+  //   const response = await Api({
+  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
+  //     method: "GET",
+  //     token: localStorage.getItem("token") as string,
+  //   });
+  //   setPromptType(await response.type);
+  // }
 
-  function checkIfLogIn() {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      setNeedToSignIn(true);
-    } else if (isJwtExpired(token)) {
-      navigate("/login");
-    }
-  }
-
-  function isJwtExpired(jwt: string) {
-    // Step 1: Split the token into its parts
-    const tokenParts = jwt.split(".");
-    if (tokenParts.length !== 3) {
-      throw new Error("Invalid JWT format");
-    }
-
-    // Step 2: Decode the payload
-    const payloadBase64Url = tokenParts[1];
-    const payloadBase64 = payloadBase64Url.replace("-", "+").replace("_", "/");
-    const payloadJson = atob(payloadBase64);
-    const payload = JSON.parse(payloadJson);
-
-    // Step 3: Check the 'exp' claim
-    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    if (payload.exp && payload.exp < currentTime) {
-      return true; // Token has expired
-    }
-
-    return false; // Token has not expired
-  }
-
-  async function fetchImprovedPrompt() {
-    //fetch prompt output:
-    setPromptOutputLoading(true);
-    const response = await Api({
-      path: `prompt/get-improved-prompt?prompt=${userPrompt}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
-    });
-    // console.log(await response);
-    setPromptOutputLoading(false);
-    const responseString = await response.prompt.output;
-    setCurrentPromptId(await response.prompt.id);
-
-    await runTextAnimation(responseString, setPromptOutput, textSpeed);
-  }
-
-  async function fetchFinalOutput() {
-    setImprovedPromptLoading(true);
-    const response = await Api({
-      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${currentPromptId}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
-    });
-
-    setImprovedPromptLoading(false);
-    const responseString = await response.promptAnswer.output;
-    await runTextAnimation(responseString, setImprovedPrompt, textSpeed);
-
-    await runTextAnimation(userPrompt, setPromptTitle, 55);
-  }
   return (
-    <div className="prompt-tool-container">
-      <Popup displayPopup={needToSignIn} />
+    <div>
       <div className="prompt-tool-top-container">
-        <StyledButton
-          loading={loadingPrompt}
-          btnStyle={3}
-          title={
-            promptTitle
-              ? promptTitle.length > 35
-                ? `${promptTitle.slice(0, 35)}...`
-                : promptTitle
-              : "new"
-          }
-          bookIcon={true}
-          btnWidth={604}
-          btnHeight={68}
-          pressed={true}
-          trashIcon={false}
-        />
-        {!isPremiumUser && <UpgradeButton />}
-      </div>
-      <div className="prompt-tool-main-container">
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <div className="center">
-            <h1>Prompt Tool</h1>
+        <div className="hide-bar"></div>
+        <div className="prompt-title-container">
+          <img
+            style={{ width: "47.2px", height: "38.4px" }}
+            src={BookWhite}
+            alt=""
+          />
+          <div style={{ width: "500px" }}>
+            {loadingPrompt ? (
+              <div className="center">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <h1>
+                {promptTitle
+                  ? promptTitle.length > 31
+                    ? `${promptTitle.slice(0, 31)}...`
+                    : promptTitle
+                  : "new"}
+              </h1>
+            )}
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-          >
-            <label htmlFor="">Write a prompt</label>
-            <StyledInput
-              inpWidht={450}
-              inpHeight={200}
-              inpStyle={1}
-              title={userPrompt}
-              change={(ev) => setUserPrompt(ev.target.value)}
-            />
-            <div className="center">
-              <StyledButton
-                click={() => {
-                  if (!promptOutputLoading) {
-                    fetchImprovedPrompt();
-                  }
-                }}
-                btnStyle={3}
-                btnWidth={200}
-                btnHeight={50}
-                title="promptify"
-                loading={promptOutputLoading}
-              />
-            </div>
-          </div>
-          <label htmlFor="">Improved prompt:</label>
           <div
             style={{
+              width: "110px",
               display: "flex",
-              flexDirection: "column",
+              justifyContent: "space-between",
               alignItems: "center",
-              gap: "10px",
             }}
           >
-            <StyledInput
-              inpStyle={1}
-              title={promptOutput}
-              change={(ev) => setPromptOutput(ev.target.value)}
-              inpHeight={200}
-              inpWidht={450}
-            />
-
-            <StyledButton
-              click={() => {
-                if (!improvedPromptLoading) {
-                  fetchFinalOutput();
-                }
-              }}
-              btnStyle={3}
-              btnWidth={200}
-              btnHeight={50}
-              title="Generate Text"
-              loading={improvedPromptLoading}
+            <img style={{ width: "38px", height: "38px" }} src={Edit} alt="" />
+            <img
+              style={{ width: "51px", height: "48px" }}
+              src={TrashWhite}
+              alt=""
             />
           </div>
         </div>
-        {/* {improvedPrompt && ( */}
-        <div style={{ height: "85%", display: "flex", alignItems: "center" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor="">Generated Text:</label>
-            <StyledInput
-              inpWidht={450}
-              inpHeight={600}
-              inpStyle={1}
-              title={improvedPrompt}
-              change={(ev) => setImprovedPrompt(ev.target.value)}
-            />
-          </div>
+        <div
+          style={{ display: "flex", width: "400px", justifyContent: "center" }}
+        >
+          <img src={PromptlyLogo} alt="" />
         </div>
-        {/* )} */}
+      </div>
+      <div className="prompt-tool-container">
+        <Popup displayPopup={needToSignIn} />
+        {showTextPrompt ? (
+          <TextPrompt
+            textPrompt={textPrompt}
+            setTextPrompt={setTextPrompt}
+            setPromptTitle={setPromptTitle}
+          />
+        ) : (
+          <ImagePrompt
+            imagePrompt={imagePrompt}
+            setImagePrompt={setImagePrompt}
+            setPromptTitle={setPromptTitle}
+          />
+        )}
       </div>
     </div>
   );

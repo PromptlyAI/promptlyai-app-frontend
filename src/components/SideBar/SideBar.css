@@ -2,9 +2,39 @@
   width: 440px;
   height: 100vh;
   position: relative;
+  z-index: 1;
+}
 
+.show-sidebar-container {
+  height: 100%;
   background: #1f1f24;
 }
+.hide-sidebar {
+  animation: go-left 0.5s ease;
+  transform: translateX(-500px);
+}
+.show-sidebar {
+  animation: go-right 0.5s ease;
+  transform: translateX(0px);
+}
+
+@keyframes go-left {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+@keyframes go-right {
+  0% {
+    transform: translateX(-500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
 .logo {
   width: 267.49px;
   height: 66.14px;
@@ -17,6 +47,7 @@
   align-items: center;
   display: flex;
 }
+
 .logo-container {
   display: flex;
   justify-content: center;
@@ -30,13 +61,13 @@
   background: #2b2b32;
   display: flex;
   flex-direction: column;
-  height: 480px;
+  height: 950px;
   grid-gap: 10px;
-  border-radius: 20px;
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 120px;
   overflow-y: scroll;
-
-  padding-bottom: 100px;
 }
 .prompt-history-container::-webkit-scrollbar-thumb {
 }
@@ -61,12 +92,13 @@ label {
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 50px;
+  bottom: 0px;
   background-color: #2b2b32;
 }
 .bottom-gradient {
+  pointer-events: none;
   position: absolute;
-  bottom: 130px;
+  bottom: 90px;
   width: 97%;
   height: 45px;
   background: rgb(0, 0, 0);
@@ -105,4 +137,17 @@ label {
     width: 140px;
     height: 35px;
   }
+}
+.clear-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: none;
+  border-radius: 18px;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  background: var(--button-color);
 }

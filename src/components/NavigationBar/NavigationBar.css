@@ -1,0 +1,110 @@
+.navigation-bar-main-container {
+  z-index: 10;
+  position: relative;
+  min-width: 160px;
+  height: 100vh;
+  background: var(--nav-bar);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.nav-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 57px;
+  transition: 0.1s ease;
+}
+.menu-btn {
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+  gap: 50px;
+}
+.menu-btn.rotate {
+  transform: rotate(90deg);
+}
+
+.exit-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 120px;
+  transition: 1s ea;
+}
+.exit-icon {
+  color: white;
+  width: 40px;
+  height: 40px;
+}
+.fade-in {
+  opacity: 1;
+  animation: fade-in-anim 0.3s ease;
+}
+.fade-out {
+  opacity: 0;
+  animation: fade-out-anim 0.3s ease;
+}
+@keyframes fade-in-anim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out-anim {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*
+.fade-out {
+  opacity: 0;
+} */
+
+.nav-btn.bottom-border {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 57px;
+  padding-bottom: 10px;
+  border-bottom: solid 7px #3a3a40;
+}
+.bottom-pfp {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 50px;
+}
+.profile-picture {
+  font-family: "Roboto", sans-serif;
+  background: var(--button-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  border-radius: 100px;
+  width: 65px;
+  height: 65px;
+}
