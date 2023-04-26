@@ -63,11 +63,11 @@
   flex-direction: column;
   height: 950px;
   grid-gap: 10px;
-  /* border-radius: 20px; */
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 120px;
   overflow-y: scroll;
-
-  /* padding-bottom: 100px; */
 }
 .prompt-history-container::-webkit-scrollbar-thumb {
 }
@@ -139,6 +139,11 @@ label {
   }
 }
 .clear-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   border: none;
   border-radius: 18px;
   font-size: 20px;

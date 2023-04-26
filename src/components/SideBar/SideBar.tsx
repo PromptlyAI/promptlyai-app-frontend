@@ -8,7 +8,7 @@ import Api from "../../api/Api";
 import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import { SidebarContext } from "../../context/SidebarContext";
-import Trash from "../../images/Trash.png";
+import TrashBlack from "../../images/TrashBlack.png";
 interface buttonProps {
   input: string;
   path?: string;
@@ -216,9 +216,11 @@ export default function SideBar() {
                       btnStyle={2}
                       textColor="white"
                       title={
-                        historyBtn.input.length > 20
-                          ? `${historyBtn.input.slice(0, 20)}...`
-                          : historyBtn.input
+                        historyBtn.input
+                          ? historyBtn.input.length > 20
+                            ? `${historyBtn.input.slice(0, 20)}...`
+                            : historyBtn.input
+                          : "[untitled]"
                       }
                       bookIcon={true}
                       trashIcon={!historyBtn.loading}
@@ -245,11 +247,15 @@ export default function SideBar() {
               <div className="bottom-gradient"></div>
               <div className="clear-history-container">
                 <button
+                  onClick={() => console.log("illa.se")}
                   className="clear-btn"
                   style={{ width: bigBtnsSize, height: "56px" }}
                 >
-                  <img src={Trash} />
-                  CLEAR PROMPT HISTORY
+                  <img
+                    style={{ position: "absolute", left: "15px" }}
+                    src={TrashBlack}
+                  />
+                  CLEAR PROMPT-HISTORY
                 </button>
                 {/* <StyledButton
                   btnWidth={bigBtnsSize}

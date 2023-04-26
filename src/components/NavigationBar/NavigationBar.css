@@ -1,7 +1,7 @@
 .navigation-bar-main-container {
   z-index: 10;
   position: relative;
-  width: 160px;
+  min-width: 160px;
   height: 100vh;
   background: var(--nav-bar);
 
