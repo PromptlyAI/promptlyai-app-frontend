@@ -14,9 +14,24 @@ import BookWhite from "../../images/BookWhite.png";
 import TrashWhite from "../../images/TrashWhite.png";
 import Edit from "../../images/Edit.png";
 import PromptlyLogo from "../../images/PromptlyLogo.png";
+import LoginCheck from "../../shared/LoginCheck/LoginCheck";
+import TextPrompt from "../TextPrompt/TextPrompt";
+import ImagePrompt from "../ImagePrompt/ImagePrompt";
+
+interface TextPromptProps {
+  answer: string;
+  input: string;
+  output: string;
+}
+interface ImagePromptProps {
+  answer: string;
+  input: string;
+  url: string;
+}
 
 export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
+
   const [promptTitle, setPromptTitle] = useState<string>("");
 
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
@@ -25,41 +40,48 @@ export default function PromptTool() {
   const [promptOutput, setPromptOutput] = useState<string>("");
   const [currentPromptId, setCurrentPromptId] = useState<string>("");
 
-  const [improvedPrompt, setImprovedPrompt] = useState<string>("");
-
-  const [promptOutputLoading, setPromptOutputLoading] =
-    useState<boolean>(false);
-  const [improvedPromptLoading, setImprovedPromptLoading] =
-    useState<boolean>(false);
-  const navigate = useNavigate();
-  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
-
-  // const [imagePrompt, setImagePrompt] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
-
   const textSpeed = 4;
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+  const [promptType, setPromptType] = useState<string>("TEXT");
 
-  // const [copyColor, setCopyColor] = useState<string>("");
+  const [textPrompt, setTextPrompt] = useState<TextPromptProps>({
+    answer: "",
+    input: "",
+    output: "",
+  });
+  const [imagePrompt, setImagePrompt] = useState<ImagePromptProps>();
 
   useEffect(() => {
-    setNeedToSignIn(false);
-    checkIfLogIn();
+    if (LoginCheck()) {
+      setNeedToSignIn(true);
+      console.log("need to sign in");
+    } else {
+      setNeedToSignIn(false);
+      console.log("signed in");
+    }
   });
 
   useEffect(() => {
-    console.log(promptId);
-    if (promptId === "new" || promptId === "image") {
-      setUserPrompt("");
-      setPromptOutput("");
-      setImprovedPrompt("");
-      setPromptTitle("new");
-      setImageUrl("");
-    } else if (promptId) {
-      loadPromptHistory();
+    if (promptId === "newText") {
+      setTextPrompt({
+        answer: "",
+        input: "",
+        output: "",
+      });
+    } else if (promptId === "newImage") {
+      setImagePrompt({
+        answer: "",
+        input: "",
+        url: "",
+      });
+    } else {
+      loadPromptTextHistory();
     }
+    setPromptTitle("new");
   }, [promptId]);
 
-  async function loadPromptHistory() {
+  async function loadPromptTextHistory() {
     setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
@@ -69,112 +91,49 @@ export default function PromptTool() {
 
     console.log(await response);
 
-    setImprovedPrompt(await response.answer);
-    setUserPrompt(await response.input);
+    setTextPrompt({
+      answer: await response.answer,
+      input: await response.input,
+      output: await response.output,
+    });
     setPromptTitle(await response.input);
-    //check if prompt is a image or prompt:
-    if ((await response.type) === "Image") {
-      setPromptOutput("");
-      setImageUrl(await response.type);
-    } else {
-      setImageUrl("");
-      setPromptOutput(await response.output);
-    }
 
     setLoadingPrompt(false);
+    // setImprovedPrompt(await response.answer);
+    // setUserPrompt(await response.input);
+    //check if prompt is a image or prompt:
+    // if ((await response.type) === "Image") {
+    //   setPromptOutput("");
+    //   setImageUrl(await response.type);
+    // } else {
+    //   setImageUrl("");
+    //   setPromptOutput(await response.output);
+    // }
   }
-
-  function checkIfLogIn() {
-    let token = localStorage.getItem("token");
-    if (!token) {
-      setNeedToSignIn(true);
-    } else if (isJwtExpired(token)) {
-      navigate("/login");
-    }
-  }
-
-  function isJwtExpired(jwt: string) {
-    // Step 1: Split the token into its parts
-    const tokenParts = jwt.split(".");
-    if (tokenParts.length !== 3) {
-      throw new Error("Invalid JWT format");
-    }
-
-    // Step 2: Decode the payload
-    const payloadBase64Url = tokenParts[1];
-    const payloadBase64 = payloadBase64Url.replace("-", "+").replace("_", "/");
-    const payloadJson = atob(payloadBase64);
-    const payload = JSON.parse(payloadJson);
-
-    // Step 3: Check the 'exp' claim
-    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
-    if (payload.exp && payload.exp < currentTime) {
-      return true; // Token has expired
-    }
-
-    return false; // Token has not expired
-  }
-
-  async function fetchImprovedPrompt() {
-    //fetch prompt output:
-    setPromptOutputLoading(true);
+  async function loadPromptImageHistory() {
+    setLoadingPrompt(true);
     const response = await Api({
-      path: `prompt/get-improved-prompt?prompt=${userPrompt}`,
+      path: `prompt/get-prompt-info?promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-    // console.log(await response);
-    setPromptOutputLoading(false);
-    const responseString = await response.prompt.output;
-    setCurrentPromptId(await response.prompt.id);
-
-    await runTextAnimation(responseString, setPromptOutput, textSpeed);
-  }
-
-  async function fetchFinalOutput() {
-    setImprovedPromptLoading(true);
-    const response = await Api({
-      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${currentPromptId}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
+    setImagePrompt({
+      answer: await response.answer,
+      input: await response.input,
+      url: await response.output,
     });
-
-    setImprovedPromptLoading(false);
-    const responseString = await response.promptAnswer.output;
-    await runTextAnimation(responseString, setImprovedPrompt, textSpeed);
-
-    await runTextAnimation(userPrompt, setPromptTitle, 55);
+    setPromptTitle(await response.answer);
+    setLoadingPrompt(false);
   }
-
-  async function fetchImprovedImagePrompt() {
-    setPromptOutputLoading(true);
-    const response = await Api({
-      path: `prompt/get-improved-image-prompt?prompt=${promptOutput}&promptId=${currentPromptId}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
-    });
-    setPromptOutputLoading(true);
-
-    console.log(await response);
-
-    const responseString = await response.prompt.output;
-    setCurrentPromptId(await response.prompt.id);
-
-    await runTextAnimation(responseString, setPromptOutput, textSpeed);
-    // set(await response.image_url);
-  }
-
-  async function fetchImage() {
-    setImprovedPromptLoading(true);
-    const response = await Api({
-      path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${currentPromptId}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
-    });
-    setImprovedPromptLoading(false);
-    console.log(await response);
-    setImageUrl(await response.image_url);
-  }
+  // async function checkType() {
+  //   console.log(promptId);
+  //   const response = await Api({
+  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
+  //     method: "GET",
+  //     token: localStorage.getItem("token") as string,
+  //   });
+  //   setPromptType(await response.type);
+  // }
 
   return (
     <div>
@@ -225,164 +184,13 @@ export default function PromptTool() {
       </div>
       <div className="prompt-tool-container">
         <Popup displayPopup={needToSignIn} />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "500px",
-          }}
-        ></div>
-        <div style={{ gap: "60px" }} className="prompt-tool-main-container">
-          <div>
-            {promptId === "image" ? (
-              <h1 className="big-title">IMAGE TOOL</h1>
-            ) : (
-              <h1 className="big-title">PROMPT TOOL</h1>
-            )}
-
-            <div className="prompt-tool-main-inner">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
-
-                <StyledInput
-                  inpWidht={700}
-                  inpHeight={350}
-                  inpStyle={1}
-                  title={userPrompt}
-                  change={(ev) => setUserPrompt(ev.target.value)}
-                  placeHolder="Write your prompt input here..."
-                />
-
-                <div>
-                  <StyledButton
-                    click={() => {
-                      if (!promptOutputLoading) {
-                        if (promptId === "image") {
-                          fetchImprovedImagePrompt();
-                        } else {
-                          fetchImprovedPrompt();
-                        }
-                      }
-                    }}
-                    btnStyle={3}
-                    btnWidth={200}
-                    btnHeight={50}
-                    title="Improve"
-                    loading={promptOutputLoading}
-                  />
-                </div>
-              </div>
-              <h1 style={{ textAlign: "left" }}>Improved prompt:</h1>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                <StyledInput
-                  inpStyle={1}
-                  title={promptOutput}
-                  change={(ev) => setPromptOutput(ev.target.value)}
-                  inpHeight={350}
-                  inpWidht={700}
-                  placeHolder="Your generated prompt will appear here..."
-                />
-                <div>
-                  <StyledButton
-                    click={() => {
-                      if (!improvedPromptLoading) {
-                        if (promptId === "image") {
-                          fetchImage();
-                        } else {
-                          fetchFinalOutput();
-                        }
-                      }
-                    }}
-                    btnStyle={3}
-                    btnWidth={200}
-                    btnHeight={50}
-                    title="Generate"
-                    loading={improvedPromptLoading}
-                  />
-                  {improvedPromptLoading && (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ color: "white", fontSize: "15px" }}>
-                        this may take some time...
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* {improvedPrompt && ( */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 className="big-title">AI GENERATED</h1>
-            <div className="right-generate-container">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                <h1 style={{ textAlign: "left" }}>Output:</h1>
-                {promptId === "image" ? (
-                  <div className="image-container">
-                    {imageUrl && (
-                      <img className="generated-image" src={imageUrl} alt="" />
-                    )}
-                  </div>
-                ) : (
-                  <StyledInput
-                    inpWidht={750}
-                    inpHeight={850}
-                    inpStyle={1}
-                    title={improvedPrompt}
-                    change={(ev) => setImprovedPrompt(ev.target.value)}
-                    placeHolder="Your generated output will appear here..."
-                  />
-                )}
-
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    gap: "20px",
-                    paddingTop: "0px",
-                  }}
-                >
-                  <StyledButton
-                    click={() => {
-                      if (!improvedPromptLoading) {
-                        fetchFinalOutput();
-                      }
-                    }}
-                    btnStyle={3}
-                    btnWidth={200}
-                    btnHeight={50}
-                    title="SAVE"
-                  />
-                  <StyledButton
-                    click={() => navigator.clipboard.writeText(improvedPrompt)}
-                    btnStyle={3}
-                    btnWidth={200}
-                    btnHeight={50}
-                    title="COPY"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* )} */}
-        </div>
+        <TextPrompt
+          textPrompt={textPrompt}
+          setTextPrompt={setTextPrompt}
+          setPromptTitle={setPromptTitle}
+          // setLoadingPrompt={setLoadingPrompt}
+          // promptType={promptType}
+        />
       </div>
     </div>
   );

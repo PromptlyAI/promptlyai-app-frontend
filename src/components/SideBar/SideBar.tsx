@@ -104,13 +104,13 @@ export default function SideBar() {
   }
 
   function pressModeBtn(_id: string) {
-    let arr = [...modes];
-    arr.map((btn) =>
-      btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
-    );
-    setModes(arr);
+    // let arr = [...modes];
+    // arr.map((btn) =>
+    //   btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
+    // );
+    // setModes(arr);
 
-    setPromptId("new");
+    setPromptId(_id);
 
     //deselect all history buttons
     let historyArr = [...promptHistory];
@@ -136,11 +136,7 @@ export default function SideBar() {
     setPromptHistory(a);
   }
   return (
-    <div
-      // style={{ position: showSidebar ? "relative" : "absolute" }}
-      className="side-bar-container"
-    >
-      {/* {showSidebar && ( */}
+    <div className="side-bar-container">
       <div
         className={
           showSidebar
@@ -151,18 +147,12 @@ export default function SideBar() {
         <div className="center">
           <UpgradeButton />
         </div>
-        {/* <div className="logo-main-container">
-        <div className="logo-container">
-          <img className="logo" src={Logo} alt="" />
-        </div>
-      </div> */}
         <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "10px",
-              // marginBottom: "40px",
             }}
           >
             <div className="mode-container"></div>
@@ -175,14 +165,14 @@ export default function SideBar() {
             }}
           >
             <StyledButton
-              click={() => setPromptId("new")}
+              click={() => pressModeBtn("newText")}
               title="new prompt"
               btnStyle={2}
               btnWidth={130}
               btnHeight={50}
             />
             <StyledButton
-              click={() => setPromptId("image")}
+              click={() => pressModeBtn("newImage")}
               title="new image"
               btnStyle={2}
               btnWidth={130}
@@ -195,7 +185,6 @@ export default function SideBar() {
             style={{
               position: "relative",
               height: "fit-content",
-              // paddingBottom: "50px",
             }}
           >
             <div className="prompt-history-container">
@@ -257,22 +246,11 @@ export default function SideBar() {
                   />
                   CLEAR PROMPT-HISTORY
                 </button>
-                {/* <StyledButton
-                  btnWidth={bigBtnsSize}
-                  btnHeight={56}
-                  btnStyle={6}
-                  textColor="white"
-                  title="CLEAR PROMPT HISTORY"
-                  trashIcon={true}
-                  deleteIconClick={() => {}}
-                  animationPopup={true}
-                /> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* )} */}
     </div>
   );
 }
