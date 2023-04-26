@@ -98,6 +98,24 @@ export default function AdminPage() {
     console.log(await response);
   }
 
+  async function unbanUser() {
+    if (!selectedUser) {
+      return;
+    }
+
+    const response = await Api({
+      path: `admin/unbanUser`,
+      method: "PATCH",
+      token: localStorage.getItem("token") as string,
+      bodyParams: {
+        userId: selectedUser.id,
+      },
+    });
+    console.log(await response);
+  }
+
+  
+
   return (
     <div className="admin-container">
       <div>
@@ -200,7 +218,10 @@ export default function AdminPage() {
                 </select>
               </div>
               {selectedUser.isBanned ? (
-                <StyledButton btnStyle={3} title="UNBAN USER" />
+                <StyledButton  btnStyle={3} title="UNBAN USER" click={()=>{
+                  unbanUser();
+                  //butcher
+                }}/>
               ) : (
                 <StyledButton
                   click={() => banUser()}
