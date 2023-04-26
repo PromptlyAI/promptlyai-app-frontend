@@ -69,17 +69,18 @@ export default function PromptTool() {
 
     console.log(await response);
 
-    // const test = await response.answer;
-    // if (promptId === "image" && test) {
-    //   setImageUrl(test);
-    // } else {
-    // }
     setImprovedPrompt(await response.answer);
-
     setUserPrompt(await response.input);
-    setPromptOutput(await response.output);
-
     setPromptTitle(await response.input);
+    //check if prompt is a image or prompt:
+    if ((await response.type) === "Image") {
+      setPromptOutput("");
+      setImageUrl(await response.type);
+    } else {
+      setImageUrl("");
+      setPromptOutput(await response.output);
+    }
+
     setLoadingPrompt(false);
   }
 
