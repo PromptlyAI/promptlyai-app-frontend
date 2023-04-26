@@ -16,6 +16,7 @@ interface buttonProps {
   id: string;
   icon?: string;
   loading: boolean;
+  type: string;
 }
 
 export default function SideBar() {
@@ -33,6 +34,7 @@ export default function SideBar() {
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
       loading: false,
+      type: "",
     },
     {
       input: "IMAGE-EDITOR",
@@ -41,6 +43,7 @@ export default function SideBar() {
       id: `${Math.round(Math.random() * 100) / 100}`,
       icon: "search",
       loading: false,
+      type: "",
     },
   ]);
 
@@ -81,7 +84,9 @@ export default function SideBar() {
       input: item.input,
       id: item.id,
       pressed: false,
+      type: item.type,
     }));
+    console.log(await response);
 
     setPromptHistory([...arr]);
     setPromptHistoryLoading(false);
@@ -212,6 +217,7 @@ export default function SideBar() {
                           : "[untitled]"
                       }
                       bookIcon={true}
+                      imgIcon={historyBtn.type === "IMAGE" ? true : false}
                       trashIcon={!historyBtn.loading}
                       animationPopup={true}
                       loading={historyBtn.loading}
