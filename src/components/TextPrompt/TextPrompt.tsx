@@ -204,11 +204,7 @@ export default function TextPrompt({
                 }}
               >
                 <StyledButton
-                  click={() => {
-                    if (!improvedPromptLoading) {
-                      fetchFinalOutput();
-                    }
-                  }}
+                  click={() => {}}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}

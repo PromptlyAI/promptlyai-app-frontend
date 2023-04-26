@@ -24,8 +24,8 @@ interface TextPromptProps {
   output: string;
 }
 interface ImagePromptProps {
-  answer: string;
   input: string;
+  output: string;
   url: string;
 }
 
@@ -36,21 +36,27 @@ export default function PromptTool() {
 
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
 
-  const [userPrompt, setUserPrompt] = useState<string>("");
-  const [promptOutput, setPromptOutput] = useState<string>("");
-  const [currentPromptId, setCurrentPromptId] = useState<string>("");
+  // const [userPrompt, setUserPrompt] = useState<string>("");
+  // const [promptOutput, setPromptOutput] = useState<string>("");
+  // const [currentPromptId, setCurrentPromptId] = useState<string>("");
 
   const [imageUrl, setImageUrl] = useState<string>("");
   const textSpeed = 4;
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
   const [promptType, setPromptType] = useState<string>("TEXT");
 
+  const [showTextPrompt, setShowTextPrompt] = useState<boolean>(true);
+
   const [textPrompt, setTextPrompt] = useState<TextPromptProps>({
     answer: "",
     input: "",
     output: "",
   });
-  const [imagePrompt, setImagePrompt] = useState<ImagePromptProps>();
+  const [imagePrompt, setImagePrompt] = useState<ImagePromptProps>({
+    input: "",
+    output: "",
+    url: "",
+  });
 
   useEffect(() => {
     if (LoginCheck()) {
@@ -64,15 +70,17 @@ export default function PromptTool() {
 
   useEffect(() => {
     if (promptId === "newText") {
+      setShowTextPrompt(true);
       setTextPrompt({
         answer: "",
         input: "",
         output: "",
       });
     } else if (promptId === "newImage") {
+      setShowTextPrompt(false);
       setImagePrompt({
-        answer: "",
         input: "",
+        output: "",
         url: "",
       });
     } else {
@@ -91,11 +99,23 @@ export default function PromptTool() {
 
     console.log(await response);
 
-    setTextPrompt({
-      answer: await response.answer,
-      input: await response.input,
-      output: await response.output,
-    });
+    const type = await response.type;
+    if (type === "TEXT") {
+      setTextPrompt({
+        answer: await response.answer,
+        input: await response.input,
+        output: await response.output,
+      });
+      setShowTextPrompt(true);
+    } else if (type === "IMAGE") {
+      setImagePrompt({
+        input: await response.input,
+        output: await response.output,
+        url: await response.answer,
+      });
+      setShowTextPrompt(false);
+    }
+
     setPromptTitle(await response.input);
 
     setLoadingPrompt(false);
@@ -110,21 +130,21 @@ export default function PromptTool() {
     //   setPromptOutput(await response.output);
     // }
   }
-  async function loadPromptImageHistory() {
-    setLoadingPrompt(true);
-    const response = await Api({
-      path: `prompt/get-prompt-info?promptId=${promptId}`,
-      method: "GET",
-      token: localStorage.getItem("token") as string,
-    });
-    setImagePrompt({
-      answer: await response.answer,
-      input: await response.input,
-      url: await response.output,
-    });
-    setPromptTitle(await response.answer);
-    setLoadingPrompt(false);
-  }
+  // async function loadPromptImageHistory() {
+  //   setLoadingPrompt(true);
+  //   const response = await Api({
+  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
+  //     method: "GET",
+  //     token: localStorage.getItem("token") as string,
+  //   });
+  //   setImagePrompt({
+  //     answer: await response.answer,
+  //     input: await response.input,
+  //     url: await response.output,
+  //   });
+  //   setPromptTitle(await response.answer);
+  //   setLoadingPrompt(false);
+  // }
   // async function checkType() {
   //   console.log(promptId);
   //   const response = await Api({
@@ -184,13 +204,19 @@ export default function PromptTool() {
       </div>
       <div className="prompt-tool-container">
         <Popup displayPopup={needToSignIn} />
-        <TextPrompt
-          textPrompt={textPrompt}
-          setTextPrompt={setTextPrompt}
-          setPromptTitle={setPromptTitle}
-          // setLoadingPrompt={setLoadingPrompt}
-          // promptType={promptType}
-        />
+        {showTextPrompt ? (
+          <TextPrompt
+            textPrompt={textPrompt}
+            setTextPrompt={setTextPrompt}
+            setPromptTitle={setPromptTitle}
+          />
+        ) : (
+          <ImagePrompt
+            imagePrompt={imagePrompt}
+            setImagePrompt={setImagePrompt}
+            setPromptTitle={setPromptTitle}
+          />
+        )}
       </div>
     </div>
   );
