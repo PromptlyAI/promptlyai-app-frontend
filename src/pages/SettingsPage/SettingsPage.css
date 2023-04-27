@@ -26,20 +26,38 @@
   background: var(--primary-background);
   display: flex;
   flex-direction: column;
-  width: 1500px;
-  height: 600px;
+  width: 1250px;
+  height: 500px;
   border-radius: 30px;
 }
-.settings-topbar {
+.setting-bottom-buttons {
+  position: absolute;
+  bottom: 20px;
   width: 90%;
+  gap: 40px;
+  display: flex;
+  justify-content: right;
+}
+
+.settings-topbar {
+  padding-left: 60px;
+  padding-right: 55px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 .settings-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .settings-input {
   background: var(--secondary-background);
   border: none;
+  min-width: 300px;
+  padding-left: 9px;
+  height: 41px;
+  font-size: 25px;
   color: var(--input-text);
 }
 h2 {

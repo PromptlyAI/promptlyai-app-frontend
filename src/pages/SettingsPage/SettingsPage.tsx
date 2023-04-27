@@ -25,8 +25,8 @@ export default function SettingsPage() {
   const [newPassword, setNewPassword] = useState<string>("");
 
   const { showSettings, setShowSettings } = useContext(SettingsContext);
-
   const navigate = useNavigate();
+
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await Api({
@@ -92,16 +92,22 @@ export default function SettingsPage() {
         <HomeButton />
       </div> */}
       <div className="setting-container">
-        <div className="center">
+        <div style={{ display: "flex" }}>
           <div className="settings-topbar">
             <img src={Logo} alt="" />
-
-            <StyledButton btnStyle={1} />
           </div>
+          <StyledButton
+            click={() => setShowSettings(false)}
+            title="Back"
+            btnWidth={240}
+            btnHeight={50}
+            btnStyle={3}
+          />
         </div>
 
         <div
           style={{
+            pointerEvents: "none",
             position: "absolute",
             width: "100%",
             display: "flex",
@@ -124,57 +130,98 @@ export default function SettingsPage() {
           }}
         >
           <div className="settings-info">
-            <div style={{ display: "flex" }}>
-              <label style={{ fontSize: "35px" }} htmlFor="">
-                Username
-              </label>
+            <h1 style={{ textAlign: "left", fontSize: "35px" }}>
+              User Settings
+            </h1>
+            <div
+              style={{
+                display: "flex",
+                width: "800px",
+                gap: "20px",
+              }}
+            >
+              <div style={{ minWidth: "180px" }}>
+                <label style={{ fontSize: "35px" }} htmlFor="">
+                  Username
+                </label>
+              </div>
+
               <input
                 type="text"
                 className="settings-input"
-                style={{ height: "30px", width: "250px" }}
                 value={userInfo ? userInfo.name : ""}
               />
-              {/* <StyledInput
-                title={}
-                inpHeight={20}
-                inpWidht={200}
-                inpStyle={1}
-              /> */}
+              <StyledButton
+                click={() => setShowSettings(false)}
+                title="Change"
+                btnWidth={140}
+                btnHeight={40}
+                btnStyle={3}
+              />
             </div>
-            <label style={{ fontSize: "20px" }} htmlFor="">
-              Email
-            </label>
-            <StyledInput
-              title={userInfo ? userInfo.email : ""}
-              inpHeight={20}
-              inpWidht={200}
-              inpStyle={1}
+
+            <div
+              style={{
+                display: "flex",
+                width: "500px",
+                gap: "20px",
+              }}
+            >
+              <div style={{ minWidth: "180px" }}>
+                <label style={{ fontSize: "35px" }} htmlFor="">
+                  Email
+                </label>
+              </div>
+              <input
+                type="text"
+                className="settings-input"
+                value={userInfo ? userInfo.email : ""}
+              />
+              <StyledButton
+                click={() => setShowSettings(false)}
+                title="Update"
+                btnWidth={140}
+                btnHeight={40}
+                btnStyle={3}
+              />
+            </div>
+          </div>
+          <div>
+            <StyledButton
+              click={() => setShowChangePassword(true)}
+              btnHeight={50}
+              btnWidth={100}
+              btnStyle={3}
+              title="Change password"
             />
           </div>
-          <StyledButton
-            click={() => setShowChangePassword(true)}
-            btnHeight={50}
-            btnStyle={3}
-            title="Change password"
-          />
-          <StyledButton click={() => logout()} btnStyle={4} title="Logout" />
-          <StyledButton
-            click={() => setShowWarning(true)}
-            btnStyle={4}
-            title="Delete Account"
-          />
-          {userInfo?.role === "ADMIN" && (
+          <div className="setting-bottom-buttons">
             <StyledButton
-              btnStyle={5}
-              title="Admin tools"
-              click={() => {
-                navigate("/admin");
-              }}
+              click={() => logout()}
+              btnWidth={250}
+              btnStyle={4}
+              title="Logout"
             />
-          )}
+            <StyledButton
+              click={() => setShowWarning(true)}
+              btnStyle={4}
+              btnWidth={250}
+              title="Delete Account"
+            />
+            {userInfo?.role === "ADMIN" && (
+              <StyledButton
+                btnStyle={4}
+                btnWidth={250}
+                title="Admin tools"
+                click={() => {
+                  navigate("/admin");
+                }}
+              />
+            )}
+          </div>
         </div>
 
-        {showChangePassword && (
+        {/* {showChangePassword && (
           <div className="delete-warning-container">
             <div className="delete-warning">
               <h2>Change Password</h2>
@@ -249,7 +296,7 @@ export default function SettingsPage() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
