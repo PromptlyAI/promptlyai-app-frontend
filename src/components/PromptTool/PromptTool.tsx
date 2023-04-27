@@ -203,7 +203,7 @@ export default function PromptTool() {
         </div>
       </div>
       <div className="prompt-tool-container">
-        {needToSignIn && <Popup displayPopup={needToSignIn} />}
+        {needToSignIn && <Popup/>}
         {showTextPrompt ? (
           <TextPrompt
             textPrompt={textPrompt}

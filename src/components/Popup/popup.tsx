@@ -2,12 +2,9 @@ import React, { CSSProperties } from "react";
 import "./popup.css";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import Logo from "../../images/PromptlyLogo.png";
-interface PopupProps {
-  displayPopup: boolean;
-}
+
 import { useNavigate } from "react-router";
-export default function Popup(props: PopupProps) {
-  const { displayPopup } = props;
+export default function Popup() {
   const navigate = useNavigate();
 
   return (
