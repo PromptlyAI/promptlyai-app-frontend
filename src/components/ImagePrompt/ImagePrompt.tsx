@@ -66,6 +66,7 @@ export default function ImagePrompt({
   }
 
   async function fetchImage() {
+    setImageLoading(true);
     setImprovedPromptLoading(true);
     const response = await Api({
       path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${currentPromptId}`,
@@ -77,6 +78,10 @@ export default function ImagePrompt({
     setImageUrl(await response.image_url);
 
     await runTextAnimation(userPrompt, setPromptTitle, 55);
+  }
+  function test() {
+    console.log("butcher meeting");
+    setImageLoading(false);
   }
   return (
     <>
@@ -184,27 +189,22 @@ export default function ImagePrompt({
               >
                 {imageUrl && (
                   <>
-                    {imageLoading ? (
+                    {imageLoading && (
                       <div className="image-load-placeholder"></div>
-                    ) : (
-                      <img
-                        onLoad={() => setImageLoading(false)}
-                        style={{ width: "500px", height: "500px" }}
-                        src={imageUrl}
-                        alt=""
-                      />
                     )}
+                    <img
+                      onLoad={() => test()}
+                      style={{
+                        width: "500px",
+                        height: "500px",
+                        display: imageLoading ? "none" : "flex",
+                      }}
+                      src={imageUrl}
+                      alt=""
+                    />
                   </>
                 )}
               </div>
-              {/* <StyledInput
-                inpWidht={750}
-                inpHeight={850}
-                inpStyle={1}
-                title={improvedPrompt}
-                change={(ev) => setImprovedPrompt(ev.target.value)}
-                placeHolder="Your generated output will appear here..."
-              /> */}
               <div
                 style={{
                   width: "100%",
