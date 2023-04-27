@@ -93,6 +93,18 @@ export default function PromptTool() {
   }, [promptId]);
 
   async function loadPromptTextHistory() {
+    setTextPrompt({
+      answer: "",
+      input: "",
+      output: "",
+    });
+
+    setImagePrompt({
+      input: "",
+      output: "",
+      url: "",
+    });
+
     setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
