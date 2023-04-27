@@ -15,11 +15,14 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import { SidebarContext } from "./context/SidebarContext";
 import Popup from "./components/Popup/popup";
 import { SettingsContext } from "./context/SettingsContext";
+import { ReloadHistoryContext } from "./context/ReloadHistoryContext";
+import { AppContext } from "./context/AppContext";
 
 function App() {
   const [promptId, setPromptId] = useState<string>("");
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
   const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [reloadHistory, setReloadHistory] = useState<boolean>(false);
   return (
     <>
       <Router>
@@ -29,19 +32,39 @@ function App() {
               path="/"
               element={
                 <>
-                  <SettingsContext.Provider
-                    value={{ showSettings, setShowSettings }}
+                  <AppContext.Provider
+                    value={{
+                      reloadHistory,
+                      setReloadHistory,
+                      showSettings,
+                      setShowSettings,
+                      showSidebar,
+                      setShowSidebar,
+                      promptId,
+                      setPromptId,
+                    }}
                   >
-                    <SidebarContext.Provider
-                      value={{ showSidebar, setShowSidebar }}
+                    <NavigationBar />
+                    <SideBar />
+                    <PromptPage />
+                  </AppContext.Provider>
+                  {/* <ReloadHistoryContext.Provider
+                    value={{ reloadHistory, setReloadHistory }}
+                  >
+                    <SettingsContext.Provider
+                      value={{ showSettings, setShowSettings }}
                     >
-                      <PromptContext.Provider value={{ promptId, setPromptId }}>
-                        <NavigationBar />
-                        <SideBar />
-                        <PromptPage />
-                      </PromptContext.Provider>
-                    </SidebarContext.Provider>
-                  </SettingsContext.Provider>
+                      <SidebarContext.Provider
+                        value={{ showSidebar, setShowSidebar }}
+                      >
+                        <PromptContext.Provider
+                          value={{ promptId, setPromptId }}
+                        >
+
+                        </PromptContext.Provider>
+                      </SidebarContext.Provider>
+                    </SettingsContext.Provider>
+                  </ReloadHistoryContext.Provider> */}
                 </>
               }
             />

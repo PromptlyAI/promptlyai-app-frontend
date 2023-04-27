@@ -4,6 +4,7 @@ import Api from "../../api/Api";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
+import { AppContext } from "../../context/AppContext";
 interface TextPromptProps {
   answer: string;
   input: string;
@@ -24,7 +25,8 @@ export default function TextPrompt({
   setTextPrompt,
   setPromptTitle,
 }: IProps) {
-  const { promptId } = useContext(PromptContext);
+  const { promptId } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory } = useContext(AppContext);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -72,6 +74,8 @@ export default function TextPrompt({
     setCurrentPromptId(await response.prompt.id);
 
     await runTextAnimation(responseString, setPromptOutput, textSpeed);
+
+    setReloadHistory(true);
   }
 
   async function fetchFinalOutput() {

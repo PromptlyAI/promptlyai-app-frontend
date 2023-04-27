@@ -2,11 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import Api from "../../api/Api";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SettingsPage.css";
-import HomeButton from "../../shared/HomeButton/HomeButton";
 import { useNavigate } from "react-router";
-import StyledInput from "../../shared/input-styles/StyledInput";
-import { SettingsContext } from "../../context/SettingsContext";
 import Logo from "../../images/PromptlyLogo.png";
+import { AppContext } from "../../context/AppContext";
 
 interface UserProps {
   name: string;
@@ -24,7 +22,7 @@ export default function SettingsPage() {
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
 
-  const { showSettings, setShowSettings } = useContext(SettingsContext);
+  const { showSettings, setShowSettings } = useContext(AppContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,12 +83,6 @@ export default function SettingsPage() {
 
   return (
     <div className="setting-page-container">
-      {/* <div
-        onClick={() => setShowSettings(false)}
-        style={{ position: "absolute", left: "100px", top: "20px" }}
-      >
-        <HomeButton />
-      </div> */}
       <div className="setting-container">
         <div style={{ display: "flex" }}>
           <div className="settings-topbar">

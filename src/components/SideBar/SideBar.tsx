@@ -9,6 +9,7 @@ import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import { SidebarContext } from "../../context/SidebarContext";
 import TrashBlack from "../../images/TrashBlack.png";
+import { AppContext } from "../../context/AppContext";
 interface buttonProps {
   input: string;
   path?: string;
@@ -20,8 +21,9 @@ interface buttonProps {
 }
 
 export default function SideBar() {
-  const { setPromptId, promptId } = useContext(PromptContext);
-  const { showSidebar, setShowSidebar } = useContext(SidebarContext);
+  const { setPromptId, promptId } = useContext(AppContext);
+  const { showSidebar, setShowSidebar } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory } = useContext(AppContext);
 
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [promptHistoryLoading, setPromptHistoryLoading] =
@@ -73,6 +75,29 @@ export default function SideBar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  useEffect(() => {
+    if (reloadHistory === true) {
+      fastReload();
+      setReloadHistory(false);
+    }
+  }, [reloadHistory]);
+
+  async function fastReload() {
+    const response = await Api({
+      path: "prompt/prompts",
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+
+    const arr: buttonProps[] = await response.map((item: any) => ({
+      input: item.input,
+      id: item.id,
+      pressed: false,
+      type: item.type,
+    }));
+
+    setPromptHistory([...arr]);
+  }
 
   async function getPromptHistory() {
     setPromptHistoryLoading(true);

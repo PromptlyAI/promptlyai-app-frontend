@@ -10,10 +10,11 @@ import { RxExit } from "react-icons/rx";
 import { SidebarContext } from "../../context/SidebarContext";
 import SettingsPage from "../../pages/SettingsPage/SettingsPage";
 import { SettingsContext } from "../../context/SettingsContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function NavigationBar() {
-  const { showSidebar, setShowSidebar } = useContext(SidebarContext);
-  const { showSettings, setShowSettings } = useContext(SettingsContext);
+  const { showSidebar, setShowSidebar } = useContext(AppContext);
+  const { showSettings, setShowSettings } = useContext(AppContext);
 
   const [userName, setUserName] = useState<string>("");
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ export default function NavigationBar() {
               borderRadius: "13px",
             }}
             className="nav-btn"
-            onClick={() => setShowSidebar(!showSettings)}
+            onClick={() => setShowSidebar(!showSidebar)}
           >
             <img src={Time} alt="" />
           </div>

@@ -5,6 +5,7 @@ import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./ImagePrompt.css";
+import { AppContext } from "../../context/AppContext";
 
 interface ImagePromptProps {
   input: string;
@@ -23,6 +24,8 @@ export default function ImagePrompt({
   setImagePrompt,
   setPromptTitle,
 }: IProps) {
+  const { reloadHistory, setReloadHistory } = useContext(AppContext);
+
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
   const [improvedPrompt, setImprovedPrompt] = useState<string>("");
@@ -68,6 +71,9 @@ export default function ImagePrompt({
     await runTextAnimation(responseString, setPromptOutput, textSpeed);
 
     setPromptOutputLoading(false);
+
+    setReloadHistory(true);
+
     // set(await response.image_url);
   }
 
