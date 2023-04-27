@@ -61,7 +61,7 @@ export default function NavigationBar() {
               borderRadius: "13px",
             }}
             className="nav-btn"
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={() => setShowSidebar(!showSettings)}
           >
             <img src={Time} alt="" />
           </div>
