@@ -18,7 +18,7 @@ import Popup from "./components/Popup/popup";
 function App() {
   const [promptId, setPromptId] = useState<string>("");
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
-
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   return (
     <Router>
       <div className="App">
@@ -31,7 +31,10 @@ function App() {
                   value={{ showSidebar, setShowSidebar }}
                 >
                   <PromptContext.Provider value={{ promptId, setPromptId }}>
-                    <NavigationBar />
+                    <NavigationBar
+                      showSettings={showSettings}
+                      setShowSettings={setShowSettings}
+                    />
                     <SideBar />
                     <PromptPage />
                   </PromptContext.Provider>
@@ -39,10 +42,11 @@ function App() {
               </>
             }
           />
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/loading" element={<IntroPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
+          {/* <Route path="/settings" element={<SettingsPage />} /> */}
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
