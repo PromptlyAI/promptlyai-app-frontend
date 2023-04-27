@@ -9,17 +9,11 @@ import Api from "../../api/Api";
 import { RxExit } from "react-icons/rx";
 import { SidebarContext } from "../../context/SidebarContext";
 import SettingsPage from "../../pages/SettingsPage/SettingsPage";
+import { SettingsContext } from "../../context/SettingsContext";
 
-interface IProps {
-  showSettings: boolean;
-  setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function NavigationBar({
-  showSettings,
-  setShowSettings,
-}: IProps) {
+export default function NavigationBar() {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext);
+  const { showSettings, setShowSettings } = useContext(SettingsContext);
 
   const [userName, setUserName] = useState<string>("");
   const navigate = useNavigate();
@@ -40,7 +34,7 @@ export default function NavigationBar({
 
   return (
     <>
-      {showSettings && <SettingsPage />}
+      {/* {showSettings && <SettingsPage />} */}
       <div className="navigation-bar-main-container">
         <div
           onClick={() => setRotate(!rotate)}
@@ -67,7 +61,7 @@ export default function NavigationBar({
               borderRadius: "13px",
             }}
             className="nav-btn"
-            onClick={() => setShowSidebar(!showSidebar)}
+            onClick={() => setShowSettings(!showSettings)}
           >
             <img src={Time} alt="" />
           </div>

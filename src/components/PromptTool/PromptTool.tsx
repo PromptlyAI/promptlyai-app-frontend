@@ -17,6 +17,8 @@ import PromptlyLogo from "../../images/PromptlyLogo.png";
 import LoginCheck from "../../shared/LoginCheck/LoginCheck";
 import TextPrompt from "../TextPrompt/TextPrompt";
 import ImagePrompt from "../ImagePrompt/ImagePrompt";
+import SettingsPage from "../../pages/SettingsPage/SettingsPage";
+import { SettingsContext } from "../../context/SettingsContext";
 
 interface TextPromptProps {
   answer: string;
@@ -31,6 +33,7 @@ interface ImagePromptProps {
 
 export default function PromptTool() {
   const { promptId } = useContext(PromptContext);
+  const { showSettings, setShowSettings } = useContext(SettingsContext);
 
   const [promptTitle, setPromptTitle] = useState<string>("");
 
@@ -203,7 +206,10 @@ export default function PromptTool() {
         </div>
       </div>
       <div className="prompt-tool-container">
+
+        {showSettings && <SettingsPage />}
         {needToSignIn && <Popup/>}
+        
         {showTextPrompt ? (
           <TextPrompt
             textPrompt={textPrompt}
