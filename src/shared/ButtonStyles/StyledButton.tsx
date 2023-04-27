@@ -3,7 +3,9 @@ import "../ButtonStyles/StyledButton.css";
 import BookClicked from "../../images/BookClicked.png";
 import Book from "../../images/Book.png";
 
-import ImgBox from "../../images/ImgBox.png";
+import ImgBoxBlack from "../../images/ImgBoxBlack.png";
+import ImgBoxBlue from "../../images/ImgBoxBlue.png";
+
 import Trash from "../../images/Trash.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
@@ -80,14 +82,14 @@ export default function StyledButton({
             <img
               style={{ width: "35px", height: "35px" }}
               className="left-icon"
-              src={ImgBox}
+              src={ImgBoxBlue}
               alt=""
             />
           ) : (
             <img
               style={{ width: "35px", height: "35px" }}
               className="left-icon"
-              src={ImgBox}
+              src={ImgBoxBlack}
               alt=""
             />
           )}
