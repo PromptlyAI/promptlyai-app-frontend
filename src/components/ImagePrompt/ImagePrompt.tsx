@@ -91,10 +91,11 @@ export default function ImagePrompt({
 
     await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
-  function test() {
-    console.log("butcher meeting");
-    setImageLoading(false);
-  }
+
+  const handleDownload = () => {
+    window.open(imageUrl);
+  };
+
   return (
     <>
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
@@ -205,7 +206,7 @@ export default function ImagePrompt({
                       <div className="image-load-placeholder"></div>
                     )}
                     <img
-                      onLoad={() => test()}
+                      onLoad={() => setImageLoading(false)}
                       style={{
                         width: "500px",
                         height: "500px",
@@ -226,18 +227,18 @@ export default function ImagePrompt({
                 }}
               >
                 <StyledButton
-                  click={() => {}}
+                  click={() => handleDownload()}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}
-                  title="SAVE"
+                  title="OPEN"
                 />
                 <StyledButton
-                  click={() => navigator.clipboard.writeText(improvedPrompt)}
+                  click={() => navigator.clipboard.writeText(imageUrl)}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}
-                  title="COPY"
+                  title="COPY-URL"
                 />
               </div>
             </div>
