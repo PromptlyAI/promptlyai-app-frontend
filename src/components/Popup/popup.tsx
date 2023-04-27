@@ -11,7 +11,7 @@ export default function Popup(props: PopupProps) {
 
   const popupStyle: CSSProperties = {
     display: displayPopup ? "flex" : "none",
-    position: "fixed",
+    position: "absolute",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
@@ -19,8 +19,8 @@ export default function Popup(props: PopupProps) {
     left: 0,
     width: "100%",
     height: "100%",
-    zIndex: 1000,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 10,
+    backgroundColor: "#515B72",
   };
 
   return (

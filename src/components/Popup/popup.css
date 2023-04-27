@@ -7,6 +7,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    z-index: 11;
 }
 .popupButtonContainer{
     gap: 10px;
