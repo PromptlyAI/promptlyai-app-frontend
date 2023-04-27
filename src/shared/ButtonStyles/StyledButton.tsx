@@ -74,6 +74,7 @@ export default function StyledButton({
         background: color,
         color: textColor,
         fontSize: textSize,
+        border:"none"
       }}
     >
       {imgIcon ? (
