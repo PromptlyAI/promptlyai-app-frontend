@@ -46,6 +46,12 @@ export default function ImagePrompt({
     setImageUrl(imagePrompt.url);
   }, [imagePrompt]);
 
+  useEffect(() => {
+    if (imageUrl !== "") {
+      setImageLoading(true);
+    }
+  }, [imageUrl]);
+
   async function fetchImprovedImagePrompt() {
     setPromptOutputLoading(true);
     const response = await Api({
