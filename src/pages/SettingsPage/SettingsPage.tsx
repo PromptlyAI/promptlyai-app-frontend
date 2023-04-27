@@ -6,6 +6,8 @@ import HomeButton from "../../shared/HomeButton/HomeButton";
 import { useNavigate } from "react-router";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import { SettingsContext } from "../../context/SettingsContext";
+import Logo from "../../images/PromptlyLogo.png";
+
 interface UserProps {
   name: string;
   email: string;
@@ -83,13 +85,35 @@ export default function SettingsPage() {
 
   return (
     <div className="setting-page-container">
-      <div
+      {/* <div
         onClick={() => setShowSettings(false)}
         style={{ position: "absolute", left: "100px", top: "20px" }}
       >
         <HomeButton />
-      </div>
+      </div> */}
       <div className="setting-container">
+        <div className="center">
+          <div className="settings-topbar">
+            <img src={Logo} alt="" />
+
+            <StyledButton btnStyle={1} />
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div>
+            <h1>Profile Settings</h1>
+            <h2>Settings are automatically saved!</h2>
+          </div>
+        </div>
+
         <div
           style={{
             height: "",
@@ -99,18 +123,24 @@ export default function SettingsPage() {
             gap: "20px",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label style={{ fontSize: "20px" }} htmlFor="">
-              Username
-            </label>
-            <StyledInput
-              title={userInfo ? userInfo.name : ""}
-              inpHeight={20}
-              inpWidht={200}
-              inpStyle={1}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="settings-info">
+            <div style={{ display: "flex" }}>
+              <label style={{ fontSize: "35px" }} htmlFor="">
+                Username
+              </label>
+              <input
+                type="text"
+                className="settings-input"
+                style={{ height: "30px", width: "250px" }}
+                value={userInfo ? userInfo.name : ""}
+              />
+              {/* <StyledInput
+                title={}
+                inpHeight={20}
+                inpWidht={200}
+                inpStyle={1}
+              /> */}
+            </div>
             <label style={{ fontSize: "20px" }} htmlFor="">
               Email
             </label>
