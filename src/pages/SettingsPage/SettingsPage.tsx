@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Api from "../../api/Api";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import "./SettingsPage.css";
 import HomeButton from "../../shared/HomeButton/HomeButton";
 import { useNavigate } from "react-router";
 import StyledInput from "../../shared/input-styles/StyledInput";
+import { SettingsContext } from "../../context/SettingsContext";
 interface UserProps {
   name: string;
   email: string;
@@ -20,6 +21,8 @@ export default function SettingsPage() {
 
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
+
+  const { showSettings, setShowSettings } = useContext(SettingsContext);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -75,157 +78,149 @@ export default function SettingsPage() {
 
   function logout() {
     localStorage.removeItem("token");
-    navigate("/");
+    setShowSettings(false);
   }
 
   return (
     <div className="setting-page-container">
-      <div style={{ position: "absolute", left: "100px", top: "20px" }}>
+      <div
+        onClick={() => setShowSettings(false)}
+        style={{ position: "absolute", left: "100px", top: "20px" }}
+      >
         <HomeButton />
       </div>
-
-      <div
-        style={{
-          height: "",
-          display: "flex",
-          padding: "50px",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={{ fontSize: "20px" }} htmlFor="">
-            Username
-          </label>
-          <StyledInput
-            title={userInfo ? userInfo.name : ""}
-            inpHeight={20}
-            inpWidht={200}
-            inpStyle={1}
-          />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <label style={{ fontSize: "20px" }} htmlFor="">
-            Email
-          </label>
-          <StyledInput
-            title={userInfo ? userInfo.email : ""}
-            inpHeight={20}
-            inpWidht={200}
-            inpStyle={1}
-          />
-        </div>
-        <StyledButton
-          click={() => setShowChangePassword(true)}
-          btnHeight={50}
-          btnStyle={3}
-          title="Change password"
-        />
-        <StyledButton click={() => logout()} btnStyle={4} title="Logout" />
-        <StyledButton
-          click={() => setShowWarning(true)}
-          btnStyle={4}
-          title="Delete Account"
-        />
-        {userInfo?.role === "ADMIN" && (
+      <div className="setting-container">
+        <div
+          style={{
+            height: "",
+            display: "flex",
+            padding: "50px",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label style={{ fontSize: "20px" }} htmlFor="">
+              Username
+            </label>
+            <StyledInput
+              title={userInfo ? userInfo.name : ""}
+              inpHeight={20}
+              inpWidht={200}
+              inpStyle={1}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label style={{ fontSize: "20px" }} htmlFor="">
+              Email
+            </label>
+            <StyledInput
+              title={userInfo ? userInfo.email : ""}
+              inpHeight={20}
+              inpWidht={200}
+              inpStyle={1}
+            />
+          </div>
           <StyledButton
-            btnStyle={5}
-            title="Admin tools"
-            click={() => {
-              navigate("/admin");
-            }}
+            click={() => setShowChangePassword(true)}
+            btnHeight={50}
+            btnStyle={3}
+            title="Change password"
           />
-        )}
-      </div>
+          <StyledButton click={() => logout()} btnStyle={4} title="Logout" />
+          <StyledButton
+            click={() => setShowWarning(true)}
+            btnStyle={4}
+            title="Delete Account"
+          />
+          {userInfo?.role === "ADMIN" && (
+            <StyledButton
+              btnStyle={5}
+              title="Admin tools"
+              click={() => {
+                navigate("/admin");
+              }}
+            />
+          )}
+        </div>
 
-      {showChangePassword && (
-        <div className="delete-warning-container">
-          <div className="delete-warning">
-            <h2>Change Password</h2>
-            <div className="center">
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "20px",
-                  gap: "20px",
-                  width: "90%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                {/* <div style={{ display: "flex", flexDirection: "column" }}>
-                  <label style={{ fontSize: "20px" }} htmlFor="">
-                    Current password
-                  </label>
-                  <StyledInput
-                    title={currentPassword}
-                    change={(ev) => setCurrentPassword(ev.target.value)}
-                    inpHeight={20}
-                    inpWidht={200}
-                    inpStyle={1}
+        {showChangePassword && (
+          <div className="delete-warning-container">
+            <div className="delete-warning">
+              <h2>Change Password</h2>
+              <div className="center">
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "20px",
+                    gap: "20px",
+                    width: "90%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={{ fontSize: "20px" }} htmlFor="">
+                      New password
+                    </label>
+                    <StyledInput
+                      title={newPassword}
+                      change={(ev) => setNewPassword(ev.target.value)}
+                      inpHeight={20}
+                      inpWidht={200}
+                      inpStyle={1}
+                    />
+                  </div>
+
+                  <StyledButton
+                    click={() => changePassword()}
+                    btnHeight={50}
+                    btnStyle={3}
+                    title="Change password"
                   />
-                </div> */}
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <label style={{ fontSize: "20px" }} htmlFor="">
-                    New password
-                  </label>
-                  <StyledInput
-                    title={newPassword}
-                    change={(ev) => setNewPassword(ev.target.value)}
-                    inpHeight={20}
-                    inpWidht={200}
-                    inpStyle={1}
+                  <StyledButton
+                    click={() => setShowChangePassword(false)}
+                    btnStyle={5}
+                    title="Back"
                   />
                 </div>
-
-                <StyledButton
-                  click={() => changePassword()}
-                  btnHeight={50}
-                  btnStyle={3}
-                  title="Change password"
-                />
-                <StyledButton
-                  click={() => setShowChangePassword(false)}
-                  btnStyle={5}
-                  title="Back"
-                />
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {showWarning && (
-        <div className="delete-warning-container">
-          <div className="delete-warning">
-            <h2>Are you sure</h2>
-            <h3>Do you really want to delete your account?</h3>
-            <div className="center">
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "20px",
-                  gap: "20px",
-                  width: "90%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <StyledButton
-                  click={() => setShowWarning(false)}
-                  btnStyle={5}
-                  title="Do not delete"
-                />
-                <StyledButton
-                  click={() => deleteAccount()}
-                  btnStyle={4}
-                  title="Delete Account"
-                />
+        {showWarning && (
+          <div className="delete-warning-container">
+            <div className="delete-warning">
+              <h2>Are you sure</h2>
+              <h3>Do you really want to delete your account?</h3>
+              <div className="center">
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "20px",
+                    gap: "20px",
+                    width: "90%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <StyledButton
+                    click={() => setShowWarning(false)}
+                    btnStyle={5}
+                    title="Do not delete"
+                  />
+                  <StyledButton
+                    click={() => deleteAccount()}
+                    btnStyle={4}
+                    title="Delete Account"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
