@@ -83,7 +83,7 @@ export default function PromptTool() {
         output: "",
         url: "",
       });
-    } else {
+    } else if (promptId.length > 0) {
       loadPromptTextHistory();
     }
     setPromptTitle("new");

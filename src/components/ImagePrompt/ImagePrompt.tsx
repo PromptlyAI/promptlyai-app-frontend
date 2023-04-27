@@ -4,6 +4,7 @@ import Api from "../../api/Api";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
+import "./ImagePrompt.css";
 
 interface ImagePromptProps {
   input: string;
@@ -34,6 +35,7 @@ export default function ImagePrompt({
     useState<boolean>(false);
 
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
 
   const textSpeed = 4;
 
@@ -73,6 +75,8 @@ export default function ImagePrompt({
     setImprovedPromptLoading(false);
     console.log(await response);
     setImageUrl(await response.image_url);
+
+    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
   return (
     <>
@@ -179,11 +183,18 @@ export default function ImagePrompt({
                 }}
               >
                 {imageUrl && (
-                  <img
-                    style={{ width: "500px", height: "500px" }}
-                    src={imageUrl}
-                    alt=""
-                  />
+                  <>
+                    {imageLoading ? (
+                      <div className="image-load-placeholder"></div>
+                    ) : (
+                      <img
+                        onLoad={() => setImageLoading(false)}
+                        style={{ width: "500px", height: "500px" }}
+                        src={imageUrl}
+                        alt=""
+                      />
+                    )}
+                  </>
                 )}
               </div>
               {/* <StyledInput

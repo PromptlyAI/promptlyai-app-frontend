@@ -114,7 +114,6 @@ export default function SideBar() {
     //   btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     // );
     // setModes(arr);
-
     setPromptId(_id);
 
     //deselect all history buttons
@@ -136,10 +135,12 @@ export default function SideBar() {
         promptId: _id,
       },
     });
+    console.log(await response);
 
-    const a = arr.filter((btn) => btn.id !== _id);
-    setPromptHistory(a);
+    const newArr = arr.filter((btn) => btn.id !== _id);
+    setPromptHistory(newArr);
   }
+
   return (
     <div className="side-bar-container">
       <div
