@@ -20,7 +20,6 @@
     transparent 40%
   );
   animation: loading-gradient 1.5s ease-in-out infinite;
-  animation-delay: 0.5s;
 }
 
 @keyframes loading-gradient {
