@@ -157,6 +157,9 @@ export default function PromptTool() {
   //   });
   //   setPromptType(await response.type);
   // }
+  useEffect(() => {
+    setShowSettings(false);
+  }, []);
 
   return (
     <div>
@@ -206,10 +209,9 @@ export default function PromptTool() {
         </div>
       </div>
       <div className="prompt-tool-container">
-
         {showSettings && <SettingsPage />}
-        {needToSignIn && <Popup/>}
-        
+        {needToSignIn && <Popup />}
+
         {showTextPrompt ? (
           <TextPrompt
             textPrompt={textPrompt}
