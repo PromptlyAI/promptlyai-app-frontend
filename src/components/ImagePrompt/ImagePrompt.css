@@ -1,0 +1,32 @@
+.image-load-placeholder {
+  overflow: hidden;
+  width: 500px;
+  height: 500px;
+  position: relative;
+  background-color: var(--secondary-background);
+}
+
+.image-load-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #f0f0f013 20%,
+    transparent 40%
+  );
+  animation: loading-gradient 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-gradient {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}

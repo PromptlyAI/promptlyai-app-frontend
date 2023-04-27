@@ -26,6 +26,8 @@ export default function SideBar() {
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [promptHistoryLoading, setPromptHistoryLoading] =
     useState<boolean>(false);
+  const [clearLoading, setClearLoading] = useState<boolean>(false);
+
   const [modes, setModes] = useState<buttonProps[]>(() => [
     {
       input: "PROMPT-EDITOR",
@@ -114,7 +116,6 @@ export default function SideBar() {
     //   btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     // );
     // setModes(arr);
-
     setPromptId(_id);
 
     //deselect all history buttons
@@ -136,10 +137,24 @@ export default function SideBar() {
         promptId: _id,
       },
     });
+    console.log(await response);
 
-    const a = arr.filter((btn) => btn.id !== _id);
-    setPromptHistory(a);
+    const newArr = arr.filter((btn) => btn.id !== _id);
+    setPromptHistory(newArr);
   }
+
+  async function clearPromptHistory() {
+    setClearLoading(true);
+    const response = await Api({
+      path: "prompt/all",
+      method: "DELETE",
+      token: localStorage.getItem("token") as string,
+    });
+    console.log(await response);
+    setClearLoading(false);
+    setPromptHistory([]);
+  }
+
   return (
     <div className="side-bar-container">
       <div
@@ -242,15 +257,23 @@ export default function SideBar() {
               <div className="bottom-gradient"></div>
               <div className="clear-history-container">
                 <button
-                  onClick={() => console.log("illa.se")}
+                  onClick={() => clearPromptHistory()}
                   className="clear-btn"
                   style={{ width: bigBtnsSize, height: "56px" }}
                 >
-                  <img
-                    style={{ position: "absolute", left: "15px" }}
-                    src={TrashBlack}
-                  />
-                  CLEAR PROMPT-HISTORY
+                  {clearLoading ? (
+                    <div className="center">
+                      <div className="loader"></div>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        style={{ position: "absolute", left: "15px" }}
+                        src={TrashBlack}
+                      />
+                      CLEAR PROMPT-HISTORY
+                    </>
+                  )}
                 </button>
               </div>
             </div>
