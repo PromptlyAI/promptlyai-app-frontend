@@ -97,7 +97,7 @@ export default function SettingsPage() {
               paddingTop: "30px",
             }}
           >
-            <h1>Settings</h1>
+            <h1 style={{ textAlign: "center" }}>Settings</h1>
             <div className="center">
               <div
                 onClick={() => setShowSettings(!showSettings)}
