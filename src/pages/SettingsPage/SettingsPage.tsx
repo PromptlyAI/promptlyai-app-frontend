@@ -165,13 +165,15 @@ export default function SettingsPage() {
                 />
               </div>
               <div className="settings-bottom-collection">
-                <StyledButton
-                  click={() => navigate("/admin")}
-                  btnStyle={4}
-                  btnWidth={200}
-                  btnHeight={60}
-                  title="ADMIN TOOLS"
-                />
+                {userInfo?.role === "ADMIN" && (
+                  <StyledButton
+                    click={() => navigate("/admin")}
+                    btnStyle={4}
+                    btnWidth={200}
+                    btnHeight={60}
+                    title="ADMIN TOOLS"
+                  />
+                )}
                 <StyledButton
                   click={() => logout()}
                   btnStyle={4}
