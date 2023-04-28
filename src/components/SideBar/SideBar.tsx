@@ -5,12 +5,12 @@ import "./SideBar.css";
 import Logo from "../../images/PromptlyLogo.png";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Api from "../../api/Api";
-import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
-import { SidebarContext } from "../../context/SidebarContext";
 import TrashBlack from "../../images/TrashBlack.png";
 import { AppContext } from "../../context/AppContext";
-interface buttonProps {
+import TextHistory from "../TextHistory/PromptHistory";
+import PromptHistory from "../TextHistory/PromptHistory";
+interface promptHistoryProps {
   input: string;
   path?: string;
   pressed: boolean;
@@ -21,16 +21,24 @@ interface buttonProps {
 }
 
 export default function SideBar() {
-  const { setPromptId, promptId } = useContext(AppContext);
-  const { showSidebar, setShowSidebar } = useContext(AppContext);
-  const { reloadHistory, setReloadHistory } = useContext(AppContext);
+  const {
+    setPromptId,
+    promptId,
+    showSidebar,
+    setShowSidebar,
+    reloadHistory,
+    setReloadHistory,
+    historyMode,
+  } = useContext(AppContext);
 
-  const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
+  const [promptHistory, setPromptHistory] = useState<promptHistoryProps[]>(
+    () => []
+  );
   const [promptHistoryLoading, setPromptHistoryLoading] =
     useState<boolean>(false);
   const [clearLoading, setClearLoading] = useState<boolean>(false);
 
-  const [modes, setModes] = useState<buttonProps[]>(() => [
+  const [modes, setModes] = useState<promptHistoryProps[]>(() => [
     {
       input: "PROMPT-EDITOR",
       path: "",
@@ -84,12 +92,12 @@ export default function SideBar() {
 
   async function fastReload() {
     const response = await Api({
-      path: "prompt/prompts",
+      path: `prompt/prompts?type=${historyMode}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    const arr: buttonProps[] = await response.map((item: any) => ({
+    const arr: promptHistoryProps[] = await response.map((item: any) => ({
       input: item.input,
       id: item.id,
       pressed: false,
@@ -101,13 +109,14 @@ export default function SideBar() {
 
   async function getPromptHistory() {
     setPromptHistoryLoading(true);
+
     const response = await Api({
-      path: "prompt/prompts",
+      path: `prompt/prompts?type=${historyMode}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    const arr: buttonProps[] = await response.map((item: any) => ({
+    const arr: promptHistoryProps[] = await response.map((item: any) => ({
       input: item.input,
       id: item.id,
       pressed: false,
@@ -117,22 +126,6 @@ export default function SideBar() {
 
     setPromptHistory([...arr]);
     setPromptHistoryLoading(false);
-  }
-
-  function pressHistoryBtn(_id: string) {
-    let arr = [...promptHistory];
-    arr.map((btn) =>
-      btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
-    );
-    setPromptHistory(arr);
-
-    //set prompt id --> load prompt
-    setPromptId(_id);
-
-    //deselect all mode buttons
-    let modeButtons = [...modes];
-    modeButtons.map((btn) => (btn.pressed = false));
-    setModes(modeButtons);
   }
 
   function pressModeBtn(_id: string) {
@@ -149,24 +142,24 @@ export default function SideBar() {
     setPromptHistory(historyArr);
   }
 
-  async function deletePrompt(_id: string) {
-    const arr = [...promptHistory];
-    arr.map((btn) =>
-      btn.id === _id ? (btn.loading = true) : (btn.loading = false)
-    );
-    const response = await Api({
-      path: "prompt",
-      method: "DELETE",
-      token: localStorage.getItem("token") as string,
-      bodyParams: {
-        promptId: _id,
-      },
-    });
-    console.log(await response);
+  // async function deletePrompt(_id: string) {
+  //   const arr = [...promptHistory];
+  //   arr.map((btn) =>
+  //     btn.id === _id ? (btn.loading = true) : (btn.loading = false)
+  //   );
+  //   const response = await Api({
+  //     path: "prompt",
+  //     method: "DELETE",
+  //     token: localStorage.getItem("token") as string,
+  //     bodyParams: {
+  //       promptId: _id,
+  //     },
+  //   });
+  //   console.log(await response);
 
-    const newArr = arr.filter((btn) => btn.id !== _id);
-    setPromptHistory(newArr);
-  }
+  //   const newArr = arr.filter((btn) => btn.id !== _id);
+  //   setPromptHistory(newArr);
+  // }
 
   async function clearPromptHistory() {
     setClearLoading(true);
@@ -232,52 +225,12 @@ export default function SideBar() {
               height: "fit-content",
             }}
           >
-            <div className="prompt-history-container">
-              {!promptHistoryLoading ? (
-                <>
-                  {promptHistory.map((historyBtn) => (
-                    <StyledButton
-                      key={historyBtn.id}
-                      click={() => {
-                        pressHistoryBtn(historyBtn.id);
-                      }}
-                      deleteIconClick={() => {
-                        deletePrompt(historyBtn.id);
-                      }}
-                      pressed={historyBtn.pressed}
-                      btnWidth={smallBtnsSize}
-                      btnHeight={56}
-                      btnStyle={2}
-                      textColor="white"
-                      title={
-                        historyBtn.input
-                          ? historyBtn.input.length > 20
-                            ? `${historyBtn.input.slice(0, 20)}...`
-                            : historyBtn.input
-                          : "[untitled]"
-                      }
-                      bookIcon={true}
-                      imgIcon={historyBtn.type === "IMAGE" ? true : false}
-                      trashIcon={!historyBtn.loading}
-                      animationPopup={true}
-                      loading={historyBtn.loading}
-                    />
-                  ))}
-                </>
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "15%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  <div className="loader"></div>
-                </div>
-              )}
-            </div>
+            <PromptHistory
+              promptHistory={promptHistory}
+              setPromptHistory={setPromptHistory}
+              promptHistoryLoading={promptHistoryLoading}
+            />
+
             <div>
               <div className="bottom-gradient"></div>
               <div className="clear-history-container">
