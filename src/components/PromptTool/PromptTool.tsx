@@ -93,15 +93,21 @@ export default function PromptTool() {
   }, [promptId]);
 
   async function createNewText() {
+    setLoadingPrompt(true);
+    setPromptId("");
     const response = await Api({
       path: `prompt?type=TEXT`,
       method: "POST",
       token: localStorage.getItem("token") as string,
     });
     setPromptId(await response.prompt.id);
+    setLoadingPrompt(false);
   }
 
   async function createNewImage() {
+    setPromptId("");
+    // setLoadingPrompt(true);
+
     const response = await Api({
       path: `prompt?type=IMAGE`,
       method: "POST",
@@ -109,6 +115,7 @@ export default function PromptTool() {
     });
     console.log(await response.prompt.id);
     setPromptId(await response.prompt.id);
+    // setLoadingPrompt(false);
   }
   async function loadPromptHistory() {
     setTextPrompt({
@@ -201,18 +208,26 @@ export default function PromptTool() {
         {showSettings && <SettingsPage />}
         {needToSignIn && <Popup />}
 
-        {showTextPrompt ? (
-          <TextPrompt
-            textPrompt={textPrompt}
-            setTextPrompt={setTextPrompt}
-            setPromptTitle={setPromptTitle}
-          />
-        ) : (
-          <ImagePrompt
-            imagePrompt={imagePrompt}
-            setImagePrompt={setImagePrompt}
-            setPromptTitle={setPromptTitle}
-          />
+        {promptId && (
+          <>
+            {/* {!loadingPrompt && ( */}
+            <>
+              {showTextPrompt ? (
+                <TextPrompt
+                  textPrompt={textPrompt}
+                  setTextPrompt={setTextPrompt}
+                  setPromptTitle={setPromptTitle}
+                />
+              ) : (
+                <ImagePrompt
+                  imagePrompt={imagePrompt}
+                  setImagePrompt={setImagePrompt}
+                  setPromptTitle={setPromptTitle}
+                />
+              )}
+            </>
+            {/* )} */}
+          </>
         )}
       </div>
     </div>
