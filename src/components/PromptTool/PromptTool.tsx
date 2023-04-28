@@ -25,7 +25,7 @@ interface ImagePromptProps {
 }
 
 export default function PromptTool() {
-  const { promptId } = useContext(AppContext);
+  const { promptId, setPromptId } = useContext(AppContext);
   const { showSettings, setShowSettings } = useContext(AppContext);
 
   const [promptTitle, setPromptTitle] = useState<string>("");
@@ -76,6 +76,7 @@ export default function PromptTool() {
         input: "",
         output: "",
       });
+      createNewText();
     } else if (promptId === "newImage") {
       setShowTextPrompt(false);
       setImagePrompt({
@@ -83,12 +84,32 @@ export default function PromptTool() {
         output: "",
         url: "",
       });
-    } else if (promptId.length > 0) {
+      createNewImage();
+    } else if (promptId !== undefined && promptId.length > 0) {
       loadPromptHistory();
+    } else {
+      setPromptTitle("new");
     }
-    setPromptTitle("new");
   }, [promptId]);
 
+  async function createNewText() {
+    const response = await Api({
+      path: `prompt?type=TEXT`,
+      method: "POST",
+      token: localStorage.getItem("token") as string,
+    });
+    setPromptId(await response.prompt.id);
+  }
+
+  async function createNewImage() {
+    const response = await Api({
+      path: `prompt?type=IMAGE`,
+      method: "POST",
+      token: localStorage.getItem("token") as string,
+    });
+    console.log(await response.prompt.id);
+    setPromptId(await response.prompt.id);
+  }
   async function loadPromptHistory() {
     setTextPrompt({
       answer: "",

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { PromptContext } from "../../context/PromptContext";
 import Api from "../../api/Api";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
@@ -64,12 +63,13 @@ export default function TextPrompt({
     //fetch prompt output:
     setPromptOutputLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-prompt?prompt=${userPrompt}`,
+      path: `prompt/get-improved-prompt?prompt=${userPrompt}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-    // console.log(await response);
+    console.log(await response);
     setPromptOutputLoading(false);
+
     const responseString = await response.prompt.output;
     setCurrentPromptId(await response.prompt.id);
 
@@ -84,10 +84,11 @@ export default function TextPrompt({
     // }
     setImprovedPromptLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${currentPromptId}`,
+      path: `prompt/get-improved-answer?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
+    console.log(await response);
 
     setImprovedPromptLoading(false);
     const responseString = await response.promptAnswer.output;

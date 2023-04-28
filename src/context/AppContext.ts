@@ -12,6 +12,9 @@ interface AppContextType {
 
   showSidebar: boolean;
   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+
+  historyMode: string;
+  setHistoryMode: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const AppContext = createContext<AppContextType>({
@@ -23,4 +26,6 @@ export const AppContext = createContext<AppContextType>({
   setShowSettings: () => {},
   showSidebar: false,
   setShowSidebar: () => {},
+  historyMode: "",
+  setHistoryMode: () => {}
 });

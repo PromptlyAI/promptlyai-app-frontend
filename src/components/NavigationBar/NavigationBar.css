@@ -79,13 +79,10 @@
   opacity: 0;
 } */
 
-.nav-btn.bottom-border {
-  display: flex;
+.bottom-border {
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  width: 57px;
-  height: 57px;
-  padding-bottom: 10px;
+  align-items: center; */
   border-bottom: solid 7px #3a3a40;
 }
 .bottom-pfp {
