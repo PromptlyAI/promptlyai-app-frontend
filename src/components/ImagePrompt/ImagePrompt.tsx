@@ -109,7 +109,7 @@ export default function ImagePrompt({
     <>
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
         <div>
-          <h1 className="big-title">IMAGE TOOL</h1>
+          <h1 className="big-title">IMAGE PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
             <div
               style={{
