@@ -9,7 +9,6 @@ import ProfileBar from "../../components/ProfileBar/ProfileBar";
 
 import SettingsCollection from "../../components/SettingsCollection/SettingsCollection";
 
-
 interface UserProps {
   name: string;
   email: string;
@@ -99,7 +98,9 @@ export default function SettingsPage() {
               paddingTop: "30px",
             }}
           >
-            <h1 style={{ textAlign: "center" }}>Settings</h1>
+            <div className="center">
+              <h1 style={{ textAlign: "center" }}>Settings</h1>
+            </div>
             <div className="center">
               <div
                 onClick={() => setShowSettings(!showSettings)}
@@ -135,37 +136,29 @@ export default function SettingsPage() {
                 }}
               >
                 <StyledButton
-
                   click={() => setPage("PROFILE")}
                   btnStyle={page === "PROFILE" ? 3 : 2}
-
                   btnWidth={200}
                   btnHeight={65}
                   title="Profile"
                 />
                 <StyledButton
-
                   click={() => setPage("PRIVACY")}
                   btnStyle={page === "PRIVACY" ? 3 : 2}
-
                   btnWidth={200}
                   btnHeight={65}
                   title="Privacy"
                 />
                 <StyledButton
-
                   click={() => setPage("PROMPT")}
                   btnStyle={page === "PROMPT" ? 3 : 2}
-
                   btnWidth={200}
                   btnHeight={65}
                   title="Prompt"
                 />
                 <StyledButton
-
                   click={() => setPage("BILLING")}
                   btnStyle={page === "BILLING" ? 3 : 2}
-
                   btnWidth={200}
                   btnHeight={65}
                   title="Billing"
@@ -173,18 +166,14 @@ export default function SettingsPage() {
               </div>
               <div className="settings-bottom-collection">
                 <StyledButton
-
                   click={() => navigate("/admin")}
-
                   btnStyle={4}
                   btnWidth={200}
                   btnHeight={60}
                   title="ADMIN TOOLS"
                 />
                 <StyledButton
-
                   click={() => logout()}
-
                   btnStyle={4}
                   btnWidth={200}
                   btnHeight={60}
@@ -195,7 +184,6 @@ export default function SettingsPage() {
           </div>
         </div>
         <SettingsCollection userInfo={userInfo} page={page} />
-
       </div>
     </div>
   );
