@@ -101,7 +101,7 @@ export default function TextPrompt({
       {/* {promptType !== "IMAGE" && ( */}
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
         <div>
-          <h1 className="big-title">PROMPT TOOL</h1>
+          <h1 className="big-title">TEXT PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
             <div
               style={{
