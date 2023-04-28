@@ -7,7 +7,10 @@ import Logo from '../../images/PromptlyLogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function RegisterPage() {
+  const [name, setName] = useState<string>('')
+
   const [email, setEmail] = useState<string>('')
+  
   const [password, setPassword] = useState<string>('')
 
   const [loginFailed, setLoginFailed] = useState<boolean>(false)
@@ -15,9 +18,15 @@ export default function RegisterPage() {
 
   const navigate = useNavigate()
 
-  async function login(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function register(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     ev.preventDefault()
     setLoading(true)
+    const registerResponse = await Api({
+      path: 'user/register',
+      method: 'POST',
+      bodyParams: { name, email, password },
+    })
+
     const response = await Api({
       path: 'user/login',
       method: 'POST',
@@ -42,8 +51,8 @@ export default function RegisterPage() {
 
   async function forgotPassword() {}
   return (
-    <div className="login-page-container">
-      <div className="login-page">
+    <div className="register-page-container">
+      <div className="register-page">
         <div>
           <div className="center">
             <img className="logo" src={Logo} alt="" />
@@ -63,7 +72,7 @@ export default function RegisterPage() {
                 gap: '5px',
               }}
             >
-              <h1>Login</h1>
+              <h1>Register</h1>
               {loginFailed && (
                 <div style={{ height: '25px' }}>
                   <span style={{ color: 'red' }}>
@@ -71,9 +80,28 @@ export default function RegisterPage() {
                   </span>
                 </div>
               )}
+              <div style={{ display: 'flex', width: '200px' }}>
+                <label className="register-label" htmlFor="">
+                  Enter name
+                </label>
+              </div>
+              <div
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <input
+                  className="register-input"
+                  type="text"
+                  value={name}
+                  onChange={(ev) => setName(ev.target.value)}
+                />
+              </div>
 
               <div style={{ display: 'flex', width: '200px' }}>
-                <label className="login-label" htmlFor="">
+                <label className="register-label" htmlFor="">
                   Enter email
                 </label>
               </div>
@@ -85,7 +113,7 @@ export default function RegisterPage() {
                 }}
               >
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="text"
                   value={email}
                   onChange={(ev) => setEmail(ev.target.value)}
@@ -93,7 +121,7 @@ export default function RegisterPage() {
               </div>
 
               <div style={{ display: 'flex', width: '200px' }}>
-                <label className="login-label" htmlFor="">
+                <label className="register-label" htmlFor="">
                   Enter password
                 </label>
               </div>
@@ -105,14 +133,14 @@ export default function RegisterPage() {
                 }}
               >
                 <input
-                  className="login-input"
+                  className="register-input"
                   type="password"
                   value={password}
                   onChange={(ev) => setPassword(ev.target.value)}
                 />
               </div>
               <div>
-                <label className="login-label" htmlFor="">
+                <label className="register-label" htmlFor="">
                   Don’t have an account?{' '}
                   <Link className="register-button" to="/register">
                     Sign up
@@ -126,7 +154,7 @@ export default function RegisterPage() {
                   height: '40px',
                 }}
                 className="loggin-btn"
-                onClick={(ev) => login(ev)}
+                onClick={(ev) => register(ev)}
               >
                 {loading ? (
                   <div className="center">

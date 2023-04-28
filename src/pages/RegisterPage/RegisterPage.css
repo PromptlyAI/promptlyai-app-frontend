@@ -1,4 +1,4 @@
-.login-page-container {
+.register-page-container {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -9,9 +9,10 @@
   }
   h1 {
     width: max-content;
+    color: white;
   }
   
-  .login-page {
+  .register-page {
     width: 663px;
     height: 511px;
     background: #43434e;
@@ -32,17 +33,17 @@
   font-size: 23px;
     text-decoration: none;
   }
-  .login-label {
+  .register-label {
     text-align: left;
     font-weight: 600;
   font-size: 22px;
   line-height: 27px;
   }
-  .login-inputs h1 {
+  .register-inputs h1 {
     color: white;
     text-align: center;
   }
-  .login-inputs {
+  .register-inputs {
     position: relative;
     background: var(--primary-gray);
     padding: 35px;
@@ -55,7 +56,7 @@
     display: flex;
     flex-direction: column;
   }
-  .login-input {
+  .register-input {
     height: 28px;
     width: 100%;
     padding: 5px;
