@@ -5,6 +5,7 @@ import "./SettingsPage.css";
 import { useNavigate } from "react-router";
 import Logo from "../../images/PromptlyLogo.png";
 import { AppContext } from "../../context/AppContext";
+import ProfileBar from "../../components/ProfileBar/ProfileBar";
 
 interface UserProps {
   name: string;
@@ -84,211 +85,98 @@ export default function SettingsPage() {
   return (
     <div className="setting-page-container">
       <div className="setting-container">
-        <div style={{ display: "flex" }}>
-          <div className="settings-topbar">
-            <img src={Logo} alt="" />
-          </div>
-          <StyledButton
-            click={() => setShowSettings(false)}
-            title="Back"
-            btnWidth={240}
-            btnHeight={50}
-            btnStyle={3}
-          />
-        </div>
-
-        <div
-          style={{
-            pointerEvents: "none",
-            position: "absolute",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div>
-            <h1>Profile Settings</h1>
-            <h2>Settings are automatically saved!</h2>
-          </div>
-        </div>
-
-        <div
-          style={{
-            height: "",
-            display: "flex",
-            padding: "50px",
-            flexDirection: "column",
-            gap: "20px",
-          }}
-        >
-          <div className="settings-info">
-            <h1 style={{ textAlign: "left", fontSize: "35px" }}>
-              User Settings
-            </h1>
-            <div
-              style={{
-                display: "flex",
-                width: "800px",
-                gap: "20px",
-              }}
-            >
-              <div style={{ minWidth: "180px" }}>
-                <label style={{ fontSize: "35px" }} htmlFor="">
-                  Username
-                </label>
+        <div className="settings-sidebar">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "30px",
+              paddingTop: "30px",
+            }}
+          >
+            <h1>Settings</h1>
+            <div className="center">
+              <div
+                onClick={() => setShowSettings(!showSettings)}
+                className="settings-profile-picture"
+              >
+                {userInfo?.name?.charAt(0).toUpperCase()}
               </div>
-
-              <input
-                type="text"
-                className="settings-input"
-                value={userInfo ? userInfo.name : ""}
-              />
-              <StyledButton
-                click={() => setShowSettings(false)}
-                title="Change"
-                btnWidth={140}
-                btnHeight={40}
-                btnStyle={3}
-              />
             </div>
-
             <div
               style={{
+                height: "200px",
                 display: "flex",
-                width: "500px",
-                gap: "20px",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <div style={{ minWidth: "180px" }}>
-                <label style={{ fontSize: "35px" }} htmlFor="">
-                  Email
-                </label>
-              </div>
-              <input
-                type="text"
-                className="settings-input"
-                value={userInfo ? userInfo.email : ""}
-              />
               <StyledButton
                 click={() => setShowSettings(false)}
-                title="Update"
-                btnWidth={140}
-                btnHeight={40}
                 btnStyle={3}
+                btnWidth={200}
+                btnHeight={65}
+                title="Back"
               />
             </div>
           </div>
-          <div>
-            <StyledButton
-              click={() => setShowChangePassword(true)}
-              btnHeight={50}
-              btnWidth={100}
-              btnStyle={3}
-              title="Change password"
-            />
-          </div>
-          <div className="setting-bottom-buttons">
-            <StyledButton
-              click={() => logout()}
-              btnWidth={250}
-              btnStyle={4}
-              title="Logout"
-            />
-            <StyledButton
-              click={() => setShowWarning(true)}
-              btnStyle={4}
-              btnWidth={250}
-              title="Delete Account"
-            />
-            {userInfo?.role === "ADMIN" && (
-              <StyledButton
-                btnStyle={4}
-                btnWidth={250}
-                title="Admin tools"
-                click={() => {
-                  navigate("/admin");
+          <div className="center">
+            <div className="settings-button-collection">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
                 }}
-              />
-            )}
+              >
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={65}
+                  title="Profile"
+                />
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={65}
+                  title="Privacy"
+                />
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={65}
+                  title="Prompt"
+                />
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={3}
+                  btnWidth={200}
+                  btnHeight={65}
+                  title="Billing"
+                />
+              </div>
+              <div className="settings-bottom-collection">
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={4}
+                  btnWidth={200}
+                  btnHeight={60}
+                  title="ADMIN TOOLS"
+                />
+                <StyledButton
+                  click={() => setShowSettings(false)}
+                  btnStyle={4}
+                  btnWidth={200}
+                  btnHeight={60}
+                  title="Logout"
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* {showChangePassword && (
-          <div className="delete-warning-container">
-            <div className="delete-warning">
-              <h2>Change Password</h2>
-              <div className="center">
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "20px",
-                    gap: "20px",
-                    width: "90%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <label style={{ fontSize: "20px" }} htmlFor="">
-                      New password
-                    </label>
-                    <StyledInput
-                      title={newPassword}
-                      change={(ev) => setNewPassword(ev.target.value)}
-                      inpHeight={20}
-                      inpWidht={200}
-                      inpStyle={1}
-                    />
-                  </div>
-
-                  <StyledButton
-                    click={() => changePassword()}
-                    btnHeight={50}
-                    btnStyle={3}
-                    title="Change password"
-                  />
-                  <StyledButton
-                    click={() => setShowChangePassword(false)}
-                    btnStyle={5}
-                    title="Back"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {showWarning && (
-          <div className="delete-warning-container">
-            <div className="delete-warning">
-              <h2>Are you sure</h2>
-              <h3>Do you really want to delete your account?</h3>
-              <div className="center">
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "20px",
-                    gap: "20px",
-                    width: "90%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <StyledButton
-                    click={() => setShowWarning(false)}
-                    btnStyle={5}
-                    title="Do not delete"
-                  />
-                  <StyledButton
-                    click={() => deleteAccount()}
-                    btnStyle={4}
-                    title="Delete Account"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )} */}
       </div>
     </div>
   );
