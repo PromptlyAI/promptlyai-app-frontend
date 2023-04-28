@@ -85,7 +85,8 @@ export default function SideBar() {
   }, []);
   useEffect(() => {
     if (reloadHistory === true) {
-      fastReload();
+      // fastReload();
+      getPromptHistory();
       setReloadHistory(false);
     }
   }, [reloadHistory]);
@@ -202,26 +203,34 @@ export default function SideBar() {
               justifyContent: "space-around",
             }}
           >
-            {historyMode === "TEXT" ? (
-              <StyledButton
-                click={() => pressModeBtn("newText")}
-                title="new prompt"
-                btnStyle={2}
-                btnWidth={130}
-                btnHeight={50}
-              />
-            ) : (
-              <StyledButton
-                click={() => pressModeBtn("newImage")}
-                title="new image"
-                btnStyle={2}
-                btnWidth={130}
-                btnHeight={50}
-              />
-            )}
+            <div
+              style={{
+                height: "70px",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <label htmlFor="">PROMPT HISTORY</label>
+              {historyMode === "TEXT" ? (
+                <button
+                  className="new-prompt-btn"
+                  onClick={() => pressModeBtn("newText")}
+                >
+                  NEW PROMPT
+                </button>
+              ) : (
+                <button
+                  className="new-prompt-btn"
+                  onClick={() => pressModeBtn("newImage")}
+                >
+                  NEW PROMPT
+                </button>
+              )}
+            </div>
           </div>
 
-          <label htmlFor="">PROMPT HISTORY</label>
           <div
             style={{
               position: "relative",

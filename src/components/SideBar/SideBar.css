@@ -151,3 +151,13 @@ label {
   color: white;
   background: var(--button-color);
 }
+.new-prompt-btn {
+  cursor: pointer;
+  width: 120px;
+  height: 34px;
+  background: #777777;
+  border: none;
+  border-radius: 6px;
+  font-weight: 100;
+  color: white;
+}

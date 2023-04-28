@@ -19,6 +19,7 @@ export default function NavigationBar() {
     historyMode,
     setHistoryMode,
     setReloadHistory,
+    setPromptId,
   } = useContext(AppContext);
 
   const [userName, setUserName] = useState<string>("");
@@ -39,6 +40,7 @@ export default function NavigationBar() {
   }, []);
 
   function changeMode(type: string) {
+    setPromptId("");
     setHistoryMode(type);
     setReloadHistory(true);
   }
