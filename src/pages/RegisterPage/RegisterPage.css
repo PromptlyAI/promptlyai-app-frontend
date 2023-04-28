@@ -26,7 +26,7 @@
   .logo {
     margin-bottom: 40px;
   }
-  .register-button {
+  .login-button {
     bottom: 40px;
     color: var(--light-blue);
    font-weight: bolder;
