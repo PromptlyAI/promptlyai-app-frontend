@@ -4,15 +4,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #43434e;
+  background-color: var(--background);
   opacity: 0.9;
-  
+}
+h1 {
+  width: max-content;
 }
 
 .login-page {
   width: 663px;
   height: 511px;
-  background: red;
+  background: #43434e;
   border-radius: 28px;
   display: flex;
   flex-direction: column;
@@ -25,12 +27,16 @@
 }
 .register-button {
   bottom: 40px;
-  color: white;
-  text-align: center;
+  color: var(--light-blue);
+ font-weight: bolder;
+font-size: 23px;
+  text-decoration: none;
 }
 .login-label {
   text-align: left;
-  font-size: 18px;
+  font-weight: 600;
+font-size: 22px;
+line-height: 27px;
 }
 .login-inputs h1 {
   color: white;
@@ -51,10 +57,17 @@
 }
 .login-input {
   height: 28px;
-  width: 200px;
+  width: 100%;
   padding: 5px;
   border-radius: 10px;
   font-size: 15px;
+  background: rgba(34, 37, 41, 0.5);
+  border-radius: 0px;
+  border: none;
+  color: rgba(148, 148, 148, 1);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
 }
 .loggin-btn {
   cursor: pointer;
@@ -63,5 +76,5 @@
   border: solid white 2px;
   font-size: 20px;
   color: white;
-  border-radius: 10px;
+  border: none;
 }
