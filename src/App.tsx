@@ -10,16 +10,13 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import IntroPage from "./pages/IntroPage/IntroPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
-import { PromptContext } from "./context/PromptContext";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
-import { SidebarContext } from "./context/SidebarContext";
 import Popup from "./components/Popup/popup";
-import { SettingsContext } from "./context/SettingsContext";
-import { ReloadHistoryContext } from "./context/ReloadHistoryContext";
 import { AppContext } from "./context/AppContext";
 
 function App() {
   const [promptId, setPromptId] = useState<string>("");
+  const [historyMode, setHistoryMode] = useState<string>("TEXT");
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [reloadHistory, setReloadHistory] = useState<boolean>(false);
@@ -36,6 +33,8 @@ function App() {
                     value={{
                       reloadHistory,
                       setReloadHistory,
+                      historyMode,
+                      setHistoryMode,
                       showSettings,
                       setShowSettings,
                       showSidebar,
@@ -48,23 +47,6 @@ function App() {
                     <SideBar />
                     <PromptPage />
                   </AppContext.Provider>
-                  {/* <ReloadHistoryContext.Provider
-                    value={{ reloadHistory, setReloadHistory }}
-                  >
-                    <SettingsContext.Provider
-                      value={{ showSettings, setShowSettings }}
-                    >
-                      <SidebarContext.Provider
-                        value={{ showSidebar, setShowSidebar }}
-                      >
-                        <PromptContext.Provider
-                          value={{ promptId, setPromptId }}
-                        >
-
-                        </PromptContext.Provider>
-                      </SidebarContext.Provider>
-                    </SettingsContext.Provider>
-                  </ReloadHistoryContext.Provider> */}
                 </>
               }
             />

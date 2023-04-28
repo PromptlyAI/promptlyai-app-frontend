@@ -7,14 +7,19 @@ import MenuBtn from "../../images/MenuBtn.png";
 import { useNavigate } from "react-router";
 import Api from "../../api/Api";
 import { RxExit } from "react-icons/rx";
-import { SidebarContext } from "../../context/SidebarContext";
 import SettingsPage from "../../pages/SettingsPage/SettingsPage";
-import { SettingsContext } from "../../context/SettingsContext";
 import { AppContext } from "../../context/AppContext";
 
 export default function NavigationBar() {
-  const { showSidebar, setShowSidebar } = useContext(AppContext);
-  const { showSettings, setShowSettings } = useContext(AppContext);
+  const {
+    showSidebar,
+    setShowSidebar,
+    showSettings,
+    setShowSettings,
+    historyMode,
+    setHistoryMode,
+    setReloadHistory,
+  } = useContext(AppContext);
 
   const [userName, setUserName] = useState<string>("");
   const navigate = useNavigate();
@@ -33,9 +38,13 @@ export default function NavigationBar() {
     getUserInfo();
   }, []);
 
+  function changeMode(type: string) {
+    setHistoryMode(type);
+    setReloadHistory(true);
+  }
+
   return (
     <>
-      {/* {showSettings && <SettingsPage />} */}
       <div className="navigation-bar-main-container">
         <div
           onClick={() => setRotate(!rotate)}
@@ -48,14 +57,26 @@ export default function NavigationBar() {
         </div>
         <div className="nav-btn-container">
           <div
-            style={{ background: "#605C9D", borderRadius: "13px" }}
+            style={{
+              background: historyMode === "TEXT" ? "#605C9D" : "transparent",
+              borderRadius: "13px",
+            }}
             className="nav-btn"
+            onClick={() => changeMode("TEXT")}
           >
             <img src={Search} alt="" />
           </div>
-          <div className="nav-btn bottom-border">
+          <div
+            style={{
+              background: historyMode === "IMAGE" ? "#605C9D" : "transparent",
+              borderRadius: "13px",
+            }}
+            className="nav-btn"
+            onClick={() => changeMode("IMAGE")}
+          >
             <img src={ImgBox} alt="" />
           </div>
+          <div className="bottom-border"></div>
           <div
             style={{
               background: showSidebar ? "#605C9D" : "transparent",

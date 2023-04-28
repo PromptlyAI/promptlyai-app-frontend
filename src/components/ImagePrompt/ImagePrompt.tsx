@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { PromptContext } from "../../context/PromptContext";
 import Api from "../../api/Api";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
@@ -24,7 +23,7 @@ export default function ImagePrompt({
   setImagePrompt,
   setPromptTitle,
 }: IProps) {
-  const { reloadHistory, setReloadHistory } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory, promptId } = useContext(AppContext);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -42,10 +41,11 @@ export default function ImagePrompt({
 
   const textSpeed = 4;
 
+  const [startImage, setStartImage] = useState<boolean>(false);
+
   useEffect(() => {
     setUserPrompt(imagePrompt.input);
     setPromptOutput(imagePrompt.output);
-
     setImageUrl(imagePrompt.url);
   }, [imagePrompt]);
 
@@ -58,7 +58,7 @@ export default function ImagePrompt({
   async function fetchImprovedImagePrompt() {
     setPromptOutputLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-image-prompt?prompt=${userPrompt}&promptId=${currentPromptId}`,
+      path: `prompt/get-improved-image-prompt?prompt=${userPrompt}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
@@ -74,28 +74,37 @@ export default function ImagePrompt({
 
     setReloadHistory(true);
 
-    // set(await response.image_url);
+    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
 
   async function fetchImage() {
     setImageLoading(true);
     setImprovedPromptLoading(true);
     const response = await Api({
-      path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${currentPromptId}`,
+      path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
     setImprovedPromptLoading(false);
-    console.log(await response);
-    setImageUrl(await response.image_url);
+    const data = await response.image_url;
+    // setImageUrl(data);
 
-    await runTextAnimation(userPrompt, setPromptTitle, 55);
+    testing(data);
   }
 
   const handleDownload = () => {
     window.open(imageUrl);
   };
 
+  function testing(url: string) {
+    setTimeout(() => {
+      setImageUrl(url);
+    }, 1000);
+  }
+
+  useEffect(() => {
+    console.log(imageUrl);
+  }, [imageUrl]);
   return (
     <>
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
@@ -122,11 +131,11 @@ export default function ImagePrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!promptOutputLoading) {
+                    if (!promptOutputLoading && !improvedPromptLoading) {
                       fetchImprovedImagePrompt();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={improvedPromptLoading ? 2 : 3}
                   btnWidth={200}
                   btnHeight={50}
                   title="Improve"
@@ -153,11 +162,11 @@ export default function ImagePrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!improvedPromptLoading) {
+                    if (!improvedPromptLoading && promptOutput) {
                       fetchImage();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={promptOutput ? 3 : 2}
                   btnWidth={200}
                   btnHeight={50}
                   title="Generate"
@@ -200,7 +209,7 @@ export default function ImagePrompt({
                   alignItems: "center",
                 }}
               >
-                {imageUrl && (
+                {imageUrl.length > 0 && (
                   <>
                     {imageLoading && (
                       <div className="image-load-placeholder"></div>
