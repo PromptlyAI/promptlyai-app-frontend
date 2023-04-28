@@ -173,13 +173,15 @@ export default function PromptTool() {
                 <div className="loader"></div>
               </div>
             ) : (
-              <h1>
-                {promptTitle
-                  ? promptTitle.length > 31
-                    ? `${promptTitle.slice(0, 31)}...`
-                    : promptTitle
-                  : "new"}
-              </h1>
+              <div className="center">
+                <h1>
+                  {promptTitle
+                    ? promptTitle.length > 31
+                      ? `${promptTitle.slice(0, 31)}...`
+                      : promptTitle
+                    : "new"}
+                </h1>
+              </div>
             )}
           </div>
           <div
