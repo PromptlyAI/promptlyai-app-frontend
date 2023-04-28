@@ -4,6 +4,8 @@ import Api from "../../api/Api";
 import runTextAnimation from "../../functions/runTextAnimation";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
+import "./ImagePrompt.css";
+import { AppContext } from "../../context/AppContext";
 
 interface ImagePromptProps {
   input: string;
@@ -22,6 +24,8 @@ export default function ImagePrompt({
   setImagePrompt,
   setPromptTitle,
 }: IProps) {
+  const { reloadHistory, setReloadHistory } = useContext(AppContext);
+
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
   const [improvedPrompt, setImprovedPrompt] = useState<string>("");
@@ -34,6 +38,7 @@ export default function ImagePrompt({
     useState<boolean>(false);
 
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
 
   const textSpeed = 4;
 
@@ -43,6 +48,12 @@ export default function ImagePrompt({
 
     setImageUrl(imagePrompt.url);
   }, [imagePrompt]);
+
+  useEffect(() => {
+    if (imageUrl !== "") {
+      setImageLoading(true);
+    }
+  }, [imageUrl]);
 
   async function fetchImprovedImagePrompt() {
     setPromptOutputLoading(true);
@@ -60,10 +71,14 @@ export default function ImagePrompt({
     await runTextAnimation(responseString, setPromptOutput, textSpeed);
 
     setPromptOutputLoading(false);
+
+    setReloadHistory(true);
+
     // set(await response.image_url);
   }
 
   async function fetchImage() {
+    setImageLoading(true);
     setImprovedPromptLoading(true);
     const response = await Api({
       path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${currentPromptId}`,
@@ -73,7 +88,14 @@ export default function ImagePrompt({
     setImprovedPromptLoading(false);
     console.log(await response);
     setImageUrl(await response.image_url);
+
+    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
+
+  const handleDownload = () => {
+    window.open(imageUrl);
+  };
+
   return (
     <>
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
@@ -179,21 +201,23 @@ export default function ImagePrompt({
                 }}
               >
                 {imageUrl && (
-                  <img
-                    style={{ width: "500px", height: "500px" }}
-                    src={imageUrl}
-                    alt=""
-                  />
+                  <>
+                    {imageLoading && (
+                      <div className="image-load-placeholder"></div>
+                    )}
+                    <img
+                      onLoad={() => setImageLoading(false)}
+                      style={{
+                        width: "500px",
+                        height: "500px",
+                        display: imageLoading ? "none" : "flex",
+                      }}
+                      src={imageUrl}
+                      alt=""
+                    />
+                  </>
                 )}
               </div>
-              {/* <StyledInput
-                inpWidht={750}
-                inpHeight={850}
-                inpStyle={1}
-                title={improvedPrompt}
-                change={(ev) => setImprovedPrompt(ev.target.value)}
-                placeHolder="Your generated output will appear here..."
-              /> */}
               <div
                 style={{
                   width: "100%",
@@ -203,18 +227,18 @@ export default function ImagePrompt({
                 }}
               >
                 <StyledButton
-                  click={() => {}}
+                  click={() => handleDownload()}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}
-                  title="SAVE"
+                  title="OPEN"
                 />
                 <StyledButton
-                  click={() => navigator.clipboard.writeText(improvedPrompt)}
+                  click={() => navigator.clipboard.writeText(imageUrl)}
                   btnStyle={3}
                   btnWidth={200}
                   btnHeight={50}
-                  title="COPY"
+                  title="COPY-URL"
                 />
               </div>
             </div>

@@ -9,6 +9,7 @@ import { PromptContext } from "../../context/PromptContext";
 import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import { SidebarContext } from "../../context/SidebarContext";
 import TrashBlack from "../../images/TrashBlack.png";
+import { AppContext } from "../../context/AppContext";
 interface buttonProps {
   input: string;
   path?: string;
@@ -20,12 +21,15 @@ interface buttonProps {
 }
 
 export default function SideBar() {
-  const { setPromptId, promptId } = useContext(PromptContext);
-  const { showSidebar, setShowSidebar } = useContext(SidebarContext);
+  const { setPromptId, promptId } = useContext(AppContext);
+  const { showSidebar, setShowSidebar } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory } = useContext(AppContext);
 
   const [promptHistory, setPromptHistory] = useState<buttonProps[]>(() => []);
   const [promptHistoryLoading, setPromptHistoryLoading] =
     useState<boolean>(false);
+  const [clearLoading, setClearLoading] = useState<boolean>(false);
+
   const [modes, setModes] = useState<buttonProps[]>(() => [
     {
       input: "PROMPT-EDITOR",
@@ -71,6 +75,29 @@ export default function SideBar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  useEffect(() => {
+    if (reloadHistory === true) {
+      fastReload();
+      setReloadHistory(false);
+    }
+  }, [reloadHistory]);
+
+  async function fastReload() {
+    const response = await Api({
+      path: "prompt/prompts",
+      method: "GET",
+      token: localStorage.getItem("token") as string,
+    });
+
+    const arr: buttonProps[] = await response.map((item: any) => ({
+      input: item.input,
+      id: item.id,
+      pressed: false,
+      type: item.type,
+    }));
+
+    setPromptHistory([...arr]);
+  }
 
   async function getPromptHistory() {
     setPromptHistoryLoading(true);
@@ -114,7 +141,6 @@ export default function SideBar() {
     //   btn.id === _id ? (btn.pressed = true) : (btn.pressed = false)
     // );
     // setModes(arr);
-
     setPromptId(_id);
 
     //deselect all history buttons
@@ -136,10 +162,24 @@ export default function SideBar() {
         promptId: _id,
       },
     });
+    console.log(await response);
 
-    const a = arr.filter((btn) => btn.id !== _id);
-    setPromptHistory(a);
+    const newArr = arr.filter((btn) => btn.id !== _id);
+    setPromptHistory(newArr);
   }
+
+  async function clearPromptHistory() {
+    setClearLoading(true);
+    const response = await Api({
+      path: "prompt/all",
+      method: "DELETE",
+      token: localStorage.getItem("token") as string,
+    });
+    console.log(await response);
+    setClearLoading(false);
+    setPromptHistory([]);
+  }
+
   return (
     <div className="side-bar-container">
       <div
@@ -242,15 +282,23 @@ export default function SideBar() {
               <div className="bottom-gradient"></div>
               <div className="clear-history-container">
                 <button
-                  onClick={() => console.log("illa.se")}
+                  onClick={() => clearPromptHistory()}
                   className="clear-btn"
                   style={{ width: bigBtnsSize, height: "56px" }}
                 >
-                  <img
-                    style={{ position: "absolute", left: "15px" }}
-                    src={TrashBlack}
-                  />
-                  CLEAR PROMPT-HISTORY
+                  {clearLoading ? (
+                    <div className="center">
+                      <div className="loader"></div>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        style={{ position: "absolute", left: "15px" }}
+                        src={TrashBlack}
+                      />
+                      CLEAR PROMPT-HISTORY
+                    </>
+                  )}
                 </button>
               </div>
             </div>

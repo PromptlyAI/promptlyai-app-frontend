@@ -96,6 +96,7 @@
   bottom: 50px;
 }
 .profile-picture {
+  border: solid 5px white;
   font-family: "Roboto", sans-serif;
   background: var(--button-color);
   display: flex;

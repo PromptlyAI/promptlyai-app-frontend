@@ -1,14 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import runTextAnimation from "../../functions/runTextAnimation";
-import StyledButton from "../../shared/ButtonStyles/StyledButton";
-import StyledInput from "../../shared/input-styles/StyledInput";
 import "./PromptTool.css";
-import ButtonCollection from "../../shared/ButtonStyles/ButtonCollection";
-import UpgradeButton from "../UpgradeSection/UpgradeSection";
 import Api from "../../api/Api";
-import { useNavigate } from "react-router";
 import Popup from "../Popup/popup";
-import { PromptContext } from "../../context/PromptContext";
 
 import BookWhite from "../../images/BookWhite.png";
 import TrashWhite from "../../images/TrashWhite.png";
@@ -17,6 +10,8 @@ import PromptlyLogo from "../../images/PromptlyLogo.png";
 import LoginCheck from "../../shared/LoginCheck/LoginCheck";
 import TextPrompt from "../TextPrompt/TextPrompt";
 import ImagePrompt from "../ImagePrompt/ImagePrompt";
+import SettingsPage from "../../pages/SettingsPage/SettingsPage";
+import { AppContext } from "../../context/AppContext";
 
 interface TextPromptProps {
   answer: string;
@@ -30,7 +25,8 @@ interface ImagePromptProps {
 }
 
 export default function PromptTool() {
-  const { promptId } = useContext(PromptContext);
+  const { promptId } = useContext(AppContext);
+  const { showSettings, setShowSettings } = useContext(AppContext);
 
   const [promptTitle, setPromptTitle] = useState<string>("");
 
@@ -59,6 +55,10 @@ export default function PromptTool() {
   });
 
   useEffect(() => {
+    setShowSettings(false);
+  }, []);
+
+  useEffect(() => {
     if (LoginCheck()) {
       setNeedToSignIn(true);
       console.log("need to sign in");
@@ -83,21 +83,31 @@ export default function PromptTool() {
         output: "",
         url: "",
       });
-    } else {
-      loadPromptTextHistory();
+    } else if (promptId.length > 0) {
+      loadPromptHistory();
     }
     setPromptTitle("new");
   }, [promptId]);
 
-  async function loadPromptTextHistory() {
+  async function loadPromptHistory() {
+    setTextPrompt({
+      answer: "",
+      input: "",
+      output: "",
+    });
+
+    setImagePrompt({
+      input: "",
+      output: "",
+      url: "",
+    });
+
     setLoadingPrompt(true);
     const response = await Api({
       path: `prompt/get-prompt-info?promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
-
-    console.log(await response);
 
     const type = await response.type;
     if (type === "TEXT") {
@@ -115,45 +125,9 @@ export default function PromptTool() {
       });
       setShowTextPrompt(false);
     }
-
     setPromptTitle(await response.input);
-
     setLoadingPrompt(false);
-    // setImprovedPrompt(await response.answer);
-    // setUserPrompt(await response.input);
-    //check if prompt is a image or prompt:
-    // if ((await response.type) === "Image") {
-    //   setPromptOutput("");
-    //   setImageUrl(await response.type);
-    // } else {
-    //   setImageUrl("");
-    //   setPromptOutput(await response.output);
-    // }
   }
-  // async function loadPromptImageHistory() {
-  //   setLoadingPrompt(true);
-  //   const response = await Api({
-  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
-  //     method: "GET",
-  //     token: localStorage.getItem("token") as string,
-  //   });
-  //   setImagePrompt({
-  //     answer: await response.answer,
-  //     input: await response.input,
-  //     url: await response.output,
-  //   });
-  //   setPromptTitle(await response.answer);
-  //   setLoadingPrompt(false);
-  // }
-  // async function checkType() {
-  //   console.log(promptId);
-  //   const response = await Api({
-  //     path: `prompt/get-prompt-info?promptId=${promptId}`,
-  //     method: "GET",
-  //     token: localStorage.getItem("token") as string,
-  //   });
-  //   setPromptType(await response.type);
-  // }
 
   return (
     <div>
@@ -203,7 +177,9 @@ export default function PromptTool() {
         </div>
       </div>
       <div className="prompt-tool-container">
-        <Popup displayPopup={needToSignIn} />
+        {showSettings && <SettingsPage />}
+        {needToSignIn && <Popup />}
+
         {showTextPrompt ? (
           <TextPrompt
             textPrompt={textPrompt}
