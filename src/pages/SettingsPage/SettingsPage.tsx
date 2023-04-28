@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import Logo from "../../images/PromptlyLogo.png";
 import { AppContext } from "../../context/AppContext";
 import ProfileBar from "../../components/ProfileBar/ProfileBar";
+import SettingsCollection from "../../components/SettingsCollection/SettingsCollection";
 
 interface UserProps {
   name: string;
@@ -25,6 +26,8 @@ export default function SettingsPage() {
 
   const { showSettings, setShowSettings } = useContext(AppContext);
   const navigate = useNavigate();
+
+  const [page, setPage] = useState<string>("PROFILE");
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -130,29 +133,29 @@ export default function SettingsPage() {
                 }}
               >
                 <StyledButton
-                  click={() => setShowSettings(false)}
-                  btnStyle={3}
+                  click={() => setPage("PROFILE")}
+                  btnStyle={page === "PROFILE" ? 3 : 2}
                   btnWidth={200}
                   btnHeight={65}
                   title="Profile"
                 />
                 <StyledButton
-                  click={() => setShowSettings(false)}
-                  btnStyle={3}
+                  click={() => setPage("PRIVACY")}
+                  btnStyle={page === "PRIVACY" ? 3 : 2}
                   btnWidth={200}
                   btnHeight={65}
                   title="Privacy"
                 />
                 <StyledButton
-                  click={() => setShowSettings(false)}
-                  btnStyle={3}
+                  click={() => setPage("PROMPT")}
+                  btnStyle={page === "PROMPT" ? 3 : 2}
                   btnWidth={200}
                   btnHeight={65}
                   title="Prompt"
                 />
                 <StyledButton
-                  click={() => setShowSettings(false)}
-                  btnStyle={3}
+                  click={() => setPage("BILLING")}
+                  btnStyle={page === "BILLING" ? 3 : 2}
                   btnWidth={200}
                   btnHeight={65}
                   title="Billing"
@@ -160,14 +163,14 @@ export default function SettingsPage() {
               </div>
               <div className="settings-bottom-collection">
                 <StyledButton
-                  click={() => setShowSettings(false)}
+                  click={() => navigate("/admin")}
                   btnStyle={4}
                   btnWidth={200}
                   btnHeight={60}
                   title="ADMIN TOOLS"
                 />
                 <StyledButton
-                  click={() => setShowSettings(false)}
+                  click={() => logout()}
                   btnStyle={4}
                   btnWidth={200}
                   btnHeight={60}
@@ -177,6 +180,7 @@ export default function SettingsPage() {
             </div>
           </div>
         </div>
+        <SettingsCollection userInfo={userInfo} page={page} />
       </div>
     </div>
   );

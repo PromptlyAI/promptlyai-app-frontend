@@ -1,0 +1,61 @@
+.main-settings-collection {
+  position: relative;
+  width: 100%;
+  padding: 50px;
+}
+.settings-input {
+  background: var(--secondary-background);
+  border: none;
+  min-width: 300px;
+  padding-left: 9px;
+  height: 41px;
+  font-size: 25px;
+  color: var(--input-text);
+}
+.settings-title {
+  color: white;
+  text-align: left;
+}
+.profile-settings-collection {
+  padding-top: 90px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.profile-privacy-collection {
+  padding-top: 90px;
+  height: 400px;
+  display: flex;
+  gap: 30px;
+}
+.settings-input-row {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+.profile-label {
+  width: 200px;
+  text-align: left;
+}
+.joined-date {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 70px;
+  right: 0;
+  color: var(--input-text);
+  font-size: 20px;
+  font-weight: bolder;
+}
+.big-settings-title {
+  background: rgba(105, 105, 105, 0.053);
+  border-radius: 20px;
+  padding: 50px;
+  position: absolute;
+  transform: rotateZ(30deg);
+  font-size: 100px;
+  color: var(--input-text);
+}
