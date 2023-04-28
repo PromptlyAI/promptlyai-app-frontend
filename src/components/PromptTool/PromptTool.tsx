@@ -210,23 +210,23 @@ export default function PromptTool() {
 
         {promptId && (
           <>
-            {!loadingPrompt && (
-              <>
-                {showTextPrompt ? (
-                  <TextPrompt
-                    textPrompt={textPrompt}
-                    setTextPrompt={setTextPrompt}
-                    setPromptTitle={setPromptTitle}
-                  />
-                ) : (
-                  <ImagePrompt
-                    imagePrompt={imagePrompt}
-                    setImagePrompt={setImagePrompt}
-                    setPromptTitle={setPromptTitle}
-                  />
-                )}
-              </>
-            )}
+            {/* {!loadingPrompt && ( */}
+            <>
+              {showTextPrompt ? (
+                <TextPrompt
+                  textPrompt={textPrompt}
+                  setTextPrompt={setTextPrompt}
+                  setPromptTitle={setPromptTitle}
+                />
+              ) : (
+                <ImagePrompt
+                  imagePrompt={imagePrompt}
+                  setImagePrompt={setImagePrompt}
+                  setPromptTitle={setPromptTitle}
+                />
+              )}
+            </>
+            {/* )} */}
           </>
         )}
       </div>

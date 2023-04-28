@@ -154,11 +154,12 @@ export default function TextPrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!improvedPromptLoading) {
+                    if (!improvedPromptLoading && promptOutput) {
                       fetchFinalOutput();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={promptOutput ? 3 : 2}
+                  unclickable={promptOutput ? false : true}
                   btnWidth={200}
                   btnHeight={50}
                   title="Generate"

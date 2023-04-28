@@ -167,6 +167,7 @@ export default function ImagePrompt({
                     }
                   }}
                   btnStyle={promptOutput ? 3 : 2}
+                  unclickable={promptOutput ? false : true}
                   btnWidth={200}
                   btnHeight={50}
                   title="Generate"

@@ -29,6 +29,7 @@ interface IProps {
   textSize?: number;
   btnType?: string;
   imgIcon?: boolean;
+  unclickable?: boolean;
 }
 
 export default function StyledButton({
@@ -50,6 +51,7 @@ export default function StyledButton({
   textSize,
   btnType = "",
   imgIcon,
+  unclickable,
 }: IProps) {
   return (
     <button
@@ -69,12 +71,13 @@ export default function StyledButton({
           : `btn-style-${btnStyle} btn`
       }
       style={{
+        cursor: unclickable ? "not-allowed" : "cursor",
         minWidth: btnWidth,
         minHeight: btnHeight,
         background: color,
         color: textColor,
         fontSize: textSize,
-        border:"none"
+        border: "none",
       }}
     >
       {imgIcon ? (
