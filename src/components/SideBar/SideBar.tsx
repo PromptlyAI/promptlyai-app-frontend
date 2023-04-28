@@ -205,7 +205,7 @@ export default function SideBar() {
             {historyMode === "TEXT" ? (
               <StyledButton
                 click={() => pressModeBtn("newText")}
-                title="new prompt"
+                title="NEW PROMPT"
                 btnStyle={2}
                 btnWidth={130}
                 btnHeight={50}
@@ -213,7 +213,7 @@ export default function SideBar() {
             ) : (
               <StyledButton
                 click={() => pressModeBtn("newImage")}
-                title="new image"
+                title="NEW PROMPT"
                 btnStyle={2}
                 btnWidth={130}
                 btnHeight={50}
