@@ -13,12 +13,11 @@
   position: relative;
   background: var(--side-black);
   display: flex;
-  flex-direction: column;
   width: 1250px;
   height: 100%;
 }
 .settings-sidebar {
-  width: 380px;
+  width: 480px;
   height: 100%;
   background: var(--nav-bar);
   overflow: hidden;
@@ -48,6 +47,7 @@
   padding-top: 40px;
   width: 80%;
 }
+
 .settings-bottom-collection {
   position: absolute;
   bottom: 100px;

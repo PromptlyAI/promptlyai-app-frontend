@@ -30,6 +30,7 @@ interface IProps {
   btnType?: string;
   imgIcon?: boolean;
   unclickable?: boolean;
+  hover?: boolean;
 }
 
 export default function StyledButton({
@@ -52,6 +53,7 @@ export default function StyledButton({
   btnType = "",
   imgIcon,
   unclickable,
+  hover = true,
 }: IProps) {
   return (
     <button
