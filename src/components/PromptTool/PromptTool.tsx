@@ -76,15 +76,15 @@ export default function PromptTool() {
         input: "",
         output: "",
       });
+      createNewText();
     } else if (promptId === "newImage") {
-      console.log("creating new");
       setShowTextPrompt(false);
       setImagePrompt({
         input: "",
         output: "",
         url: "",
       });
-      createNew();
+      createNewImage();
     } else if (promptId !== undefined && promptId.length > 0) {
       loadPromptHistory();
     } else {
@@ -92,7 +92,16 @@ export default function PromptTool() {
     }
   }, [promptId]);
 
-  async function createNew() {
+  async function createNewText() {
+    const response = await Api({
+      path: `prompt?type=TEXT`,
+      method: "POST",
+      token: localStorage.getItem("token") as string,
+    });
+    setPromptId(await response.prompt.id);
+  }
+
+  async function createNewImage() {
     const response = await Api({
       path: `prompt?type=IMAGE`,
       method: "POST",
