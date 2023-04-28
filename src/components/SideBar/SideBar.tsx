@@ -202,20 +202,23 @@ export default function SideBar() {
               justifyContent: "space-around",
             }}
           >
-            <StyledButton
-              click={() => pressModeBtn("newText")}
-              title="new prompt"
-              btnStyle={2}
-              btnWidth={130}
-              btnHeight={50}
-            />
-            <StyledButton
-              click={() => pressModeBtn("newImage")}
-              title="new image"
-              btnStyle={2}
-              btnWidth={130}
-              btnHeight={50}
-            />
+            {historyMode === "TEXT" ? (
+              <StyledButton
+                click={() => pressModeBtn("newText")}
+                title="new prompt"
+                btnStyle={2}
+                btnWidth={130}
+                btnHeight={50}
+              />
+            ) : (
+              <StyledButton
+                click={() => pressModeBtn("newImage")}
+                title="new image"
+                btnStyle={2}
+                btnWidth={130}
+                btnHeight={50}
+              />
+            )}
           </div>
 
           <label htmlFor="">PROMPT HISTORY</label>
