@@ -123,11 +123,12 @@ export default function TextPrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!promptOutputLoading) {
+                    if (!promptOutputLoading && userPrompt) {
                       fetchImprovedPrompt();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={userPrompt ? 3 : 2}
+                  unclickable={userPrompt ? false : true}
                   btnWidth={200}
                   btnHeight={50}
                   title="Improve"

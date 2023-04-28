@@ -71,7 +71,7 @@ export default function StyledButton({
           : `btn-style-${btnStyle} btn`
       }
       style={{
-        cursor: unclickable ? "not-allowed" : "cursor",
+        cursor: unclickable ? "not-allowed" : "pointer",
         minWidth: btnWidth,
         minHeight: btnHeight,
         background: color,

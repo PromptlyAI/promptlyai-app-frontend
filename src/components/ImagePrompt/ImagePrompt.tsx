@@ -136,6 +136,7 @@ export default function ImagePrompt({
                     }
                   }}
                   btnStyle={improvedPromptLoading ? 2 : 3}
+                  unclickable={improvedPromptLoading ? true : false}
                   btnWidth={200}
                   btnHeight={50}
                   title="Improve"
