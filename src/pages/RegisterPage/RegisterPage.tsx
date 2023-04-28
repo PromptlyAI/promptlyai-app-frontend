@@ -141,9 +141,9 @@ export default function RegisterPage() {
               </div>
               <div>
                 <label className="register-label" htmlFor="">
-                  Don’t have an account?{' '}
+                  Already have an account?{' '}
                   <Link className="register-button" to="/register">
-                    Sign up
+                  Login
                   </Link>
                 </label>
               </div>
