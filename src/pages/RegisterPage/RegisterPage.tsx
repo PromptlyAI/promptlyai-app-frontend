@@ -10,7 +10,7 @@ export default function RegisterPage() {
   const [name, setName] = useState<string>('')
 
   const [email, setEmail] = useState<string>('')
-  
+
   const [password, setPassword] = useState<string>('')
 
   const [loginFailed, setLoginFailed] = useState<boolean>(false)
@@ -54,9 +54,13 @@ export default function RegisterPage() {
     <div className="register-page-container">
       <div className="register-page">
         <div>
-          <div className="center">
-            <img className="logo" src={Logo} alt="" />
-          </div>
+          <img
+            className="logo"
+            style={{ marginBottom: '0px' }}
+            src={Logo}
+            alt=""
+          />
+
           <form
             style={{
               display: 'flex',
@@ -143,7 +147,7 @@ export default function RegisterPage() {
                 <label className="register-label" htmlFor="">
                   Already have an account?{' '}
                   <Link className="login-button" to="/login">
-                  Login
+                    Login
                   </Link>
                 </label>
               </div>
@@ -170,6 +174,4 @@ export default function RegisterPage() {
       </div>
     </div>
   )
-
-   
 }

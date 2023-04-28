@@ -45,9 +45,12 @@ export default function LoginPage() {
     <div className="login-page-container">
       <div className="login-page">
         <div>
-          <div className="center">
-            <img className="logo" src={Logo} alt="" />
-          </div>
+        <img
+            className="logo"
+            style={{ marginBottom: '0px' }}
+            src={Logo}
+            alt=""
+          />
           <form
             style={{
               display: 'flex',
