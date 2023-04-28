@@ -74,7 +74,7 @@ export default function ImagePrompt({
 
     setReloadHistory(true);
 
-    // set(await response.image_url);
+    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
 
   async function fetchImage() {
@@ -88,8 +88,6 @@ export default function ImagePrompt({
     setImprovedPromptLoading(false);
     console.log(await response);
     setImageUrl(await response.image_url);
-
-    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
 
   const handleDownload = () => {
@@ -122,11 +120,11 @@ export default function ImagePrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!promptOutputLoading) {
+                    if (!promptOutputLoading && !improvedPromptLoading) {
                       fetchImprovedImagePrompt();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={improvedPromptLoading ? 2 : 3}
                   btnWidth={200}
                   btnHeight={50}
                   title="Improve"
@@ -153,11 +151,11 @@ export default function ImagePrompt({
               <div>
                 <StyledButton
                   click={() => {
-                    if (!improvedPromptLoading) {
+                    if (!improvedPromptLoading && promptOutput) {
                       fetchImage();
                     }
                   }}
-                  btnStyle={3}
+                  btnStyle={promptOutput ? 3 : 2}
                   btnWidth={200}
                   btnHeight={50}
                   title="Generate"
