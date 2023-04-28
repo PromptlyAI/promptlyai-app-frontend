@@ -1,16 +1,82 @@
-.register-page-container{
+.register-page-container {
     height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
-}
-h1{
+    align-items: center;
+    background-color: var(--background);
+    opacity: 0.9;
+  }
+  h1 {
+    width: max-content;
     color: white;
-    text-align: center;
-}
-.register-inputs{
-    gap: 10px;
-    align-items: center ;
+  }
+  
+  .register-page {
+    width: 663px;
+    height: 511px;
+    background: #43434e;
+    border-radius: 28px;
     display: flex;
     flex-direction: column;
-}
+    justify-content: center;
+    align-items: left;
+  }
+  
+  .logo {
+    margin-bottom: 40px;
+  }
+  .login-button {
+    bottom: 40px;
+    color: var(--light-blue);
+   font-weight: bolder;
+  font-size: 23px;
+    text-decoration: none;
+  }
+  .register-label {
+    text-align: left;
+    font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  }
+  .register-inputs h1 {
+    color: white;
+    text-align: center;
+  }
+  .register-inputs {
+    position: relative;
+    background: var(--primary-gray);
+    padding: 35px;
+  
+    width: 300px;
+    height: 370px;
+    border-radius: 30px;
+    gap: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .register-input {
+    height: 28px;
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+    background: rgba(34, 37, 41, 0.5);
+    border-radius: 0px;
+    border: none;
+    color: rgba(148, 148, 148, 1);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .loggin-btn {
+    cursor: pointer;
+    font-weight: 700;
+    background: var(--button-select-color);
+    border: solid white 2px;
+    font-size: 20px;
+    color: white;
+    border: none;
+  }
+  
