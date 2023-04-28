@@ -165,7 +165,7 @@ export default function RegisterPage() {
                     <div className="loader"></div>
                   </div>
                 ) : (
-                  <>Login</>
+                  <>Register</>
                 )}
               </button>
             </div>
