@@ -11,7 +11,7 @@
 }
 .setting-container {
   position: relative;
-  background: var(--side-black);
+  /* background: var(--side-black); */
   display: flex;
   width: 1250px;
   height: 100%;
