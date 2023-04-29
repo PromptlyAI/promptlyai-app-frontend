@@ -56,7 +56,6 @@ export default function RegisterPage() {
         <div>
           <img
             className="logo"
-            style={{ marginBottom: '0px' }}
             src={Logo}
             alt=""
           />
@@ -70,7 +69,7 @@ export default function RegisterPage() {
           >
             <div
               style={{
-                width: '588px',
+                width: '80%',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '5px',

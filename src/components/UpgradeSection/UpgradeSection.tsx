@@ -21,7 +21,7 @@ export default function UpgradeButton() {
 
   return (
     <div className="upgrade-container">
-      <div className="left-upgrade">
+      <div className="left-upg rade">
         <span> {wordsUsed}/10,000 FREE TOKENS USED</span>
         <div className="words-left-bar-container">
           <div

@@ -45,9 +45,8 @@ export default function LoginPage() {
     <div className="login-page-container">
       <div className="login-page">
         <div>
-        <img
+          <img
             className="logo"
-            style={{ marginBottom: '0px' }}
             src={Logo}
             alt=""
           />
@@ -60,7 +59,7 @@ export default function LoginPage() {
           >
             <div
               style={{
-                width: '588px',
+                width: '80%',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '5px',
