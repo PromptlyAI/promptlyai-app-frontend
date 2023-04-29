@@ -15,6 +15,16 @@ interface AppContextType {
 
   historyMode: string;
   setHistoryMode: React.Dispatch<React.SetStateAction<string>>;
+
+  screenDimensions: screenDimensionsProps;
+  setScreenDimensions: React.Dispatch<
+    React.SetStateAction<screenDimensionsProps>
+  >;
+}
+
+interface screenDimensionsProps {
+  w: number;
+  h: number;
 }
 
 export const AppContext = createContext<AppContextType>({
@@ -27,5 +37,7 @@ export const AppContext = createContext<AppContextType>({
   showSidebar: false,
   setShowSidebar: () => {},
   historyMode: "",
-  setHistoryMode: () => {}
+  setHistoryMode: () => {},
+  screenDimensions: { w: 0, h: 0 },
+  setScreenDimensions: () => {},
 });

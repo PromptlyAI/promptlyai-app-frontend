@@ -29,20 +29,9 @@ export default function PromptTool() {
   const { showSettings, setShowSettings } = useContext(AppContext);
 
   const [promptTitle, setPromptTitle] = useState<string>("");
-
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
-
-  // const [userPrompt, setUserPrompt] = useState<string>("");
-  // const [promptOutput, setPromptOutput] = useState<string>("");
-  // const [currentPromptId, setCurrentPromptId] = useState<string>("");
-
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const textSpeed = 4;
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
-  const [promptType, setPromptType] = useState<string>("TEXT");
-
   const [showTextPrompt, setShowTextPrompt] = useState<boolean>(true);
-
   const [textPrompt, setTextPrompt] = useState<TextPromptProps>({
     answer: "",
     input: "",
@@ -56,17 +45,8 @@ export default function PromptTool() {
 
   useEffect(() => {
     setShowSettings(false);
+    checkIfLoggedIn();
   }, []);
-
-  useEffect(() => {
-    if (LoginCheck()) {
-      setNeedToSignIn(true);
-      console.log("need to sign in");
-    } else {
-      setNeedToSignIn(false);
-      console.log("signed in");
-    }
-  });
 
   useEffect(() => {
     if (promptId === "newText") {
@@ -92,7 +72,18 @@ export default function PromptTool() {
     }
   }, [promptId]);
 
+  function checkIfLoggedIn() {
+    if (LoginCheck()) {
+      setNeedToSignIn(true);
+      console.log("need to sign in");
+    } else {
+      setNeedToSignIn(false);
+      console.log("signed in");
+    }
+  }
   async function createNewText() {
+    checkIfLoggedIn();
+
     setLoadingPrompt(true);
     setPromptId("");
     const response = await Api({
@@ -103,11 +94,10 @@ export default function PromptTool() {
     setPromptId(await response.prompt.id);
     setLoadingPrompt(false);
   }
-
   async function createNewImage() {
-    setPromptId("");
-    // setLoadingPrompt(true);
+    checkIfLoggedIn();
 
+    setPromptId("");
     const response = await Api({
       path: `prompt?type=IMAGE`,
       method: "POST",
@@ -115,9 +105,10 @@ export default function PromptTool() {
     });
     console.log(await response.prompt.id);
     setPromptId(await response.prompt.id);
-    // setLoadingPrompt(false);
   }
   async function loadPromptHistory() {
+    checkIfLoggedIn();
+
     setTextPrompt({
       answer: "",
       input: "",

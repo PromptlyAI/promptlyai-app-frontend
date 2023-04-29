@@ -60,21 +60,21 @@ export default function SideBar() {
   ]);
 
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
-  const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
+  // const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
+  // const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
 
-  useEffect(() => {
-    if (screenWidth < 1000) {
-      setSmallBtnSize(200);
-      setBigBtnSize(250);
-      return;
-    }
-    if (screenWidth < 1200) {
-      setSmallBtnSize(300);
-      setBigBtnSize(300);
-      return;
-    }
-  }, [screenWidth]);
+  // useEffect(() => {
+  //   if (screenWidth < 1000) {
+  //     setSmallBtnSize(200);
+  //     setBigBtnSize(250);
+  //     return;
+  //   }
+  //   if (screenWidth < 1200) {
+  //     setSmallBtnSize(300);
+  //     setBigBtnSize(300);
+  //     return;
+  //   }
+  // }, [screenWidth]);
 
   useEffect(() => {
     getPromptHistory();
@@ -229,7 +229,6 @@ export default function SideBar() {
                 </button>
               )}
             </div>
-
           </div>
 
           <div
@@ -250,7 +249,7 @@ export default function SideBar() {
                 <button
                   onClick={() => clearPromptHistory()}
                   className="clear-btn"
-                  style={{ width: bigBtnsSize, height: "56px" }}
+                  style={{ height: "56px" }}
                 >
                   {clearLoading ? (
                     <div className="center">

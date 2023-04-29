@@ -140,6 +140,7 @@ label {
 }
 .clear-btn {
   cursor: pointer;
+  width: 355px;
   display: flex;
   align-items: center;
   justify-content: center;
