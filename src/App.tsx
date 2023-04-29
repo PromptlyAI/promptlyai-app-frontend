@@ -30,6 +30,7 @@ function App() {
       w: window.innerWidth,
       h: window.innerHeight,
     });
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () =>
@@ -64,6 +65,8 @@ function App() {
                       setPromptId,
                       screenDimensions,
                       setScreenDimensions,
+                      needToSignIn,
+                      setNeedToSignIn,
                     }}
                   >
                     <NavigationBar />

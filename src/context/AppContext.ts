@@ -20,6 +20,9 @@ interface AppContextType {
   setScreenDimensions: React.Dispatch<
     React.SetStateAction<screenDimensionsProps>
   >;
+
+  needToSignIn: boolean;
+  setNeedToSignIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface screenDimensionsProps {
@@ -40,4 +43,6 @@ export const AppContext = createContext<AppContextType>({
   setHistoryMode: () => {},
   screenDimensions: { w: 0, h: 0 },
   setScreenDimensions: () => {},
+  needToSignIn: false,
+  setNeedToSignIn: () => {},
 });

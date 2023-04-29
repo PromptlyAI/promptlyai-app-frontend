@@ -25,12 +25,19 @@ interface ImagePromptProps {
 }
 
 export default function PromptTool() {
-  const { promptId, setPromptId } = useContext(AppContext);
-  const { showSettings, setShowSettings } = useContext(AppContext);
+  const {
+    promptId,
+    setPromptId,
+    needToSignIn,
+    setNeedToSignIn,
+    showSettings,
+    setShowSettings,
+    screenDimensions,
+  } = useContext(AppContext);
 
   const [promptTitle, setPromptTitle] = useState<string>("");
   const [loadingPrompt, setLoadingPrompt] = useState<boolean>(false);
-  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+  const [] = useState<boolean>(false);
   const [showTextPrompt, setShowTextPrompt] = useState<boolean>(true);
   const [textPrompt, setTextPrompt] = useState<TextPromptProps>({
     answer: "",
@@ -149,16 +156,21 @@ export default function PromptTool() {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        overflowY: "scroll",
+        height: screenDimensions.h,
+      }}
+    >
       <div className="prompt-tool-top-container">
-        <div className="hide-bar"></div>
+        {screenDimensions.w > 1680 && <div className="hide-bar"></div>}
         <div className="prompt-title-container">
           <img
             style={{ width: "47.2px", height: "38.4px" }}
             src={BookWhite}
             alt=""
           />
-          <div style={{ width: "500px" }}>
+          <div className="title-container" style={{ width: "500px" }}>
             {loadingPrompt ? (
               <div className="center">
                 <div className="loader"></div>
@@ -191,13 +203,19 @@ export default function PromptTool() {
             />
           </div>
         </div>
-        <div
-          style={{ display: "flex", width: "400px", justifyContent: "center" }}
-        >
-          <img src={PromptlyLogo} alt="" />
-        </div>
+        {screenDimensions.w > 1836 && (
+          <div
+            style={{
+              display: "flex",
+              width: "400px",
+              justifyContent: "center",
+            }}
+          >
+            <img src={PromptlyLogo} alt="" />
+          </div>
+        )}
       </div>
-      <div className="prompt-tool-container">
+      <div style={{}} className="prompt-tool-container">
         {showSettings && <SettingsPage />}
         {needToSignIn && <Popup />}
 

@@ -18,6 +18,9 @@ interface UserProps {
 }
 
 export default function SettingsPage() {
+  const { showSettings, setShowSettings, setNeedToSignIn } =
+    useContext(AppContext);
+
   const [userInfo, setUserInfo] = useState<UserProps>();
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
@@ -25,7 +28,6 @@ export default function SettingsPage() {
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
 
-  const { showSettings, setShowSettings } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [page, setPage] = useState<string>("PROFILE");
@@ -83,6 +85,7 @@ export default function SettingsPage() {
 
   function logout() {
     localStorage.removeItem("token");
+    setNeedToSignIn(true);
     setShowSettings(false);
   }
 
