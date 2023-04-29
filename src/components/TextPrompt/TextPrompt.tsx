@@ -44,23 +44,32 @@ export default function TextPrompt({
   const [inputHeight, setInputHeight] = useState<number>(350);
 
   useEffect(() => {
+    if (screenDimensions.w < 770) {
+      setInputHeight(200);
+      setInputWidht(300);
+      return;
+    }
     if (screenDimensions.w < 1680) {
+      setInputWidht(400);
       setInputHeight(250);
       return;
     }
 
     if (screenDimensions.w < 1900) {
       setInputWidht(400);
+      setInputHeight(350);
       return;
     }
 
     if (screenDimensions.w < 2100) {
       setInputWidht(500);
+      setInputHeight(350);
       return;
     }
 
     if (screenDimensions.w < 2298) {
       setInputWidht(600);
+      setInputHeight(350);
       return;
     }
 
@@ -224,7 +233,7 @@ export default function TextPrompt({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
+                gap: screenDimensions.w > 780 ? "10px" : "0",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Output:</h1>
@@ -240,6 +249,7 @@ export default function TextPrompt({
                 style={{
                   width: "100%",
                   display: "flex",
+                  flexDirection: screenDimensions.w > 750 ? "row" : "column",
                   gap: "20px",
                   paddingTop: "0px",
                 }}
