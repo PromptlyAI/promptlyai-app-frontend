@@ -29,6 +29,7 @@ export default function SideBar() {
     reloadHistory,
     setReloadHistory,
     historyMode,
+    screenDimensions,
   } = useContext(AppContext);
 
   const [promptHistory, setPromptHistory] = useState<promptHistoryProps[]>(
@@ -60,21 +61,21 @@ export default function SideBar() {
   ]);
 
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
-  const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
+  // const [smallBtnsSize, setSmallBtnSize] = useState<number>(355);
+  // const [bigBtnsSize, setBigBtnSize] = useState<number>(355);
 
-  useEffect(() => {
-    if (screenWidth < 1000) {
-      setSmallBtnSize(200);
-      setBigBtnSize(250);
-      return;
-    }
-    if (screenWidth < 1200) {
-      setSmallBtnSize(300);
-      setBigBtnSize(300);
-      return;
-    }
-  }, [screenWidth]);
+  // useEffect(() => {
+  //   if (screenWidth < 1000) {
+  //     setSmallBtnSize(200);
+  //     setBigBtnSize(250);
+  //     return;
+  //   }
+  //   if (screenWidth < 1200) {
+  //     setSmallBtnSize(300);
+  //     setBigBtnSize(300);
+  //     return;
+  //   }
+  // }, [screenWidth]);
 
   useEffect(() => {
     getPromptHistory();
@@ -175,97 +176,103 @@ export default function SideBar() {
   }
 
   return (
-    <div className="side-bar-container">
-      <div
-        className={
-          showSidebar
-            ? "show-sidebar-container show-sidebar"
-            : "show-sidebar-container hide-sidebar"
-        }
-      >
-        <div className="center">
-          <UpgradeButton />
-        </div>
-        <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            <div className="mode-container"></div>
+    <div
+      style={{
+        position: screenDimensions.w < 1219 ? "absolute" : "static",
+        marginLeft: screenDimensions.w < 1219 ? "160px" : "0",
+      }}
+    >
+      <div className="side-bar-container">
+        <div
+          className={
+            showSidebar
+              ? "show-sidebar-container show-sidebar"
+              : "show-sidebar-container hide-sidebar"
+          }
+        >
+          <div className="center">
+            <UpgradeButton />
           </div>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
+          <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
             <div
               style={{
-                height: "70px",
-                width: "100%",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                flexDirection: "column",
+                gap: "10px",
               }}
             >
-              <label htmlFor="">PROMPT HISTORY</label>
-              {historyMode === "TEXT" ? (
-                <button
-                  className="new-prompt-btn"
-                  onClick={() => pressModeBtn("newText")}
-                >
-                  NEW PROMPT
-                </button>
-              ) : (
-                <button
-                  className="new-prompt-btn"
-                  onClick={() => pressModeBtn("newImage")}
-                >
-                  NEW PROMPT
-                </button>
-              )}
+              <div className="mode-container"></div>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <div
+                style={{
+                  height: "70px",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <label htmlFor="">PROMPT HISTORY</label>
+                {historyMode === "TEXT" ? (
+                  <button
+                    className="new-prompt-btn"
+                    onClick={() => pressModeBtn("newText")}
+                  >
+                    NEW PROMPT
+                  </button>
+                ) : (
+                  <button
+                    className="new-prompt-btn"
+                    onClick={() => pressModeBtn("newImage")}
+                  >
+                    NEW PROMPT
+                  </button>
+                )}
+              </div>
             </div>
 
-          </div>
+            <div
+              style={{
+                position: "relative",
+                height: "fit-content",
+              }}
+            >
+              <PromptHistory
+                promptHistory={promptHistory}
+                setPromptHistory={setPromptHistory}
+                promptHistoryLoading={promptHistoryLoading}
+              />
 
-          <div
-            style={{
-              position: "relative",
-              height: "fit-content",
-            }}
-          >
-            <PromptHistory
-              promptHistory={promptHistory}
-              setPromptHistory={setPromptHistory}
-              promptHistoryLoading={promptHistoryLoading}
-            />
-
-            <div>
-              <div className="bottom-gradient"></div>
-              <div className="clear-history-container">
-                <button
-                  onClick={() => clearPromptHistory()}
-                  className="clear-btn"
-                  style={{ width: bigBtnsSize, height: "56px" }}
-                >
-                  {clearLoading ? (
-                    <div className="center">
-                      <div className="loader"></div>
-                    </div>
-                  ) : (
-                    <>
-                      <img
-                        style={{ position: "absolute", left: "15px" }}
-                        src={TrashBlack}
-                      />
-                      CLEAR PROMPT-HISTORY
-                    </>
-                  )}
-                </button>
+              <div>
+                <div className="bottom-gradient"></div>
+                <div className="clear-history-container">
+                  <button
+                    onClick={() => clearPromptHistory()}
+                    className="clear-btn"
+                    style={{ height: "56px" }}
+                  >
+                    {clearLoading ? (
+                      <div className="center">
+                        <div className="loader"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <img
+                          style={{ position: "absolute", left: "15px" }}
+                          src={TrashBlack}
+                        />
+                        CLEAR PROMPT-HISTORY
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

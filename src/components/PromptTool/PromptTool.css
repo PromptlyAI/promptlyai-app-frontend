@@ -1,22 +1,23 @@
 .prompt-tool-container {
-  padding: 50px;
+  padding-left: 50px;
+  padding-top: 50px;
   height: 900px;
+  width: fit-content;
+  margin: 0;
 }
 .prompt-tool-main-container {
   border-radius: 30px;
   width: 100%;
   height: fit-content;
+  /* overflow-x: hidden; */
   /* background: var(--primary-background); */
   display: flex;
+
   gap: 20px;
 }
-.prompt-tool-top-container {
-  height: 100px;
-  background: var(--background-gray);
-  width: 100%;
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
+
+.title-container {
+  width: 500px;
 }
 .center {
   display: flex;
@@ -36,12 +37,14 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
+  width: fit-content;
 
   gap: 20px;
   background: var(--primary-background);
 }
 .right-generate-container {
   height: fit-content;
+  width: fit-content;
   display: flex;
   padding: 20px;
   gap: 20px;
@@ -51,20 +54,7 @@
   text-align: left;
   font-size: 40px;
 }
-.prompt-title-container {
-  margin-left: 35px;
-  width: 800px;
-  height: 100%;
-  display: flex;
-  color: white;
-  align-items: center;
-  justify-content: center;
-  justify-content: space-around;
-  border-right: solid 13px var(--background);
 
-  /* ? */
-  /* border-bottom-right-radius: 50px; */
-}
 .prompt-title-container img {
   cursor: pointer;
   color: white;
@@ -91,4 +81,53 @@
 .generated-image {
   width: 500px;
   height: 500px;
+}
+.prompt-title-container {
+  margin-left: 35px;
+  width: 800px;
+  height: 100%;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-around;
+  border-right: solid 13px var(--background);
+}
+
+.prompt-tool-top-container {
+  height: 100px;
+  background: var(--background-gray);
+  width: 100%;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+@media screen and (max-width: 1680px) {
+  .prompt-tool-main-container {
+    flex-direction: column;
+    /* height: ; */
+  }
+}
+
+@media screen and (max-width: 1423px) {
+  .prompt-tool-top-container {
+    /* width: 500px; */
+  }
+  .prompt-title-container {
+    width: 600px;
+    margin-left: 35px;
+    z-index: 8;
+  }
+}
+
+@media screen and (max-width: 1219px) {
+  .prompt-title-container {
+    width: 500px;
+    margin-left: 35px;
+    z-index: 8;
+    /* position: absolute; */
+  }
+  .prompt-tool-top-container {
+    z-index: 8;
+  }
 }

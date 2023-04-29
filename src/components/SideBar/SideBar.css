@@ -2,7 +2,7 @@
   width: 440px;
   height: 100vh;
   position: relative;
-  z-index: 1;
+  z-index: 9;
 }
 
 .show-sidebar-container {
@@ -108,7 +108,7 @@ label {
     rgba(255, 255, 255, 0) 100%
   );
 }
-
+/*
 @media only screen and (max-width: 1500px) {
   .side-bar-container {
     width: 400px;
@@ -137,9 +137,10 @@ label {
     width: 140px;
     height: 35px;
   }
-}
+} */
 .clear-btn {
   cursor: pointer;
+  width: 355px;
   display: flex;
   align-items: center;
   justify-content: center;

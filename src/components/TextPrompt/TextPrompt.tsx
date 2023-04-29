@@ -24,8 +24,8 @@ export default function TextPrompt({
   setTextPrompt,
   setPromptTitle,
 }: IProps) {
-  const { promptId } = useContext(AppContext);
-  const { reloadHistory, setReloadHistory } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory, screenDimensions, promptId } =
+    useContext(AppContext);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -39,6 +39,43 @@ export default function TextPrompt({
     useState<boolean>(false);
 
   const textSpeed = 6;
+
+  const [inputWidth, setInputWidht] = useState<number>(700);
+  const [inputHeight, setInputHeight] = useState<number>(350);
+
+  useEffect(() => {
+    if (screenDimensions.w < 770) {
+      setInputHeight(200);
+      setInputWidht(300);
+      return;
+    }
+    if (screenDimensions.w < 1680) {
+      setInputWidht(400);
+      setInputHeight(250);
+      return;
+    }
+
+    if (screenDimensions.w < 1900) {
+      setInputWidht(400);
+      setInputHeight(350);
+      return;
+    }
+
+    if (screenDimensions.w < 2100) {
+      setInputWidht(500);
+      setInputHeight(350);
+      return;
+    }
+
+    if (screenDimensions.w < 2298) {
+      setInputWidht(600);
+      setInputHeight(350);
+      return;
+    }
+
+    setInputWidht(700);
+    setInputHeight(350);
+  }, [screenDimensions.w]);
 
   useEffect(() => {
     setUserPrompt(textPrompt.input);
@@ -99,7 +136,12 @@ export default function TextPrompt({
   return (
     <>
       {/* {promptType !== "IMAGE" && ( */}
-      <div style={{ gap: "60px" }} className="prompt-tool-main-container">
+      <div
+        style={{
+          gap: "60px",
+        }}
+        className="prompt-tool-main-container"
+      >
         <div>
           <h1 className="big-title">TEXT PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
@@ -108,12 +150,13 @@ export default function TextPrompt({
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
+                width: "200px",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={700}
-                inpHeight={350}
+                inpWidht={inputHeight <= 250 ? inputWidth + 50 : inputWidth}
+                inpHeight={inputHeight}
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -148,8 +191,8 @@ export default function TextPrompt({
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={350}
-                inpWidht={700}
+                inpHeight={inputHeight}
+                inpWidht={inputHeight <= 250 ? inputWidth + 50 : inputWidth}
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -190,13 +233,13 @@ export default function TextPrompt({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
+                gap: screenDimensions.w > 780 ? "10px" : "0",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <StyledInput
-                inpWidht={750}
-                inpHeight={850}
+                inpWidht={inputWidth + 50}
+                inpHeight={inputHeight + 500}
                 inpStyle={1}
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
@@ -206,6 +249,7 @@ export default function TextPrompt({
                 style={{
                   width: "100%",
                   display: "flex",
+                  flexDirection: screenDimensions.w > 750 ? "row" : "column",
                   gap: "20px",
                   paddingTop: "0px",
                 }}

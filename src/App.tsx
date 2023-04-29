@@ -14,12 +14,34 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Popup from "./components/Popup/popup";
 import { AppContext } from "./context/AppContext";
 
+interface screenDimensionsProps {
+  w: number;
+  h: number;
+}
+
 function App() {
   const [promptId, setPromptId] = useState<string>("");
   const [historyMode, setHistoryMode] = useState<string>("TEXT");
   const [showSidebar, setShowSidebar] = useState<boolean>(true);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [reloadHistory, setReloadHistory] = useState<boolean>(false);
+  const [screenDimensions, setScreenDimensions] =
+    useState<screenDimensionsProps>({
+      w: window.innerWidth,
+      h: window.innerHeight,
+    });
+  const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () =>
+      setScreenDimensions({
+        w: window.innerWidth,
+        h: window.innerHeight,
+      });
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <Router>
@@ -41,6 +63,10 @@ function App() {
                       setShowSidebar,
                       promptId,
                       setPromptId,
+                      screenDimensions,
+                      setScreenDimensions,
+                      needToSignIn,
+                      setNeedToSignIn,
                     }}
                   >
                     <NavigationBar />

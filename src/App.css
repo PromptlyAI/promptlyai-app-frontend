@@ -28,6 +28,7 @@
 .App {
   background: var(--background);
   display: flex;
+  /* overflow-y: scroll; */
 }
 ::-webkit-scrollbar-track {
   z-index: 10;
