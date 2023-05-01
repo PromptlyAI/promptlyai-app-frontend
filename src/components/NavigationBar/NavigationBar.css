@@ -1,10 +1,9 @@
 .navigation-bar-main-container {
   z-index: 10;
   position: relative;
-  min-width: 160px;
+  width: 8vw;
   height: 100vh;
   background: var(--nav-bar);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,4 +104,57 @@
   border-radius: 100px;
   width: 65px;
   height: 65px;
+}
+
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+  .nav-btn {
+
+    width: 50px;
+    height: 50px;
+  }
+  .mobileNavLogo {
+    width: 40px;
+    height: 40px;
+  }
+  .profile-picture {
+    width: 45px;
+    height: 45px;
+  }
+
+}
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [426px -> 600px]*/
+  .navigation-bar-main-container {
+    width: 15vw;
+
+  }
+  .nav-btn {
+
+    width: 45px;
+    height: px;
+  }
+  
+
+}
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
+  .navigation-bar-main-container {
+    width: 15vw;
+    min-width: 35px;
+  }
+
+  .nav-btn {
+
+    width: 40px;
+    height: 40px;
+  }
+  .profile-picture {
+    width: 40px;
+    height: 40px;
+  }
+  .mobileNavLogo {
+    width: 30px;
+    height: 30px;
+  }
 }

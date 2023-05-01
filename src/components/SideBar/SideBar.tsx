@@ -177,10 +177,7 @@ export default function SideBar() {
 
   return (
     <div
-      style={{
-        position: screenDimensions.w < 1219 ? "absolute" : "static",
-        marginLeft: screenDimensions.w < 1219 ? "160px" : "0",
-      }}
+      
     >
       <div className="side-bar-container">
         <div
@@ -241,7 +238,7 @@ export default function SideBar() {
             <div
               style={{
                 position: "relative",
-                height: "fit-content",
+                height: "80vh",
               }}
             >
               <PromptHistory

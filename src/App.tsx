@@ -70,7 +70,7 @@ function App() {
                     }}
                   >
                     <NavigationBar />
-                    <SideBar />
+                    {/* <SideBar /> */}
                     <PromptPage />
                   </AppContext.Provider>
                 </>
