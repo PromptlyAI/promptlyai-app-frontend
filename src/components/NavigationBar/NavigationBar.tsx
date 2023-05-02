@@ -48,14 +48,15 @@ export default function NavigationBar() {
   return (
     <>
       <div className="navigation-bar-main-container">
+      
         <div
           onClick={() => setRotate(!rotate)}
           className={rotate ? "menu-btn rotate" : "menu-btn"}
         >
           <img src={MenuBtn} alt="" />
         </div>
-        <div className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
-          <RxExit className="exit-icon" />
+        <div  className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
+          <RxExit className="exit-icon mobileNavLogo" />
         </div>
         <div className="nav-btn-container">
           <div
@@ -66,7 +67,7 @@ export default function NavigationBar() {
             className="nav-btn"
             onClick={() => changeMode("TEXT")}
           >
-            <img src={Search} alt="" />
+            <img className="mobileNavLogo" src={Search} alt="" />
           </div>
           <div
             style={{
@@ -76,7 +77,7 @@ export default function NavigationBar() {
             className="nav-btn"
             onClick={() => changeMode("IMAGE")}
           >
-            <img src={ImgBox} alt="" />
+            <img className="mobileNavLogo" src={ImgBox} alt="" />
           </div>
           <div className="bottom-border"></div>
           <div
@@ -87,7 +88,7 @@ export default function NavigationBar() {
             className="nav-btn"
             onClick={() => setShowSidebar(!showSidebar)}
           >
-            <img src={Time} alt="" />
+            <img className="mobileNavLogo" src={Time} alt="" />
           </div>
         </div>
         <div className="bottom-pfp">
