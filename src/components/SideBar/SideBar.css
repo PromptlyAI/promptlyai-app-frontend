@@ -138,6 +138,10 @@ label {
     height: 35px;
   }
 } */
+
+.butch-height{
+  height: calc(100vh - var(--header-height));
+}
 .clear-btn {
   cursor: pointer;
   width: 355px;

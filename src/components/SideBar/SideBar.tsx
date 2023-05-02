@@ -187,10 +187,10 @@ export default function SideBar() {
               : "show-sidebar-container hide-sidebar"
           }
         >
-          <div className="center">
+          <div className="center prompt-tool-top-container-height" >
             <UpgradeButton />
           </div>
-          <div style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+          <div style={{ paddingLeft: "20px", paddingRight: "20px" }} className="butch-height">
             <div
               style={{
                 display: "flex",

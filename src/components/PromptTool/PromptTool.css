@@ -100,7 +100,6 @@
 }
 
 .prompt-tool-top-container {
-  height: 100px;
   background: var(--background-gray);
   width: 100%;
   display: flex;
@@ -108,9 +107,8 @@
   align-items: center;
 }
 @media screen and (max-width:1366px){
-  .prompt-tool-top-container {
-    height: 80px;
-  }
+ 
+  
   .mobileLogo {
     width: 200px;
   }
@@ -129,16 +127,11 @@
     width: 100%;
     justify-content: center;
   }
-  .prompt-tool-top-container {
-    height: 60px;
-  }
 }
 @media only screen and (max-width: 425px) {
   /*Small smartphones [325px -> 425px]*/
   .mobileLogo {
     width: 150px;
   }
-  .prompt-tool-top-container {
-    height: 50px;
-  }
+
 }

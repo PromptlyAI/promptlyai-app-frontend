@@ -18,6 +18,8 @@
   --input-text: #949494;
   --nav-bar: #14181b;
   --side-black: #1f1f24;
+  --header-height: 100px;
+
 }
 
 * {
@@ -67,5 +69,31 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.prompt-tool-top-container-height{
+  height: var(--header-height);
+}
+@media screen and (max-width:1366px){
+  :root {
+    --header-height: 80px;
+  }
+
+  
+
+}
+
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [426px -> 600px]*/
+  :root {
+    --header-height: 60px;
+  }
+
+}
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
+  :root {
+    --header-height: 50px;
   }
 }

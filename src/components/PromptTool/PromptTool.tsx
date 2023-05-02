@@ -162,7 +162,7 @@ export default function PromptTool() {
         height: screenDimensions.h,
       }}
     >
-      <div className="prompt-tool-top-container">
+      <div className="prompt-tool-top-container prompt-tool-top-container-height">
         {/* {screenDimensions.w > 1680 && <div className="hide-bar"></div>} */}
         <div className="prompt-title-container">
           <img
