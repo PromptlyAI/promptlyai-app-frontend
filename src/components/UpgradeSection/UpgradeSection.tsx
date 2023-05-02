@@ -13,7 +13,7 @@ export default function UpgradeButton() {
       });
       const data = await response;
       console.log(data);
-      const words = 10000 - data.totalTokenBalance;
+      const words = 4000 - data.totalTokenBalance;
       setWordsUsed(words);
     };
     getUserInfo();
