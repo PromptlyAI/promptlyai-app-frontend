@@ -62,7 +62,7 @@ export default function LoginPage() {
                 width: '80%',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '5px',
+                gap: '10px',
               }}
             >
               <h1>Login</h1>

@@ -13,6 +13,7 @@ h1 {
 }
 
 .login-page {
+  padding: 50px;    
   width: 663px;
   height: 511px;
   background: #43434e;
