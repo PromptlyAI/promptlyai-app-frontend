@@ -102,14 +102,14 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1680px) {
+@media only screen and (max-width: 1680px) {
   .prompt-tool-main-container {
     flex-direction: column;
     /* height: ; */
   }
 }
 
-@media screen and (max-width: 1423px) {
+@media only screen and (max-width: 1423px) {
   .prompt-tool-top-container {
     /* width: 500px; */
   }
@@ -120,7 +120,7 @@
   }
 }
 
-@media screen and (max-width: 1219px) {
+@media only screen and (max-width: 1219px) {
   .prompt-title-container {
     width: 500px;
     margin-left: 35px;

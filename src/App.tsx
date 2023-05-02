@@ -31,6 +31,12 @@ function App() {
       h: window.innerHeight,
     });
   const [needToSignIn, setNeedToSignIn] = useState<boolean>(false);
+  useEffect(() => {
+    setScreenDimensions({
+      w: window.innerWidth,
+      h: window.innerHeight,
+    });
+  });
 
   useEffect(() => {
     const handleResize = () =>

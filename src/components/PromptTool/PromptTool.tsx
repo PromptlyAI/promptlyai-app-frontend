@@ -159,7 +159,7 @@ export default function PromptTool() {
     <div
       style={{
         overflowY: "scroll",
-        height: screenDimensions.h,
+        height: "400px",
       }}
     >
       <div className="prompt-tool-top-container">
