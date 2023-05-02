@@ -238,8 +238,15 @@ export default function SideBar() {
             <div
               style={{
                 position: "relative",
-                height: "80vh",
+                height:"100%",
+                display:"flex",
+                flexDirection: "column",
+                flexGrow: "1", 
+
+                
               }}
+    
+              
             >
               <PromptHistory
                 promptHistory={promptHistory}
