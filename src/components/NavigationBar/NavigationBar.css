@@ -1,7 +1,7 @@
 .navigation-bar-main-container {
   z-index: 10;
   position: relative;
-  width: 8vw;
+  min-width: 150px;
   height: 100vh;
   background: var(--nav-bar);
   display: flex;
@@ -105,7 +105,7 @@
   width: 65px;
   height: 65px;
 }
-@media screen and (max-width:1366px){
+/* @media screen and (max-width:1366px){
   .nav-btn {
 
     width: 50px;
@@ -122,7 +122,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  /*Big smartphones [426px -> 600px]*/
   .navigation-bar-main-container {
     width: 15vw;
 
@@ -136,7 +135,6 @@
 
 }
 @media only screen and (max-width: 425px) {
-  /*Small smartphones [325px -> 425px]*/
   .navigation-bar-main-container {
     width: 15vw;
     min-width: 35px;
@@ -155,4 +153,4 @@
     width: 30px;
     height: 30px;
   }
-}
+} */
