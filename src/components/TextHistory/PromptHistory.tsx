@@ -24,7 +24,7 @@ export default function PromptHistory({
   setPromptHistory,
   promptHistoryLoading,
 }: IProps) {
-  const { setPromptId } = useContext(AppContext);
+  const { setPromptId, screenDimensions } = useContext(AppContext);
 
   function pressHistoryBtn(_id: string) {
     let arr = [...promptHistory];
@@ -75,7 +75,7 @@ export default function PromptHistory({
                 deletePrompt(historyBtn.id);
               }}
               pressed={historyBtn.pressed}
-              btnWidth={355}
+              btnWidth={screenDimensions.w < 1200 ? 200 : 355}
               btnHeight={56}
               btnStyle={2}
               textColor="white"

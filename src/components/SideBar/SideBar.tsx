@@ -176,9 +176,7 @@ export default function SideBar() {
   }
 
   return (
-    <div
-      
-    >
+    <div>
       <div className="side-bar-container">
         <div
           className={
@@ -187,10 +185,13 @@ export default function SideBar() {
               : "show-sidebar-container hide-sidebar"
           }
         >
-          <div className="center prompt-tool-top-container-height" >
+          <div className="center prompt-tool-top-container-height">
             <UpgradeButton />
           </div>
-          <div style={{ paddingLeft: "20px", paddingRight: "20px" }} className="butch-height">
+          <div
+            style={{ paddingLeft: "20px", paddingRight: "20px" }}
+            className="butch-height"
+          >
             <div
               style={{
                 display: "flex",
@@ -238,15 +239,11 @@ export default function SideBar() {
             <div
               style={{
                 position: "relative",
-                height:"100%",
-                display:"flex",
+                height: "100%",
+                display: "flex",
                 flexDirection: "column",
-                flexGrow: "1", 
-
-                
+                flexGrow: "1",
               }}
-    
-              
             >
               <PromptHistory
                 promptHistory={promptHistory}
@@ -268,10 +265,7 @@ export default function SideBar() {
                       </div>
                     ) : (
                       <>
-                        <img
-                          style={{ position: "absolute", left: "15px" }}
-                          src={TrashBlack}
-                        />
+                        <img className="left-trash" src={TrashBlack} />
                         CLEAR PROMPT-HISTORY
                       </>
                     )}
