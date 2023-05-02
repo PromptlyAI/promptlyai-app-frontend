@@ -44,8 +44,8 @@ function App() {
   return (
     <>
       {screenDimensions.w < 1500 ? (
-        <div style={{ width:"100vw", height:"100vh", display:"flex", justifyContent:"center", alignItems:"center" , background:"#43424f", }}>
-          <label style={{fontWeight:"bold"}}>Please use a bigger screen to use PromptlyLabs.</label>
+        <div style={{ width:"100%", height:"100%", display:"flex", justifyContent:"center", alignItems:"center" , background:"#43424f", }}>
+          <label style={{fontWeight:"bold"}}>Please use a bigger screen to access PromptlyLabs.</label>
         </div>
       ) : (
         <>
