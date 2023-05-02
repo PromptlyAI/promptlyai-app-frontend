@@ -105,9 +105,7 @@
   width: 65px;
   height: 65px;
 }
-
-@media only screen and (max-width: 1200px) {
-  /*Tablets [601px -> 1200px]*/
+@media screen and (max-width:1366px){
   .nav-btn {
 
     width: 50px;
@@ -121,8 +119,8 @@
     width: 45px;
     height: 45px;
   }
-
 }
+
 @media only screen and (max-width: 600px) {
   /*Big smartphones [426px -> 600px]*/
   .navigation-bar-main-container {

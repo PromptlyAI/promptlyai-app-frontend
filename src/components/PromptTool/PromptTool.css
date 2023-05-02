@@ -1,7 +1,7 @@
 .prompt-tool-container {
   padding-left: 50px;
   padding-top: 50px;
-  height: calc(100vh - 100px);
+  height: fit-content;
   width: fit-content;
 
   margin: 0;
@@ -107,6 +107,15 @@
   /* justify-content: space-between; */
   align-items: center;
 }
+@media screen and (max-width:1366px){
+  .prompt-tool-top-container {
+    height: 80px;
+  }
+  .mobileLogo {
+    width: 200px;
+  }
+}
+
 
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
@@ -116,9 +125,6 @@
 }
 @media only screen and (max-width: 600px) {
   /*Big smartphones [426px -> 600px]*/
-  .mobileLogo {
-    width: 200px;
-  }
   .logo-container {
     width: 100%;
     justify-content: center;
