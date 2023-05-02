@@ -19,6 +19,7 @@
 
 .title-container {
   width: 500px;
+  
 }
 .center {
   display: flex;
@@ -64,6 +65,7 @@
 .prompt-title-container img {
   cursor: pointer;
   color: white;
+
 }
 .loading-text {
   background: var(--background-gray);
@@ -72,6 +74,7 @@
   position: absolute;
   left: 0px;
   height: 100px;
+  z-index: 0;
   width: 600px;
   background: var(--primary-background);
 }
@@ -95,6 +98,7 @@
   display: flex;
   color: white;
   align-items: center;
+  z-index: 1;
   justify-content: space-around;
   border-right: solid 13px var(--background);
 }
@@ -105,6 +109,7 @@
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+  
 }
 @media screen and (max-width:1366px){
  

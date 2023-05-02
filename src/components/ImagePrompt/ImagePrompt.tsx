@@ -82,11 +82,14 @@ export default function ImagePrompt({
   async function fetchImage() {
     setImageLoading(true);
     setImprovedPromptLoading(true);
+    
     const response = await Api({
       path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
+
+    
     setImprovedPromptLoading(false);
     const data = await response.image_url;
     // setImageUrl(data);
@@ -99,9 +102,16 @@ export default function ImagePrompt({
   };
 
   function testing(url: string) {
+   
     setTimeout(() => {
-      setImageUrl(url);
+      try {
+        setImageUrl(url);
+
+      } catch {
+        alert("No images left")
+      }
     }, 1000);
+    
   }
 
   useEffect(() => {

@@ -163,7 +163,8 @@ export default function PromptTool() {
       }}
     >
       <div className="prompt-tool-top-container prompt-tool-top-container-height">
-        {/* {screenDimensions.w > 1680 && <div className="hide-bar"></div>} */}
+        <div className="hide-bar"></div>
+       
         <div className="prompt-title-container">
           <img
             style={{ width: '47.2px', height: '38.4px' }}
