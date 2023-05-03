@@ -57,42 +57,46 @@ export default function ImagePrompt({
 
   async function fetchImprovedImagePrompt() {
     setPromptOutputLoading(true);
+
     const response = await Api({
       path: `prompt/get-improved-image-prompt?prompt=${userPrompt}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    console.log(await response);
+    if (await response) {
+      console.log(await response);
 
-    const responseString = await response.prompt.output;
-    setCurrentPromptId(await response.prompt.id);
+      const responseString = await response.prompt.output;
+      setCurrentPromptId(await response.prompt.id);
 
-    await runTextAnimation(responseString, setPromptOutput, textSpeed);
+      await runTextAnimation(responseString, setPromptOutput, textSpeed);
 
+      setReloadHistory(true);
+
+      await runTextAnimation(userPrompt, setPromptTitle, 55);
+    }
     setPromptOutputLoading(false);
-
-    setReloadHistory(true);
-
-    await runTextAnimation(userPrompt, setPromptTitle, 55);
   }
 
   async function fetchImage() {
     setImageLoading(true);
     setImprovedPromptLoading(true);
-    
+
     const response = await Api({
       path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    
-    setImprovedPromptLoading(false);
-    const data = await response.image_url;
-    // setImageUrl(data);
+    console.log(await response);
+    if ((await response.status) === 200) {
+      setImprovedPromptLoading(false);
+      const data = await response.image_url;
+      // setImageUrl(data);
 
-    testing(data);
+      testing(data);
+    }
   }
 
   const handleDownload = () => {
@@ -100,16 +104,13 @@ export default function ImagePrompt({
   };
 
   function testing(url: string) {
-   
     setTimeout(() => {
       try {
         setImageUrl(url);
-
       } catch {
-        alert("No images left")
+        alert("No images left");
       }
     }, 1000);
-    
   }
 
   useEffect(() => {
