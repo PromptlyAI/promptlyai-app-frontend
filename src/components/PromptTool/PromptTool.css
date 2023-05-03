@@ -122,15 +122,18 @@
 
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
+
   .prompt-title-container {
     display: none;
   }
 }
+
 @media only screen and (max-width: 600px) {
   /*Big smartphones [426px -> 600px]*/
   .logo-container {
     width: 100%;
     justify-content: center;
+
   }
 }
 @media only screen and (max-width: 425px) {
