@@ -164,7 +164,7 @@ export default function PromptTool() {
     >
       <div className="prompt-tool-top-container prompt-tool-top-container-height">
         <div className="hide-bar"></div>
-       
+
         <div className="prompt-title-container">
           <img
             style={{ width: '47.2px', height: '38.4px' }}
@@ -204,12 +204,15 @@ export default function PromptTool() {
             />
           </div>
         </div>
-        <div
-          
-          className='logo-container'
-
-        >
-          <img src={PromptlyLogo} className="mobileLogo"alt="" />
+        <div className="logo-container">
+          <a
+            className="login-button"
+            href="https://www.promptlylabs.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={PromptlyLogo} className="mobileLogo" alt="" />
+          </a>
         </div>
 
         {/* {screenDimensions.w > 1836 && (

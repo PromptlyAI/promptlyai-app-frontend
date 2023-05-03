@@ -131,8 +131,8 @@ export default function ImagePrompt({
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={700}
-                inpHeight={350}
+                inpWidht={600}
+                inpHeight={200}
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -167,8 +167,8 @@ export default function ImagePrompt({
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={350}
-                inpWidht={700}
+                inpHeight={200}
+                inpWidht={600}
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -215,8 +215,8 @@ export default function ImagePrompt({
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <div
                 style={{
-                  width: "750px",
-                  height: "750px",
+                  width: "500px",
+                  height: "500px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

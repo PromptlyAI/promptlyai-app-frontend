@@ -75,7 +75,7 @@ export default function RegisterPage() {
               {loginFailed && (
                 <div style={{ height: '25px' }}>
                   <span style={{ color: 'red' }}>
-                    Invalid email or password
+                    Somthing went wrong
                   </span>
                 </div>
               )}
