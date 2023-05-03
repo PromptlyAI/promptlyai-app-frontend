@@ -19,10 +19,6 @@ export default async function Api({ path, method, bodyParams, token }: IProps) {
       body: bodyParams && JSON.stringify(bodyParams),
     }
   );
-  if (response.status === 400) {
-    alert("out of images");
-    return;
-  }
   try {
     return await response.json();
   } catch (err) {
