@@ -85,19 +85,9 @@ export default function StyledButton({
       {imgIcon ? (
         <>
           {pressed ? (
-            <img
-              style={{ width: "35px", height: "35px" }}
-              className="left-icon"
-              src={ImgBoxBlue}
-              alt=""
-            />
+            <img className="left-icon left-icon" src={ImgBoxBlue} alt="" />
           ) : (
-            <img
-              style={{ width: "35px", height: "35px" }}
-              className="left-icon"
-              src={ImgBoxBlack}
-              alt=""
-            />
+            <img className="left-icon" src={ImgBoxBlack} alt="" />
           )}
         </>
       ) : (

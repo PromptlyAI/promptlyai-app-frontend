@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
 }
-.left-upgrade span{
+.left-upgrade span {
   font-size: 15px;
   height: 25px;
   font-weight: 500;
@@ -57,4 +57,29 @@
   max-width: 100%;
   height: 92%;
   background: var(--button-select-color);
+}
+@media only screen and (max-width: 1200px) {
+  .upgrade-container {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 25px;
+    width: fit-content;
+    padding: 5px;
+  }
+  .left-upgrade span {
+    font-size: 10px;
+    height: 15px;
+    font-weight: 500;
+    align-items: center;
+  }
+  .words-left-bar-container {
+    width: 115px;
+    height: 7px;
+    padding: 2px;
+  }
+  .upgrade-btn {
+    width: 77px;
+    height: 17px;
+    font-size: 10px;
+  }
 }

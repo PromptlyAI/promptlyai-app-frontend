@@ -10,10 +10,10 @@
 h1 {
   width: max-content;
   color: white;
-
 }
 
 .login-page {
+  padding: 50px;    
   width: 663px;
   height: 511px;
   background: #43434e;
@@ -24,21 +24,19 @@ h1 {
   align-items: left;
 }
 
-.logo {
-  margin-bottom: 40px;
-}
+
 .register-button {
   bottom: 40px;
   color: var(--light-blue);
- font-weight: bolder;
-font-size: 23px;
+  font-weight: bolder;
+  font-size: 23px;
   text-decoration: none;
 }
 .login-label {
   text-align: left;
   font-weight: 600;
-font-size: 22px;
-line-height: 27px;
+  font-size: 22px;
+  line-height: 27px;
 }
 .login-inputs h1 {
   color: white;
@@ -79,4 +77,36 @@ line-height: 27px;
   font-size: 20px;
   color: white;
   border: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [426px -> 600px]*/
+  .login-page {
+    width: 363px;
+  }
+
+  .login-input {
+    height: 28px;
+    width: 300px;
+  }
+  .logo {
+    margin-bottom: 50px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
+  .login-page {
+    width: 363px;
+  }
+
+  .login-input {
+    height: 28px;
+    width: 300px;
+  }
+  .logo {
+    margin-bottom: 50px;
+  }
+
+
 }

@@ -13,7 +13,8 @@
   }
   
   .register-page {
-    width: 663px;
+padding: 50px;    
+width: 663px;
     height: 511px;
     background: #43434e;
     border-radius: 28px;
@@ -78,5 +79,36 @@
     font-size: 20px;
     color: white;
     border: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    /*Big smartphones [426px -> 600px]*/
+    .register-page {
+      width: 363px;
+    }
+  
+    .register-input {
+      height: 28px;
+      width: 300px;
+    }
+    .logo {
+      margin-bottom: 30px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    /*Small smartphones [325px -> 425px]*/
+    .register-page {
+      width: 363px;
+    }
+  
+    .register-input {
+      height: 28px;
+      width: 300px;
+    }
+    .logo {
+      margin-bottom: 30px;
+    }
+  
+  
   }
   

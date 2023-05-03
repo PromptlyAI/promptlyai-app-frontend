@@ -47,51 +47,58 @@ function App() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return (
     <>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <AppContext.Provider
-                    value={{
-                      reloadHistory,
-                      setReloadHistory,
-                      historyMode,
-                      setHistoryMode,
-                      showSettings,
-                      setShowSettings,
-                      showSidebar,
-                      setShowSidebar,
-                      promptId,
-                      setPromptId,
-                      screenDimensions,
-                      setScreenDimensions,
-                      needToSignIn,
-                      setNeedToSignIn,
-                    }}
-                  >
-                    <NavigationBar />
-                    <SideBar />
-                    <PromptPage />
-                  </AppContext.Provider>
-                </>
-              }
-            />
-
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/loading" element={<IntroPage />} />
-            {/* <Route path="/settings" element={<SettingsPage />} /> */}
-            <Route path="/admin" element={<AdminPage />} />
-            {/* {showSettings && <SettingsPage />} */}
-          </Routes>
+      {screenDimensions.w < 1500 ? (
+        <div style={{ width:"100%", height:"100vh", display:"flex", justifyContent:"center", alignItems:"center" , background:"#43424f", padding:"10px" }}>
+          <label style={{fontWeight:"bold"}}>Please use a bigger screen to access PromptlyLabs.</label>
         </div>
-      </Router>
+      ) : (
+        <>
+          <Router>
+            <div className="App">
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <AppContext.Provider
+                        value={{
+                          reloadHistory,
+                          setReloadHistory,
+                          historyMode,
+                          setHistoryMode,
+                          showSettings,
+                          setShowSettings,
+                          showSidebar,
+                          setShowSidebar,
+                          promptId,
+                          setPromptId,
+                          screenDimensions,
+                          setScreenDimensions,
+                          needToSignIn,
+                          setNeedToSignIn,
+                        }}
+                      >
+                        <NavigationBar />
+                        <SideBar />
+                        <PromptPage />
+                      </AppContext.Provider>
+                    </>
+                  }
+                />
+
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/loading" element={<IntroPage />} />
+                {/* <Route path="/settings" element={<SettingsPage />} /> */}
+                <Route path="/admin" element={<AdminPage />} />
+                {/* {showSettings && <SettingsPage />} */}
+              </Routes>
+            </div>
+          </Router>
+        </>
+      )}
     </>
   );
 }
