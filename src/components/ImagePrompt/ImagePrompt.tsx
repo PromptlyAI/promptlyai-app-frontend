@@ -90,13 +90,13 @@ export default function ImagePrompt({
     });
 
     console.log(await response);
-    if ((await response.status) === 200) {
-      setImprovedPromptLoading(false);
+    if (await !response.error) {
       const data = await response.image_url;
-      // setImageUrl(data);
-
       testing(data);
+    } else {
+      alert("no images left");
     }
+    setImprovedPromptLoading(false);
   }
 
   const handleDownload = () => {
