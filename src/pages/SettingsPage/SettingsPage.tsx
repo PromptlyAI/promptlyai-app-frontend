@@ -114,7 +114,8 @@ export default function SettingsPage() {
             </div>
             <div
               style={{
-                height: "200px",
+                height: "100px",
+                marginBottom: "10px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -129,13 +130,13 @@ export default function SettingsPage() {
               />
             </div>
           </div>
-          <div className="center">
+          <div style={{height:"100%"}} className="center">
             <div className="settings-button-collection">
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "20px",
+                  gap: "10px",
                 }}
               >
                 <StyledButton
