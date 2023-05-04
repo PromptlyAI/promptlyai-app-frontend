@@ -82,19 +82,21 @@ export default function ImagePrompt({
   async function fetchImage() {
     setImageLoading(true);
     setImprovedPromptLoading(true);
-    
+
     const response = await Api({
       path: `prompt/get-improved-image?prompt=${promptOutput}&promptId=${promptId}`,
       method: "GET",
       token: localStorage.getItem("token") as string,
     });
 
-    
+    console.log(await response);
+    if (await !response.error) {
+      const data = await response.image_url;
+      testing(data);
+    } else {
+      alert("no images left");
+    }
     setImprovedPromptLoading(false);
-    const data = await response.image_url;
-    // setImageUrl(data);
-
-    testing(data);
   }
 
   const handleDownload = () => {
@@ -102,16 +104,13 @@ export default function ImagePrompt({
   };
 
   function testing(url: string) {
-   
     setTimeout(() => {
       try {
         setImageUrl(url);
-
       } catch {
-        alert("No images left")
+        alert("No images left");
       }
     }, 1000);
-    
   }
 
   useEffect(() => {
@@ -170,6 +169,7 @@ export default function ImagePrompt({
                 change={(ev) => setPromptOutput(ev.target.value)}
                 inpHeight={"350px"}
                 inpWidht={"700px"}
+
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -216,8 +216,8 @@ export default function ImagePrompt({
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <div
                 style={{
-                  width: "750px",
-                  height: "750px",
+                  width: "500px",
+                  height: "500px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
