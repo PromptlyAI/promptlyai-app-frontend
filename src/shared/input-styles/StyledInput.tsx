@@ -7,8 +7,8 @@ interface IProps {
   loadingText?: boolean;
   inpType?: string;
   change?: (ev: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  inpWidht?: number;
-  inpHeight?: number;
+  inpWidht?: string;
+  inpHeight?: string;
   scroll?: boolean;
   placeHolder?: string;
 }

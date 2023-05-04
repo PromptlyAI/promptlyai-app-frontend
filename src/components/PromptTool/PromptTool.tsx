@@ -236,6 +236,7 @@ export default function PromptTool() {
                   setImagePrompt={setImagePrompt}
                   setPromptTitle={setPromptTitle}
                 />
+                
               )}
             </>
             {/* )} */}

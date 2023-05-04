@@ -1,18 +1,19 @@
 .prompt-tool-container {
   padding-left: 50px;
   padding-top: 50px;
-  height: fit-content;
-  width: fit-content;
+  height: 100%;
+  width: 100%;
 
   margin: 0;
 }
 .prompt-tool-main-container {
   border-radius: 30px;
   width: 100%;
-  height: fit-content;
+  height: 100%;
   /* overflow-x: hidden; */
   /* background: var(--primary-background); */
   display: flex;
+  
 
   gap: 20px;
 }
@@ -43,15 +44,16 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: fit-content;
-  width: fit-content;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 
   gap: 20px;
   background: var(--primary-background);
 }
 .right-generate-container {
-  height: fit-content;
-  width: fit-content;
+  height: 100%;
+  width: 100%;
   display: flex;
   padding: 20px;
   gap: 20px;

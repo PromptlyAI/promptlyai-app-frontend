@@ -23,7 +23,7 @@ export default function ImagePrompt({
   setImagePrompt,
   setPromptTitle,
 }: IProps) {
-  const { reloadHistory, setReloadHistory, promptId } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory, promptId, screenDimensions } = useContext(AppContext);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -132,8 +132,8 @@ export default function ImagePrompt({
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={700}
-                inpHeight={350}
+                inpWidht={"700px"}
+                inpHeight={screenDimensions.w < 1600 ? "250px" : "350px"}
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -168,8 +168,8 @@ export default function ImagePrompt({
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={350}
-                inpWidht={700}
+                inpHeight={"350px"}
+                inpWidht={"700px"}
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
