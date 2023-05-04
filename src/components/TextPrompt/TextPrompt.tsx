@@ -143,7 +143,12 @@ export default function TextPrompt({
         className="prompt-tool-main-container"
       >
         <div style={{ width: "100%" }}>
-          <h1 className="big-title">TEXT PROMPT TOOL</h1>
+          <h1
+            className="big-title"
+            style={{ fontSize: screenDimensions.w > 1800 ? "30px" : "20px" }}
+          >
+            TEXT PROMPT TOOL
+          </h1>
           <div className="prompt-tool-main-inner">
             <div
               style={{
@@ -154,10 +159,18 @@ export default function TextPrompt({
                 height: "100%",
               }}
             >
-              <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
+              <h1
+                style={{
+                  textAlign: "left",
+                  fontSize: screenDimensions.w > 1800 ? "30px" : "20px",
+                }}
+              >
+                Prompt Input
+              </h1>
               <StyledInput
                 inpHeight={"90%"}
                 inpWidht="97%"
+                textSize={screenDimensions.w > 1800 ? "22px" : "15px"}
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -173,14 +186,22 @@ export default function TextPrompt({
                   }}
                   btnStyle={userPrompt ? 3 : 2}
                   unclickable={userPrompt ? false : true}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={screenDimensions.w > 1800 ? 200 : 120}
+                  btnHeight={screenDimensions.w > 1800 ? 50 : 35}
                   title="Improve"
                   loading={promptOutputLoading}
+                  textSize={screenDimensions.w > 1800 ? 25 : 15}
                 />
               </div>
             </div>
-            <h1 style={{ textAlign: "left" }}>Improved prompt:</h1>
+            <h1
+              style={{
+                textAlign: "left",
+                fontSize: screenDimensions.w > 1800 ? "30px" : "20px",
+              }}
+            >
+              Improved prompt:
+            </h1>
             <div
               style={{
                 display: "flex",
@@ -192,6 +213,7 @@ export default function TextPrompt({
             >
               <StyledInput
                 inpStyle={1}
+                textSize={screenDimensions.w > 1800 ? "22px" : "15px"}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
                 inpHeight={"90%"}
@@ -207,10 +229,11 @@ export default function TextPrompt({
                   }}
                   btnStyle={promptOutput ? 3 : 2}
                   unclickable={promptOutput ? false : true}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={screenDimensions.w > 1800 ? 200 : 120}
+                  btnHeight={screenDimensions.w > 1800 ? 50 : 35}
                   title="Generate"
                   loading={improvedPromptLoading}
+                  textSize={screenDimensions.w > 1800 ? 25 : 15}
                 />
                 {improvedPromptLoading && (
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -233,7 +256,12 @@ export default function TextPrompt({
         <div
           style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
-          <h1 className="big-title">AI GENERATED</h1>
+          <h1
+            className="big-title"
+            style={{ fontSize: screenDimensions.w > 1800 ? "30px" : "20px" }}
+          >
+            AI GENERATED
+          </h1>
           <div className="right-generate-container">
             <div
               style={{
@@ -244,9 +272,17 @@ export default function TextPrompt({
                 width: "100%",
               }}
             >
-              <h1 style={{ textAlign: "left" }}>Output:</h1>
+              <h1
+                style={{
+                  textAlign: "left",
+                  fontSize: screenDimensions.w > 1800 ? "30px" : "20px",
+                }}
+              >
+                Output:
+              </h1>
               <StyledInput
                 inpHeight={"100%"}
+                textSize={screenDimensions.w > 1800 ? "22px" : "15px"}
                 inpStyle={1}
                 inpWidht="97%"
                 title={improvedPrompt}
@@ -265,15 +301,17 @@ export default function TextPrompt({
                 <StyledButton
                   click={() => {}}
                   btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={screenDimensions.w > 1800 ? 200 : 120}
+                  btnHeight={screenDimensions.w > 1800 ? 50 : 35}
+                  textSize={screenDimensions.w > 1800 ? 25 : 15}
                   title="SAVE"
                 />
                 <StyledButton
                   click={() => navigator.clipboard.writeText(improvedPrompt)}
                   btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
+                  textSize={screenDimensions.w > 1800 ? 25 : 15}
+                  btnWidth={screenDimensions.w > 1800 ? 200 : 120}
+                  btnHeight={screenDimensions.w > 1800 ? 50 : 35}
                   title="COPY"
                 />
               </div>

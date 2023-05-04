@@ -78,7 +78,7 @@ export default function StyledButton({
         minHeight: btnHeight,
         background: color,
         color: textColor,
-        fontSize: textSize,
+        fontSize: textSize + "px",
         border: "none",
       }}
     >

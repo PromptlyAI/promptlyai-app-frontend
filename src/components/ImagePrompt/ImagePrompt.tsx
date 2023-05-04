@@ -152,8 +152,8 @@ export default function ImagePrompt({
                   }}
                   btnStyle={improvedPromptLoading ? 2 : 3}
                   unclickable={improvedPromptLoading ? true : false}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={100}
+                  btnHeight={25}
                   title="Improve"
                   loading={promptOutputLoading}
                 />
@@ -186,8 +186,8 @@ export default function ImagePrompt({
                   }}
                   btnStyle={promptOutput ? 3 : 2}
                   unclickable={promptOutput ? false : true}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={100}
+                  btnHeight={25}
                   title="Generate"
                   loading={improvedPromptLoading}
                 />
@@ -257,15 +257,15 @@ export default function ImagePrompt({
                 <StyledButton
                   click={() => handleDownload()}
                   btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={100}
+                  btnHeight={25}
                   title="OPEN"
                 />
                 <StyledButton
                   click={() => navigator.clipboard.writeText(imageUrl)}
                   btnStyle={3}
-                  btnWidth={200}
-                  btnHeight={50}
+                  btnWidth={100}
+                  btnHeight={25}
                   title="COPY-URL"
                 />
               </div>

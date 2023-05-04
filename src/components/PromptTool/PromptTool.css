@@ -1,8 +1,8 @@
 .prompt-tool-container {
   padding-left: 50px;
   padding-top: 50px;
-  height: calc(100vh - 300px);
-  width: calc(100vw - 900px);
+  height: calc(100vh - 200px);
+  width: calc(100vw - 700px);
 
   margin: 0;
 }
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: calc(100% - 89px);
+  height: calc(100% - 65px);
   width: 100%;
 
   gap: 20px;
