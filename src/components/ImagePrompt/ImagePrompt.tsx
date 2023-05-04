@@ -23,7 +23,8 @@ export default function ImagePrompt({
   setImagePrompt,
   setPromptTitle,
 }: IProps) {
-  const { reloadHistory, setReloadHistory, promptId, screenDimensions } = useContext(AppContext);
+  const { reloadHistory, setReloadHistory, promptId, screenDimensions } =
+    useContext(AppContext);
 
   const [userPrompt, setUserPrompt] = useState<string>("");
   const [promptOutput, setPromptOutput] = useState<string>("");
@@ -96,6 +97,7 @@ export default function ImagePrompt({
     } else {
       alert("no images left");
     }
+
     setImprovedPromptLoading(false);
   }
 
@@ -119,7 +121,7 @@ export default function ImagePrompt({
   return (
     <>
       <div style={{ gap: "60px" }} className="prompt-tool-main-container">
-        <div>
+        <div style={{ width: "100%" }}>
           <h1 className="big-title">IMAGE PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
             <div
@@ -127,12 +129,14 @@ export default function ImagePrompt({
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
+                width: "100%",
+                height: "100%",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={"700px"}
-                inpHeight={screenDimensions.w < 1600 ? "250px" : "350px"}
+                inpWidht={"90%"}
+                inpHeight={"97%"}
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -161,15 +165,16 @@ export default function ImagePrompt({
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
+                width: "100%",
+                height: "100%",
               }}
             >
               <StyledInput
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={"350px"}
-                inpWidht={"700px"}
-
+                inpHeight={"90%"}
+                inpWidht={"97%"}
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -216,8 +221,8 @@ export default function ImagePrompt({
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <div
                 style={{
-                  width: "500px",
-                  height: "500px",
+                  width: "100%",
+                  height: "97%",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
