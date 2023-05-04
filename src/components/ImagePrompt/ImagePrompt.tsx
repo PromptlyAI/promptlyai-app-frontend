@@ -90,11 +90,15 @@ export default function ImagePrompt({
       token: localStorage.getItem("token") as string,
     });
 
-    setImprovedPromptLoading(false);
-    const data = await response.image_url;
-    // setImageUrl(data);
+    console.log(await response);
+    if (await !response.error) {
+      const data = await response.image_url;
+      testing(data);
+    } else {
+      alert("no images left");
+    }
 
-    testing(data);
+    setImprovedPromptLoading(false);
   }
 
   const handleDownload = () => {

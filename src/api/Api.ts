@@ -8,24 +8,20 @@ interface IProps {
 }
 
 export default async function Api({ path, method, bodyParams, token }: IProps) {
-  const response = await fetch(
-    `https://promptlyai-backend-production.up.railway.app/${path}`,
-    {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-      body: bodyParams && JSON.stringify(bodyParams),
-    }
-  );
-  if (response.status === 400) {
-    alert("out of images");
-    return;
-  }
   try {
+    const response = await fetch(
+      `https://promptlyai-backend-production.up.railway.app/${path}`,
+      {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+        body: bodyParams && JSON.stringify(bodyParams),
+      }
+    );
     return await response.json();
   } catch (err) {
-    return response;
+    return "illa";
   }
 }
