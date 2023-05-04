@@ -40,42 +40,42 @@ export default function TextPrompt({
 
   const textSpeed = 6;
 
-  const [inputWidth, setInputWidht] = useState<number>(700);
-  const [inputHeight, setInputHeight] = useState<number>(350);
+  const [inputWidth, setInputWidht] = useState<string>("700px");
+  const [inputHeight, setInputHeight] = useState<string>("350px");
 
-  useEffect(() => {
-    if (screenDimensions.w < 770) {
-      setInputHeight(200);
-      setInputWidht(300);
-      return;
-    }
-    if (screenDimensions.w < 1680) {
-      setInputWidht(400);
-      setInputHeight(250);
-      return;
-    }
+  // useEffect(() => {
+  //   if (screenDimensions.w < 770) {
+  //     setInputHeight(200);
+  //     setInputWidht(300);
+  //     return;
+  //   }
+  //   if (screenDimensions.w < 1680) {
+  //     setInputWidht(400);
+  //     setInputHeight(250);
+  //     return;
+  //   }
 
-    if (screenDimensions.w < 1900) {
-      setInputWidht(400);
-      setInputHeight(350);
-      return;
-    }
+  //   if (screenDimensions.w < 1900) {
+  //     setInputWidht(400);
+  //     setInputHeight(350);
+  //     return;
+  //   }
 
-    if (screenDimensions.w < 2100) {
-      setInputWidht(500);
-      setInputHeight(350);
-      return;
-    }
+  //   if (screenDimensions.w < 2100) {
+  //     setInputWidht(500);
+  //     setInputHeight(350);
+  //     return;
+  //   }
 
-    if (screenDimensions.w < 2298) {
-      setInputWidht(600);
-      setInputHeight(350);
-      return;
-    }
+  //   if (screenDimensions.w < 2298) {
+  //     setInputWidht(600);
+  //     setInputHeight(350);
+  //     return;
+  //   }
 
-    setInputWidht(700);
-    setInputHeight(350);
-  }, [screenDimensions.w]);
+  //   setInputWidht(700);
+  //   setInputHeight(350);
+  // }, [screenDimensions.w]);
 
   useEffect(() => {
     setUserPrompt(textPrompt.input);
@@ -142,7 +142,7 @@ export default function TextPrompt({
         }}
         className="prompt-tool-main-container"
       >
-        <div>
+        <div style={{ width: "100%" }}>
           <h1 className="big-title">TEXT PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
             <div
@@ -150,13 +150,14 @@ export default function TextPrompt({
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
-                width: "200px",
+                width: "100%",
+                height: "100%",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={inputHeight <= 250 ? inputWidth + 50 : inputWidth}
-                inpHeight={inputHeight}
+                inpHeight={"90%"}
+                inpWidht="97%"
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -184,15 +185,17 @@ export default function TextPrompt({
               style={{
                 display: "flex",
                 flexDirection: "column",
+                width: "100%",
                 gap: "10px",
+                height: "100%",
               }}
             >
               <StyledInput
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={inputHeight}
-                inpWidht={inputHeight <= 250 ? inputWidth + 50 : inputWidth}
+                inpHeight={"90%"}
+                inpWidht="97%"
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -226,21 +229,26 @@ export default function TextPrompt({
             </div>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <h1 className="big-title">AI GENERATED</h1>
           <div className="right-generate-container">
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: screenDimensions.w > 780 ? "10px" : "0",
+                gap: "10px",
+                height: "100%",
+                width: "100%",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <StyledInput
-                inpWidht={inputWidth + 50}
-                inpHeight={inputHeight + 500}
+                inpHeight={"100%"}
                 inpStyle={1}
+                inpWidht="97%"
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
                 placeHolder="Your generated output will appear here..."
