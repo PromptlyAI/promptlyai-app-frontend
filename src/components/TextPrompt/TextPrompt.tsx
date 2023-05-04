@@ -156,8 +156,8 @@ export default function TextPrompt({
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpWidht={"100%"}
                 inpHeight={"100%"}
+                inpWidht="100%"
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -194,7 +194,8 @@ export default function TextPrompt({
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
                 inpHeight={"100%"}
-                inpWidht={"100%"}
+                inpWidht="100%"
+
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -208,6 +209,7 @@ export default function TextPrompt({
                   unclickable={promptOutput ? false : true}
                   btnWidth={200}
                   btnHeight={50}
+                  
                   title="Generate"
                   loading={improvedPromptLoading}
                 />
@@ -228,6 +230,7 @@ export default function TextPrompt({
             </div>
           </div>
         </div>
+        
         <div style={{ display: "flex", flexDirection: "column", width:"100%"  }}>
           <h1 className="big-title">AI GENERATED</h1>
           <div className="right-generate-container">
@@ -242,9 +245,9 @@ export default function TextPrompt({
             >
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <StyledInput
-                inpWidht={"100%" }
                 inpHeight={"100%" }
                 inpStyle={1}
+                inpWidht="100%"
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
                 placeHolder="Your generated output will appear here..."
