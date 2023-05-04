@@ -130,8 +130,8 @@ export default function AdminPage() {
               change={(ev) => setSearch(ev.target.value)}
               title={search}
               inpStyle={1}
-              inpHeight={15}
-              inpWidht={200}
+              inpHeight="15px"
+              inpWidht="200px"
               scroll={false}
             />
             {/* </div> */}
@@ -196,8 +196,8 @@ export default function AdminPage() {
                   change={(ev) => setNewBalance(parseInt(ev.target.value))}
                   title={`${newBalance}`}
                   inpStyle={1}
-                  inpHeight={50}
-                  inpWidht={200}
+                  inpHeight="50px"
+                  inpWidht="200px"
                 />
                 <StyledButton
                   click={() => changeBalance()}
