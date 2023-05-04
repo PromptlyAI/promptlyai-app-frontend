@@ -11,6 +11,7 @@ interface IProps {
   inpHeight?: string;
   scroll?: boolean;
   placeHolder?: string;
+  textSize?: string;
 }
 
 export default function StyledInput({
@@ -23,6 +24,7 @@ export default function StyledInput({
   inpHeight,
   scroll = true,
   placeHolder = "",
+  textSize,
 }: IProps) {
   return (
     <textarea
@@ -43,6 +45,7 @@ export default function StyledInput({
         height: inpHeight,
         overflow: scroll ? "auto" : "hidden",
         borderRadius: 0,
+        fontSize: textSize,
         borderColor: "transparent",
       }}
     >
