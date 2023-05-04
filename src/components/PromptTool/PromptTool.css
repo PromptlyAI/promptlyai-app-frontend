@@ -1,8 +1,8 @@
 .prompt-tool-container {
   padding-left: 50px;
   padding-top: 50px;
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - 300px);
+  width: calc(100vw - 900px);
 
   margin: 0;
 }
@@ -13,14 +13,12 @@
   /* overflow-x: hidden; */
   /* background: var(--primary-background); */
   display: flex;
-  
 
   gap: 20px;
 }
 
 .title-container {
   width: 500px;
-  
 }
 .center {
   display: flex;
@@ -45,7 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  height: calc(100% - 89px);
   width: 100%;
 
   gap: 20px;
@@ -67,7 +65,6 @@
 .prompt-title-container img {
   cursor: pointer;
   color: white;
-
 }
 .loading-text {
   background: var(--background-gray);
@@ -111,16 +108,12 @@
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
-  
 }
-@media screen and (max-width:1366px){
- 
-  
+@media screen and (max-width: 1366px) {
   .mobileLogo {
     width: 200px;
   }
 }
-
 
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
@@ -135,7 +128,6 @@
   .logo-container {
     width: 100%;
     justify-content: center;
-
   }
 }
 @media only screen and (max-width: 425px) {
@@ -143,5 +135,4 @@
   .mobileLogo {
     width: 150px;
   }
-
 }

@@ -142,7 +142,7 @@ export default function TextPrompt({
         }}
         className="prompt-tool-main-container"
       >
-        <div style={{width:"100%"}}>
+        <div style={{ width: "100%" }}>
           <h1 className="big-title">TEXT PROMPT TOOL</h1>
           <div className="prompt-tool-main-inner">
             <div
@@ -151,13 +151,13 @@ export default function TextPrompt({
                 flexDirection: "column",
                 gap: "10px",
                 width: "100%",
-                height:"100%"
+                height: "100%",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Prompt Input</h1>
               <StyledInput
-                inpHeight={"100%"}
-                inpWidht="100%"
+                inpHeight={"90%"}
+                inpWidht="97%"
                 inpStyle={1}
                 title={userPrompt}
                 change={(ev) => setUserPrompt(ev.target.value)}
@@ -185,17 +185,17 @@ export default function TextPrompt({
               style={{
                 display: "flex",
                 flexDirection: "column",
+                width: "100%",
                 gap: "10px",
-                height:"100%"
+                height: "100%",
               }}
             >
               <StyledInput
                 inpStyle={1}
                 title={promptOutput}
                 change={(ev) => setPromptOutput(ev.target.value)}
-                inpHeight={"100%"}
-                inpWidht="100%"
-
+                inpHeight={"90%"}
+                inpWidht="97%"
                 placeHolder="Your generated prompt will appear here..."
               />
               <div>
@@ -209,7 +209,6 @@ export default function TextPrompt({
                   unclickable={promptOutput ? false : true}
                   btnWidth={200}
                   btnHeight={50}
-                  
                   title="Generate"
                   loading={improvedPromptLoading}
                 />
@@ -230,8 +229,10 @@ export default function TextPrompt({
             </div>
           </div>
         </div>
-        
-        <div style={{ display: "flex", flexDirection: "column", width:"100%"  }}>
+
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <h1 className="big-title">AI GENERATED</h1>
           <div className="right-generate-container">
             <div
@@ -239,15 +240,15 @@ export default function TextPrompt({
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
-                width:"100%"
-                
+                height: "100%",
+                width: "100%",
               }}
             >
               <h1 style={{ textAlign: "left" }}>Output:</h1>
               <StyledInput
-                inpHeight={"100%" }
+                inpHeight={"100%"}
                 inpStyle={1}
-                inpWidht="100%"
+                inpWidht="97%"
                 title={improvedPrompt}
                 change={(ev) => setImprovedPrompt(ev.target.value)}
                 placeHolder="Your generated output will appear here..."
