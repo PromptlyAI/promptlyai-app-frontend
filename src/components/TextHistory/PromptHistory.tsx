@@ -75,8 +75,7 @@ export default function PromptHistory({
                 deletePrompt(historyBtn.id);
               }}
               pressed={historyBtn.pressed}
-              btnWidth={screenDimensions.w < 1200 ? 200 : 355}
-              btnHeight={56}
+              btnHeight={screenDimensions.w < 1600 ? 45 : 56}
               btnStyle={2}
               textColor="white"
               title={

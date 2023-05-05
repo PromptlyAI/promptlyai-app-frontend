@@ -29,6 +29,7 @@
   width: 400px;
   justify-content: center;
 }
+
 .output-types-container {
   border: solid black 2px;
   padding: 20px;
@@ -72,7 +73,7 @@
 .hide-bar {
   position: absolute;
   left: 0px;
-  height: 100px;
+  height: var(--header-height);
   z-index: 0;
   width: 600px;
   background: var(--primary-background);
@@ -108,6 +109,17 @@
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+}
+@media only screen and (max-width: 1800px) {
+  .logo-container {
+    width: 0px;
+  }
+  .mobileLogo{
+    width: 16x0px;
+  }
+  .prompt-title-container{
+    width: 500px;
+  }
 }
 @media screen and (max-width: 1366px) {
   .mobileLogo {
