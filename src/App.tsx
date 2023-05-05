@@ -13,6 +13,8 @@ import AdminPage from "./pages/AdminPage/AdminPage";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Popup from "./components/Popup/popup";
 import { AppContext } from "./context/AppContext";
+import VerifyEmail from "./pages/VerificationPages/VerifyEmail";
+import SendVerifyEmail from "./pages/VerificationPages/SendVerifyEmail";
 
 interface screenDimensionsProps {
   w: number;
@@ -93,6 +95,9 @@ function App() {
                 <Route path="/loading" element={<IntroPage />} />
                 {/* <Route path="/settings" element={<SettingsPage />} /> */}
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/verify-email" element={<VerifyEmail/>}/>
+                <Route path="/send-verify-email" element={<SendVerifyEmail/>}/>
+
                 {/* {showSettings && <SettingsPage />} */}
               </Routes>
             </div>
