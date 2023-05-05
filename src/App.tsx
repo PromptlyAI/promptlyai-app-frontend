@@ -15,6 +15,7 @@ import Popup from "./components/Popup/popup";
 import { AppContext } from "./context/AppContext";
 import VerifyEmail from "./pages/VerificationPages/VerifyEmail";
 import SendVerifyEmail from "./pages/VerificationPages/SendVerifyEmail";
+import ForgotPassword from "./pages/VerificationPages/forgotPassword";
 
 interface screenDimensionsProps {
   w: number;
@@ -93,10 +94,13 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/loading" element={<IntroPage />} />
+                
                 {/* <Route path="/settings" element={<SettingsPage />} /> */}
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/verify-email" element={<VerifyEmail/>}/>
                 <Route path="/send-verify-email" element={<SendVerifyEmail/>}/>
+                <Route path="/forgot-password" element={<ForgotPassword/>}/>
+
 
                 {/* {showSettings && <SettingsPage />} */}
               </Routes>

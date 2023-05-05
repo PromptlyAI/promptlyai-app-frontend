@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import { AppContext } from "../../context/AppContext";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Api from "../../api/Api";
 
 export default function VerifyEmail() {
   const { screenDimensions } = useContext(AppContext);
@@ -9,16 +10,28 @@ export default function VerifyEmail() {
   const [verifyToken, setVerifyToken] = useState<string>();
   const [emailHasBeenVerified, setEmailHasBeenVerified] =
     useState<boolean>(false);
+    const navigate = useNavigate();
+
+
   useEffect(() => {
-    setVerifyToken(searchParams.get("verifyToken") || "");
-    verify();
+    const token = searchParams.get("token") || "empty";
+    setVerifyToken(token);
+    if (token !== "empty") {
+      verify();
+    }
   }, []);
 
   const verify = async () => {
-    console.log("Illa: " + verifyToken);
+    const response = await Api({
+      path: "user/verify",
+      method: "put",
+      bodyParams: { token: verifyToken },
+    });
 
-    if (verifyToken != "") {
+    if (!response.error) {
       setEmailHasBeenVerified(true);
+    } else {
+      alert(response.error);
     }
   };
   return (
@@ -61,9 +74,7 @@ export default function VerifyEmail() {
               <label>Your email has been verified</label>
               <p style={{ color: "white" }}>{emailHasBeenVerified}</p>
               <StyledButton
-                click={() => {
-                  //login
-                }}
+                click={() => {navigate("/login")}}
                 btnStyle={3}
                 unclickable={false}
                 btnWidth={screenDimensions.w > 1800 ? 200 : 120}

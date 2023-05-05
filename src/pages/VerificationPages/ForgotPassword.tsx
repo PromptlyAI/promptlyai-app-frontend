@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import { useSearchParams } from "react-router-dom";
+import StyledInput from "../../shared/input-styles/StyledInput";
+import "../LoginPage/LoginPage.css";
 
-export default function SendVerifyEmail() {
+export default function ForgotPassword() {
   const { screenDimensions } = useContext(AppContext);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [email, setEmail] = useState<string>();
-  useEffect(() => {
-    setEmail(searchParams.get("email") || "");
-  }, []);
+  const [password, setPassword] = useState<string>();
+
 
   const verify = async () => {
     if (email != "") {
@@ -40,11 +40,34 @@ export default function SendVerifyEmail() {
           gap: "20px",
         }}
       >
-        <label>
-          You need to verify your email to use PromptlyLabs. An email has been
-          sent to: 
-        </label>
-        <label>{email}</label>
+        <label>Enter email</label>
+
+        <input
+          className="login-input"
+          type="email"
+          onChange={(ev) => setEmail(ev.target.value)}
+        />
+
+        <label>Enter new password</label>
+
+        <input
+          className="login-input"
+          type="password"
+          onChange={(ev) => setPassword(ev.target.value)}
+        />
+
+        <StyledButton
+          click={() => {
+            verify;
+          }}
+          btnStyle={3}
+          unclickable={false}
+          btnWidth={screenDimensions.w > 1800 ? 200 : 120}
+          btnHeight={screenDimensions.w > 1800 ? 50 : 35}
+          title="Reset"
+          loading={false}
+          textSize={screenDimensions.w > 1800 ? 25 : 15}
+        />
       </div>
     </div>
   );
