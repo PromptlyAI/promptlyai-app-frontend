@@ -15,7 +15,7 @@ import Popup from "./components/Popup/popup";
 import { AppContext } from "./context/AppContext";
 import VerifyEmail from "./pages/VerificationPages/VerifyEmail";
 import SendVerifyEmail from "./pages/VerificationPages/SendVerifyEmail";
-import ForgotPassword from "./pages/VerificationPages/forgotPassword";
+import ForgotPassword from "./pages/VerificationPages/ForgotPassword";
 
 interface screenDimensionsProps {
   w: number;
