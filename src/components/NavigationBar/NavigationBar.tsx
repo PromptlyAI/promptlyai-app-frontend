@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./NavigationBar.css";
-import Search from "../../images/Search.png";
+import Edit from "../../images/Edit.png";
 import ImgBox from "../../images/ImgBox.png";
 import Time from "../../images/Time.png";
 import MenuBtn from "../../images/MenuBtn.png";
@@ -48,14 +48,13 @@ export default function NavigationBar() {
   return (
     <>
       <div className="navigation-bar-main-container">
-      
         <div
           onClick={() => setRotate(!rotate)}
           className={rotate ? "menu-btn rotate" : "menu-btn"}
         >
           <img src={MenuBtn} alt="" />
         </div>
-        <div  className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
+        <div className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
           <RxExit className="exit-icon mobileNavLogo" />
         </div>
         <div className="nav-btn-container">
@@ -67,7 +66,7 @@ export default function NavigationBar() {
             className="nav-btn"
             onClick={() => changeMode("TEXT")}
           >
-            <img className="mobileNavLogo" src={Search} alt="" />
+            <img className="mobileNavLogo" src={Edit} alt="" />
           </div>
           <div
             style={{
