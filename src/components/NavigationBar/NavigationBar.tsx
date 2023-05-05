@@ -20,6 +20,7 @@ export default function NavigationBar() {
     setHistoryMode,
     setReloadHistory,
     setPromptId,
+    setNeedToSignIn,
   } = useContext(AppContext);
 
   const [userName, setUserName] = useState<string>("");
@@ -44,6 +45,11 @@ export default function NavigationBar() {
     setHistoryMode(type);
     setReloadHistory(true);
   }
+  function logout() {
+    localStorage.removeItem("token");
+    setNeedToSignIn(true);
+    setShowSettings(false);
+  }
 
   return (
     <>
@@ -54,7 +60,14 @@ export default function NavigationBar() {
         >
           <img src={MenuBtn} alt="" />
         </div>
-        <div className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}>
+        <div
+          onClick={() => {
+            if (rotate !== undefined && rotate === true) {
+              logout();
+            }
+          }}
+          className={rotate ? "exit-btn fade-in" : "exit-btn fade-out"}
+        >
           <RxExit className="exit-icon mobileNavLogo" />
         </div>
         <div className="nav-btn-container">

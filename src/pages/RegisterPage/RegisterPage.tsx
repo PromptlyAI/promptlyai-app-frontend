@@ -54,7 +54,7 @@ export default function RegisterPage() {
     <div className="register-page-container">
       <div className="register-page">
         <div>
-          <img className="logo" src={Logo} alt="" />
+          <img style={{ width: "260px" }} className="logo" src={Logo} alt="" />
 
           <form
             style={{
