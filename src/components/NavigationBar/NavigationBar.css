@@ -105,22 +105,23 @@
   width: 65px;
   height: 65px;
 }
-/* @media screen and (max-width:1366px){
-  .nav-btn {
-
-    width: 50px;
-    height: 50px;
+ @media screen and (max-width: 1800px){
+  .navigation-bar-main-container{
+    min-width: 100px;
   }
-  .mobileNavLogo {
-    width: 40px;
-    height: 40px;
+  .mobileNavLogo{
+    width: 35px;
   }
-  .profile-picture {
+  .nav-btn{
+    width: 47px;
+  height: 47px;
+  }
+  .profile-picture{
     width: 45px;
     height: 45px;
   }
 }
-
+/*
 @media only screen and (max-width: 600px) {
   .navigation-bar-main-container {
     width: 15vw;
