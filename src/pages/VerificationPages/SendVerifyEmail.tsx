@@ -38,22 +38,75 @@ export default function SendVerifyEmail() {
           alignItems: "center",
           flexDirection: "column",
           gap: "20px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <label>You need to verify your email to use PromptlyLabs</label>
-        <p style={{ color: "white" }}>{email}</p>
-        <StyledButton
-          click={() => {
-            verify;
+        <h1
+          style={{
+            fontSize: "32px",
+            fontWeight: "bold",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "20px",
           }}
-          btnStyle={3}
-          unclickable={false}
-          btnWidth={screenDimensions.w > 1800 ? 200 : 120}
-          btnHeight={screenDimensions.w > 1800 ? 50 : 35}
-          title="Verify"
-          loading={false}
-          textSize={screenDimensions.w > 1800 ? 25 : 15}
-        />
+        >
+          Welcome to PromptlyLabs!
+        </h1>
+
+        <label
+          style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "10px",
+          }}
+        >
+          To get started, please verify your email address.
+        </label>
+
+        <label
+          style={{
+            fontSize: "16px",
+            fontWeight: "600",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "30px",
+          }}
+        >
+          We have sent a verification email to:{" "}
+          <span style={{ textDecoration: "underline" }}>{email}</span>
+        </label>
+
+        <label
+          style={{
+            fontSize: "16px",
+            fontWeight: "600",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "10px",
+          }}
+        >
+          Please check your inbox and click the link in the email to activate
+          your account. If you did not receive the email, check your spam folder
+          or click the button below to resend the verification email.
+        </label>
+
+        <button
+          style={{
+            background: "#6f6fb3",
+            borderRadius: "8px",
+            color: "#fff",
+            fontSize: "18px",
+            fontWeight: "600",
+            padding: "10px 20px",
+            cursor: "pointer",
+            border: "none",
+            marginTop: "20px",
+          }}
+        >
+          Resend Verification Email
+        </button>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import { AppContext } from "../../context/AppContext";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Api from "../../api/Api";
 
 export default function VerifyEmail() {
   const { screenDimensions } = useContext(AppContext);
@@ -9,17 +10,31 @@ export default function VerifyEmail() {
   const [verifyToken, setVerifyToken] = useState<string>();
   const [emailHasBeenVerified, setEmailHasBeenVerified] =
     useState<boolean>(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setVerifyToken(searchParams.get("verifyToken") || "");
-    verify();
+    const token = searchParams.get("token") || "empty";
+    setVerifyToken(token);
+
+    if (token !== "empty") {
+      verify();
+    }
   }, []);
 
   const verify = async () => {
-    console.log("Illa: " + verifyToken);
+    const response = await Api({
+      path: "user/verify",
+      method: "put",
+      bodyParams: { token: verifyToken },
+    });
 
-    if (verifyToken != "") {
+    if (!response.error) {
       setEmailHasBeenVerified(true);
+    } else {
+      alert(response.error);
     }
+
+    setEmailHasBeenVerified(true);
   };
   return (
     <div
@@ -43,12 +58,22 @@ export default function VerifyEmail() {
           alignItems: "center",
           flexDirection: "column",
           gap: "20px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
         {
           //Check if message failed
           emailHasBeenVerified === false ? (
-            <label>Email is beeing verified...</label>
+            <label
+              style={{
+                fontSize: "20px",
+                fontWeight: "600",
+                color: "#fff",
+                textAlign: "center",
+              }}
+            >
+              Verifying your email...
+            </label>
           ) : (
             <div
               style={{
@@ -56,13 +81,34 @@ export default function VerifyEmail() {
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
+                gap: "20px",
               }}
             >
-              <label>Your email has been verified</label>
-              <p style={{ color: "white" }}>{emailHasBeenVerified}</p>
+              <label
+                style={{
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                Your email has been successfully verified!
+              </label>
+              <p
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  color: "#fff",
+                  textAlign: "center",
+                  marginBottom: "20px",
+                }}
+              >
+                You can now log in and enjoy our
+                services.
+              </p>
               <StyledButton
                 click={() => {
-                  //login
+                  navigate("/login");
                 }}
                 btnStyle={3}
                 unclickable={false}

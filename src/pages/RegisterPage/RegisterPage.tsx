@@ -21,32 +21,14 @@ export default function RegisterPage() {
   async function register(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     ev.preventDefault();
     setLoading(true);
+
     const registerResponse = await Api({
       path: "user/register",
       method: "POST",
       bodyParams: { name, email, password },
     });
 
-    const response = await Api({
-      path: "user/login",
-      method: "POST",
-      bodyParams: { email, password },
-    });
-    // const data = await response.json();
-
-    if (response.token === undefined) {
-      setLoginFailed(true);
-    } else {
-      setLoginFailed(false);
-      localStorage.setItem("token", await response.token);
-      console.log(localStorage.getItem("token"));
-
-      setTimeout(() => {
-        navigate("/loading");
-      }, 1000);
-    }
-
-    setLoading(false);
+    navigate(`/send-verify-email?email=${email}`);
   }
 
   async function forgotPassword() {}
