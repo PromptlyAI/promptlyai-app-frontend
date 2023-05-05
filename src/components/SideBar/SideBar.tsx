@@ -217,7 +217,14 @@ export default function SideBar() {
                   justifyContent: "space-between",
                 }}
               >
-                <label htmlFor="">PROMPT HISTORY</label>
+                <label
+                  htmlFor=""
+                  style={{
+                    fontSize: screenDimensions.w > 1800 ? "30px" : "20px",
+                  }}
+                >
+                  PROMPT HISTORY
+                </label>
                 {historyMode === "TEXT" ? (
                   <button
                     className="new-prompt-btn"
@@ -257,7 +264,6 @@ export default function SideBar() {
                   <button
                     onClick={() => clearPromptHistory()}
                     className="clear-btn"
-                    style={{ height: "56px" }}
                   >
                     {clearLoading ? (
                       <div className="center">

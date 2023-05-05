@@ -75,6 +75,11 @@
 .prompt-tool-top-container-height {
   height: var(--header-height);
 }
+@media screen and (max-width: 1800px) {
+  :root {
+    --header-height: 70px;
+  }
+}
 @media screen and (max-width: 1366px) {
   :root {
     --header-height: 80px;
