@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import { useSearchParams } from "react-router-dom";
+import Api from "../../api/Api";
 
 export default function SendVerifyEmail() {
   const { screenDimensions } = useContext(AppContext);
@@ -13,7 +14,15 @@ export default function SendVerifyEmail() {
 
   const verify = async () => {
     if (email != "") {
-      //send email
+      try {
+        const response = await Api({
+          path: `user/send-verify-email?email=${email}`,
+          method: "put",
+        });
+        alert("Email sent");
+      } catch (error) {
+        alert(error);
+      }
     }
   };
   return (
@@ -104,6 +113,7 @@ export default function SendVerifyEmail() {
             border: "none",
             marginTop: "20px",
           }}
+          onClick={verify}
         >
           Resend Verification Email
         </button>

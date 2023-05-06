@@ -34,7 +34,6 @@ export default function VerifyEmail() {
       alert(response.error);
     }
 
-    setEmailHasBeenVerified(true);
   };
   return (
     <div
