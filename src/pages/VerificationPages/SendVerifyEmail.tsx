@@ -20,7 +20,6 @@ export default function SendVerifyEmail() {
           method: "put",
         });
         alert("Email sent");
-
       } catch (error) {
         alert(error);
       }
