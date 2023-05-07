@@ -20,7 +20,7 @@ export default function ForgotPassword() {
       try {
         const response = await Api({
           path: `user/forgot-password`,
-          method: "put",
+          method: "post",
           bodyParams:{email}
         });
         console.log("Response: " + response)
