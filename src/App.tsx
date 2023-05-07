@@ -16,6 +16,7 @@ import { AppContext } from "./context/AppContext";
 import VerifyEmail from "./pages/VerificationPages/VerifyEmail";
 import SendVerifyEmail from "./pages/VerificationPages/SendVerifyEmail";
 import ForgotPassword from "./pages/VerificationPages/ForgotPassword";
+import ResetPassword from "./pages/VerificationPages/ResetPassword";
 
 interface screenDimensionsProps {
   w: number;
@@ -100,6 +101,7 @@ function App() {
                 <Route path="/verify-email" element={<VerifyEmail/>}/>
                 <Route path="/send-verify-email" element={<SendVerifyEmail/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="/reset-password" element={<ResetPassword/>}/>
 
 
                 {/* {showSettings && <SettingsPage />} */}

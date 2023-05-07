@@ -4,16 +4,30 @@ import StyledButton from "../../shared/ButtonStyles/StyledButton";
 import { useSearchParams } from "react-router-dom";
 import StyledInput from "../../shared/input-styles/StyledInput";
 import "../LoginPage/LoginPage.css";
+import Api from "../../api/Api";
 
 export default function ForgotPassword() {
   const { screenDimensions } = useContext(AppContext);
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [searchParams] = useSearchParams();
+  const [email, setEmail] = useState<string>("");
 
+  useEffect(() => {
+    setEmail(searchParams.get("email") || "");
+  }, []);
 
-  const verify = async () => {
+  const sendResetLink = async () => {
     if (email != "") {
-      //send email
+      try {
+        const response = await Api({
+          path: `user/forgot-password`,
+          method: "post",
+          bodyParams:{email}
+        });
+        console.log("Response: " + response)
+        alert("Email sent");
+      } catch (error) {
+        alert(error);
+      }
     }
   };
   return (
@@ -38,33 +52,69 @@ export default function ForgotPassword() {
           alignItems: "center",
           flexDirection: "column",
           gap: "20px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <label>Enter email</label>
+        <h1
+          style={{
+            fontSize: "32px",
+            fontWeight: "bold",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "30px",
+          }}
+        >
+          Forgot Password
+        </h1>
+        
+        <p
+          style={{
+            fontSize: "18px",
+            fontWeight: "500",
+            color: "#fff",
+            textAlign: "center",
+            marginBottom: "20px",
+          }}
+        >
+          Please enter your email address and we'll send you a link to reset your password.
+        </p>
+
+        <label
+          style={{
+            fontSize: "20px",
+            fontWeight: "600",
+            color: "#fff",
+            marginBottom: "10px",
+          }}
+        >
+          Email address
+        </label>
 
         <input
           className="login-input"
           type="email"
+          value={email}
           onChange={(ev) => setEmail(ev.target.value)}
-        />
-
-        <label>Enter new password</label>
-
-        <input
-          className="login-input"
-          type="password"
-          onChange={(ev) => setPassword(ev.target.value)}
+          style={{
+            fontSize: "16px",
+            fontWeight: "500",
+            marginBottom: "30px",
+            padding: "10px",
+            width: "100%",
+            maxWidth: "400px",
+            borderRadius: "8px",
+          }}
         />
 
         <StyledButton
           click={() => {
-            verify;
+            sendResetLink();
           }}
           btnStyle={3}
           unclickable={false}
           btnWidth={screenDimensions.w > 1800 ? 200 : 120}
           btnHeight={screenDimensions.w > 1800 ? 50 : 35}
-          title="Reset"
+          title="Send Reset Link"
           loading={false}
           textSize={screenDimensions.w > 1800 ? 25 : 15}
         />

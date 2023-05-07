@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
 interface IProps {
-  path: string;
-  method: string;
-  bodyParams?: any;
-  token?: string;
+  path: string
+  method: string
+  bodyParams?: any
+  token?: string
 }
 
 export default async function Api({ path, method, bodyParams, token }: IProps) {
@@ -14,14 +14,19 @@ export default async function Api({ path, method, bodyParams, token }: IProps) {
       {
         method: method,
         headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
+          'Content-Type': 'application/json',
+          Authorization: token ? `Bearer ${token}` : '',
         },
         body: bodyParams && JSON.stringify(bodyParams),
-      }
-    );
-    return await response.json();
+      },
+    )
+    if (response.status === 200) {
+      return await response.json()
+    }
+    {
+      return await response
+    }
   } catch (err) {
-    return "illa";
+    return err
   }
 }
