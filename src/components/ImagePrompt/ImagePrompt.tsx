@@ -125,7 +125,6 @@ export default function ImagePrompt({
   }, [imageUrl])
   return (
     <div style={{ height: '100%' }}>
-      <h1 className="settings-title">Prompt Settings</h1>
       <div
         style={{
           height: '100%',
