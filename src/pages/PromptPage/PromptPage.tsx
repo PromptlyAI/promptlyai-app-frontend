@@ -18,18 +18,25 @@ export default function PromptPage() {
       {/* <PromptTool /> */}
 
       <div style={{ display: "flex", gap: "20px" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            height: "100vh",
+            alignItems: "center",
+          }}
+        >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "100vh",
+              height: "80%",
               width: "500px",
               alignItems: "center",
-              background: "orange",
               gap: "10px",
             }}
           >
+            <h1>Doc-editor</h1>
             <div
               style={{
                 width: "100%",
@@ -48,6 +55,8 @@ export default function PromptPage() {
                 placeHolder="Write your prompt input here..."
               />
             </div>
+            <h1>Terminal</h1>
+
             <div
               style={{
                 width: "100%",
@@ -63,7 +72,7 @@ export default function PromptPage() {
                 inpStyle={1}
                 title={userInput}
                 change={(ev) => setUserInput(ev.target.value)}
-                placeHolder="Write your prompt input here..."
+                placeHolder="Write your< prompt input here..."
               />
             </div>
           </div>
@@ -71,15 +80,61 @@ export default function PromptPage() {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            justifyContent: "center",
             height: "100vh",
-            width: "500px",
             alignItems: "center",
-            background: "orange",
           }}
         >
-          <div>Settings</div>
-          <div>Actions</div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "80%",
+              width: "500px",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <h1>Settings</h1>
+            <div
+              style={{
+                width: "100%",
+                height: "50%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <StyledInput
+                inpHeight={"90%"}
+                inpWidht="97%"
+                textSize={screenDimensions.w > 1800 ? "22px" : "15px"}
+                inpStyle={1}
+                title={userInput}
+                change={(ev) => setUserInput(ev.target.value)}
+                placeHolder="Write your prompt input here..."
+              />
+            </div>
+            <h1>Actions</h1>
+
+            <div
+              style={{
+                width: "100%",
+                height: "50%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <StyledInput
+                inpHeight={"90%"}
+                inpWidht="97%"
+                textSize={screenDimensions.w > 1800 ? "22px" : "15px"}
+                inpStyle={1}
+                title={userInput}
+                change={(ev) => setUserInput(ev.target.value)}
+                placeHolder="Write your< prompt input here..."
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
