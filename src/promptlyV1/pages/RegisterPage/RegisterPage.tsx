@@ -28,7 +28,7 @@ export default function RegisterPage() {
       bodyParams: { name, email, password },
     });
 
-    navigate(`/send-verify-email?email=${email}`);
+    navigate(`/promptlyv1/send-verify-email?email=${email}`);
   }
 
   async function forgotPassword() {}

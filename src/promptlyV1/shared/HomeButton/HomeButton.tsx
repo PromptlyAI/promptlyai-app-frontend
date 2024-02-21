@@ -4,5 +4,7 @@ import { useNavigate } from "react-router";
 import "./HomeButton.css";
 export default function HomeButton() {
   const navigate = useNavigate();
-  return <AiFillHome className="home-btn" onClick={() => navigate("/")} />;
+  return (
+    <AiFillHome className="home-btn" onClick={() => navigate("/promptlyv1/")} />
+  );
 }

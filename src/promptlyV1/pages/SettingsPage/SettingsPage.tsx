@@ -65,7 +65,7 @@ export default function SettingsPage() {
 
       alert("account deleted");
       setTimeout(() => {
-        navigate("/");
+        navigate("/promptlyv1/");
       }, 1000);
     };
     deleteUser();
@@ -130,7 +130,7 @@ export default function SettingsPage() {
               />
             </div>
           </div>
-          <div style={{height:"100%"}} className="center">
+          <div style={{ height: "100%" }} className="center">
             <div className="settings-button-collection">
               <div
                 style={{
@@ -171,7 +171,7 @@ export default function SettingsPage() {
               <div className="settings-bottom-collection">
                 {userInfo?.role === "ADMIN" && (
                   <StyledButton
-                    click={() => navigate("/admin")}
+                    click={() => navigate("/promptlyv1/admin")}
                     btnStyle={4}
                     btnWidth={200}
                     btnHeight={60}

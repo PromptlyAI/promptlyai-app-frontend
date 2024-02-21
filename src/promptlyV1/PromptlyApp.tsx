@@ -71,57 +71,64 @@ function PromptlyApp() {
         </div>
       ) : (
         <>
-          <Router basename="/promptlyv1">
-            <div className="App">
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <>
-                      <AppContext.Provider
-                        value={{
-                          reloadHistory,
-                          setReloadHistory,
-                          historyMode,
-                          setHistoryMode,
-                          showSettings,
-                          setShowSettings,
-                          showSidebar,
-                          setShowSidebar,
-                          promptId,
-                          setPromptId,
-                          screenDimensions,
-                          setScreenDimensions,
-                          needToSignIn,
-                          setNeedToSignIn,
-                        }}
-                      >
-                        <NavigationBar />
-                        <SideBar />
-                        <PromptPage />
-                      </AppContext.Provider>
-                    </>
-                  }
-                />
+          <div className="App">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <AppContext.Provider
+                      value={{
+                        reloadHistory,
+                        setReloadHistory,
+                        historyMode,
+                        setHistoryMode,
+                        showSettings,
+                        setShowSettings,
+                        showSidebar,
+                        setShowSidebar,
+                        promptId,
+                        setPromptId,
+                        screenDimensions,
+                        setScreenDimensions,
+                        needToSignIn,
+                        setNeedToSignIn,
+                      }}
+                    >
+                      <NavigationBar />
+                      <SideBar />
+                      <PromptPage />
+                    </AppContext.Provider>
+                  </>
+                }
+              />
 
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/loading" element={<IntroPage />} />
+              <Route path="/promptlyv1/login" element={<LoginPage />} />
+              <Route path="/promptlyv1/register" element={<RegisterPage />} />
+              <Route path="/promptlyv1/loading" element={<IntroPage />} />
 
-                {/* <Route path="/settings" element={<SettingsPage />} /> */}
-                <Route path="/admin" element={<AdminPage />} />
-                <Route path="/verify-email" element={<VerifyEmail />} />
-                <Route
-                  path="/send-verify-email"
-                  element={<SendVerifyEmail />}
-                />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
+              {/* <Route path="/settings" element={<SettingsPage />} /> */}
+              <Route path="/promptlyv1/admin" element={<AdminPage />} />
+              <Route
+                path="/promptlyv1/verify-email"
+                element={<VerifyEmail />}
+              />
+              <Route
+                path="/promptlyv1/send-verify-email"
+                element={<SendVerifyEmail />}
+              />
+              <Route
+                path="/promptlyv1/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route
+                path="/promptlyv1/reset-password"
+                element={<ResetPassword />}
+              />
 
-                {/* {showSettings && <SettingsPage />} */}
-              </Routes>
-            </div>
-          </Router>
+              {/* {showSettings && <SettingsPage />} */}
+            </Routes>
+          </div>
         </>
       )}
     </>
