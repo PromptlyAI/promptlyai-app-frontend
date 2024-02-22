@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/promptlyv1" element={<PromptlyApp />}></Route>
+          <Route path="/promptly" element={<PromptlyApp />}></Route>
           <Route path="/prompt-grad" element={<PromptGrad />}></Route>
         </Routes>
       </Router>
