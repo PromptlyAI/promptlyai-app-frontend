@@ -6,21 +6,21 @@ import SmallBtn from "../prompt-grad/shared/smallBtn";
 export default function Home() {
   const navigate = useNavigate();
   return (
-    <div>
-      <div className="flex justify-center p-10">
-        <div className="flex flex-col">
-          <h1 className="text-[50px] text-black text-center w-[100%]">
+    <div className="flex justify-center">
+      <div className="flex justify-center p-10 w-[500px]">
+        <div className="flex flex-col w-[100%] ">
+          <h1 className="text-4xl text-black text-center w-[100%]">
             Promply Labs
           </h1>
-          <span className="w-[500px] p-10">
+          <span className="p-10">
             De prompts som skapas ska huvudsakligen användas i produktionsappar
             som basprompt. Första möjliga kund är skolans egna gpt. Bas-prompten
             som genereras ska säkerställa att gpt:n blir skolvänlig och inte gör
             arbeten åt elever utan istället hjälper de i sitt arbete med tips
             och coaching.
           </span>
-          <h2 className="text-[25px] text-center">Our sörvices:</h2>
-          <div className="p-10 flex w-[100%] justify-around">
+          <h2 className="text-2xl text-center">Our sörvices:</h2>
+          <div className="p-10 flex w-96 justify-around">
             <SmallBtn
               text="PromptGradient"
               func={() => navigate("/prompt-grad")}

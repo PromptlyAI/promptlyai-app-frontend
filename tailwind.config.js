@@ -5,8 +5,8 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    black: "#000000",
     colors: {  
+      black: "#000000",
       blue: {
         default: "#0c98c7",
       },
