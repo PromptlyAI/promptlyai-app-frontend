@@ -5,6 +5,8 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    
+
     extend: {
       colors: {  
         blue: {
@@ -18,7 +20,15 @@ export default {
           design:"#EAECEE"
         },
         greyText:"#545D65", 
+          grayscale: {
+          lgray: "#dbdbdb", 
+          gray: "#c7c7c7",
+        },
+                  description: "#e0e0e0",
+
       },
+        fontFamily: {
+        "title": "Merriweather, serif",},
     },
   },
   plugins: [],
