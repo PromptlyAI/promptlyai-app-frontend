@@ -1,6 +1,14 @@
 import React from "react";
 import "./PromptGrad.css";
+import Toolbar from "./shared/Toolbar";
+import GradInput from "./shared/GradInput";
 
 export default function PromptGrad() {
-  return <div>PromptGrad</div>;
+  //älgarna protesterar. älgarna har fått nog. älgarna är arga. älgarna är trötta. älgarna är hungriga. älgarna är ledsna. älgarna är glada. älgarna är förvirrade. älgarna är rädda
+  return (
+    <div className="bg-white h-screen">
+      <Toolbar />
+      <GradInput />
+    </div>
+  );
 }
