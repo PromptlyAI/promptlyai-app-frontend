@@ -6,23 +6,29 @@ export default {
   ],
   theme: {
     
+
     extend: {
       colors: {  
-        black: "#000000",
-        white: "#ffffff",
-        description: "#e0e0e0",
         blue: {
-          default: "#0c98c7",
-          hover: "#0eade3",
+        default: "#0c98c7",
+        hover: "#0eade3",
         },
-        grayscale: {
+        secondary:{
+          design:"#8C9DAE"
+        },
+        primary:{
+          design:"#EAECEE"
+        },
+        greyText:"#545D65", 
+          grayscale: {
           lgray: "#dbdbdb", 
           gray: "#c7c7c7",
-        }
+        },
+                  description: "#e0e0e0",
+
       },
-      fontFamily: {
-        "title": "Merriweather, serif",
-      },
+        fontFamily: {
+        "title": "Merriweather, serif",},
     },
   },
   plugins: [],
