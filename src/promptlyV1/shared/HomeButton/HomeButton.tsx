@@ -5,6 +5,6 @@ import "./HomeButton.css";
 export default function HomeButton() {
   const navigate = useNavigate();
   return (
-    <AiFillHome className="home-btn" onClick={() => navigate("/promptlyv1/")} />
+    <AiFillHome className="home-btn" onClick={() => navigate("/promptly/")} />
   );
 }

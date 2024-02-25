@@ -65,7 +65,7 @@ export default function SettingsPage() {
 
       alert("account deleted");
       setTimeout(() => {
-        navigate("/promptlyv1/");
+        navigate("/promptly/");
       }, 1000);
     };
     deleteUser();
@@ -171,7 +171,7 @@ export default function SettingsPage() {
               <div className="settings-bottom-collection">
                 {userInfo?.role === "ADMIN" && (
                   <StyledButton
-                    click={() => navigate("/promptlyv1/admin")}
+                    click={() => navigate("/promptly/admin")}
                     btnStyle={4}
                     btnWidth={200}
                     btnHeight={60}

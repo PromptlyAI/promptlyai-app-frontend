@@ -6,7 +6,7 @@ export default function IntroPage() {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      navigate("/promptlyv1/");
+      navigate("/promptly/");
     }, 3000);
   }, []);
   return (

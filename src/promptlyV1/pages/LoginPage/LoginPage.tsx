@@ -33,7 +33,7 @@ export default function LoginPage() {
       console.log(localStorage.getItem("token"));
 
       setTimeout(() => {
-        navigate("/promptlyv1/loading");
+        navigate("/promptly/loading");
       }, 1000);
     }
 

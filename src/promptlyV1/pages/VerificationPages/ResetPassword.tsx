@@ -143,7 +143,7 @@ export default function ResetPassword() {
             </p>
             <StyledButton
               click={() => {
-                navigate("/promptlyv1/login");
+                navigate("/promptly/login");
               }}
               btnStyle={3}
               unclickable={false}

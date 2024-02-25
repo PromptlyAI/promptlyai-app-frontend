@@ -20,7 +20,7 @@ export default function Popup() {
             btnWidth={175}
             btnHeight={40}
             click={() => {
-              navigate("/promptlyv1/login");
+              navigate("/promptly/login");
             }}
             btnStyle={3}
             title="Login"
@@ -29,7 +29,7 @@ export default function Popup() {
             btnWidth={175}
             btnHeight={40}
             click={() => {
-              navigate("/promptlyv1/register");
+              navigate("/promptly/register");
             }}
             btnStyle={3}
             title="Register"

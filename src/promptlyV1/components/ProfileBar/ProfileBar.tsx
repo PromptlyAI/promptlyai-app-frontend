@@ -33,7 +33,7 @@ export default function ProfileBar() {
       </div>
       <div></div>
       <img
-        onClick={() => navigate("/promptlyv1/settings")}
+        onClick={() => navigate("/promptly/settings")}
         className="settings-btn"
         src={CogWheel}
         alt=""

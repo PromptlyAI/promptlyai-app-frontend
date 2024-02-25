@@ -103,26 +103,23 @@ function PromptlyApp() {
                 }
               />
 
-              <Route path="/promptlyv1/login" element={<LoginPage />} />
-              <Route path="/promptlyv1/register" element={<RegisterPage />} />
-              <Route path="/promptlyv1/loading" element={<IntroPage />} />
+              <Route path="/promptly/login" element={<LoginPage />} />
+              <Route path="/promptly/register" element={<RegisterPage />} />
+              <Route path="/promptly/loading" element={<IntroPage />} />
 
               {/* <Route path="/settings" element={<SettingsPage />} /> */}
-              <Route path="/promptlyv1/admin" element={<AdminPage />} />
+              <Route path="/promptly/admin" element={<AdminPage />} />
+              <Route path="/promptly/verify-email" element={<VerifyEmail />} />
               <Route
-                path="/promptlyv1/verify-email"
-                element={<VerifyEmail />}
-              />
-              <Route
-                path="/promptlyv1/send-verify-email"
+                path="/promptly/send-verify-email"
                 element={<SendVerifyEmail />}
               />
               <Route
-                path="/promptlyv1/forgot-password"
+                path="/promptly/forgot-password"
                 element={<ForgotPassword />}
               />
               <Route
-                path="/promptlyv1/reset-password"
+                path="/promptly/reset-password"
                 element={<ResetPassword />}
               />
 
