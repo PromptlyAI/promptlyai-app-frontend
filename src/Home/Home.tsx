@@ -1,7 +1,7 @@
 import React from "react";
 import PromptlyApp from "../promptlyV1/PromptlyApp";
 import { useNavigate } from "react-router";
-import SmallBtn from "../prompt-grad/shared/smallBtn";
+import SmallBtn from "../shared/SmallBtn";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Home() {
             och coaching.
           </span>
           <h2 className="text-2xl text-center">Our sörvices:</h2>
-          <div className="p-10 flex w-96 justify-around">
+          <div className="p-10 flex w-96 h-[fit-content] justify-around">
             <SmallBtn
               text="PromptGradient"
               func={() => navigate("/prompt-grad")}
