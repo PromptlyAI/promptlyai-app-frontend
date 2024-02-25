@@ -1,13 +1,7 @@
-import React from 'react';
+import React from "react";
 
 export default function FileInput() {
   // Function to handle file selection
-  const handleFileChange = (event:any) => {
-    // Get the selected file from the event
-    const file = event.target.files[0];
-    // Do something with the file
-    console.log(file.name);
-  };
 
   return (
     <div className="bg-primary-design w-full h-64 flex justify-center items-center">
@@ -15,22 +9,22 @@ export default function FileInput() {
         <h4>Hello</h4>
         <input
           type="text"
-          className="w-full border-0 focus:outline-none p-1 bg-primary-design"
+          className="w-full h-2/5 border-0 focus:outline-none p-1 bg-primary-design mb-4"
         />
-        <div className="flex w-full flex-row justify-between mt-6">
+        <h4>File</h4>
+
+        <div className="flex w-full flex-row  justify-between  items-end">
           <div>
-            <h4>File</h4>
-            {/* Style adjustments made here */}
-            <input
-              type="file"
-              className="w-full text-sm text-grey-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
-                hover:file:bg-violet-100"
-              onChange={handleFileChange}
-            />
+            <div className="rounded-sm	w-10 h-10 bg-primary-design flex justify-center items-center">
+              <p className="text-[10px] text-center text-greyText ">
+                Select file
+              </p>
+            </div>
+          </div>
+          <div className="rounded-sm	w-12 h-5 bg-primary-design flex justify-center items-center">
+            <p className="text-[8px] text-center text-greyText ">
+            Buttån
+            </p>
           </div>
         </div>
       </div>

@@ -16,7 +16,8 @@ export default {
         },
         primary:{
           design:"#EAECEE"
-        }
+        },
+        greyText:"#545D65", 
       },
     },
   },
