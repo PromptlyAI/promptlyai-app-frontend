@@ -5,12 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-   
     extend: {
       colors: {  
-        black: "#000000",
         blue: {
-          default: "#0c98c7",
+        default: "#0c98c7",
+        hover: "#0eade3",
         },
         secondary:{
           design:"#8C9DAE"
