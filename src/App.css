@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+#root {
+    height: 100vh;
+    background: rgb(15, 23, 42);
+    background: linear-gradient(
+      40deg,
+      rgba(15, 23, 42, 1) 20%,
+      rgba(15, 23, 42, 1) 64%,
+      rgba(27, 18, 66, 1) 81%,
+      rgba(23, 11, 41, 1) 100%
+    );
+  }

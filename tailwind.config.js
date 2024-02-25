@@ -5,15 +5,25 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {  
-      black: "#000000",
-      white: "#ffffff",
-      blue: {
-        default: "#0c98c7",
-        hover: "#0eade3",
+    
+    extend: {
+      colors: {  
+        black: "#000000",
+        white: "#ffffff",
+        description: "#e0e0e0",
+        blue: {
+          default: "#0c98c7",
+          hover: "#0eade3",
+        },
+        grayscale: {
+          lgray: "#dbdbdb", 
+          gray: "#c7c7c7",
+        }
+      },
+      fontFamily: {
+        "title": "Merriweather, serif",
       },
     },
-    extend: {},
   },
   plugins: [],
 }
