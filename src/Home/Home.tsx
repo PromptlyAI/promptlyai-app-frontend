@@ -20,7 +20,7 @@ export default function Home() {
             och coaching.
           </span>
           <h2 className="text-2xl text-center">Our sörvices:</h2>
-          <div className="p-10 flex w-96 h-[fit-content] justify-around">
+          <div className="flex justify-around h-0 pt-5">
             <SmallBtn
               text="PromptGradient"
               func={() => navigate("/prompt-grad")}

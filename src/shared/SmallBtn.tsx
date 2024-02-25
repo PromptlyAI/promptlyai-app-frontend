@@ -7,7 +7,7 @@ interface IProps {
 export default function SmallBtn({ text, func }: IProps) {
   return (
     <button
-      className="w-[300px] p-10 h-[10px] bg-blue-default flex items-center"
+      className="w-40 h-14 bg-blue-default text-center rounded-md text-white  "
       onClick={func}
     >
       {text}

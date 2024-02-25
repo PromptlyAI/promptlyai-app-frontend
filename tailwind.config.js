@@ -7,6 +7,7 @@ export default {
   theme: {
     colors: {  
       black: "#000000",
+      white: "#ffffff",
       blue: {
         default: "#0c98c7",
       },
