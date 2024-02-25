@@ -6,7 +6,10 @@ interface IProps {
 }
 export default function SmallBtn({ text, func }: IProps) {
   return (
-    <button className="w-[100px] p-10 h-[30px] bg-blue-default" onClick={func}>
+    <button
+      className="w-36 h-12 bg-blue-default text-center rounded-md text-white hover:bg-blue-hover transition-colors"
+      onClick={func}
+    >
       {text}
     </button>
   );

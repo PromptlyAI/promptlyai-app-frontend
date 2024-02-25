@@ -1,26 +1,24 @@
 import React from "react";
 import PromptlyApp from "../promptlyV1/PromptlyApp";
 import { useNavigate } from "react-router";
-import SmallBtn from "../prompt-grad/shared/smallBtn";
+import SmallBtn from "../shared/ui/SmallBtn";
+import useLetterAnimation from "../shared/functions/useLetterAnimation";
+import titleDescription from "./titleDescription";
 
 export default function Home() {
   const navigate = useNavigate();
+  const desciption = useLetterAnimation(titleDescription(), 12);
+
   return (
     <div className="flex justify-center">
       <div className="flex justify-center p-10 w-[500px]">
         <div className="flex flex-col w-[100%] ">
-          <h1 className="text-4xl text-black text-center w-[100%]">
+          <h1 className="text-4xl text-black text-center w-[100%] ">
             Promply Labs
           </h1>
-          <span className="p-10">
-            De prompts som skapas ska huvudsakligen användas i produktionsappar
-            som basprompt. Första möjliga kund är skolans egna gpt. Bas-prompten
-            som genereras ska säkerställa att gpt:n blir skolvänlig och inte gör
-            arbeten åt elever utan istället hjälper de i sitt arbete med tips
-            och coaching.
-          </span>
+          <span className="flex h-52 mt-5 mb-5">{desciption}</span>
           <h2 className="text-2xl text-center">Our sörvices:</h2>
-          <div className="p-10 flex w-96 justify-around">
+          <div className="flex justify-around h-0 pt-5">
             <SmallBtn
               text="PromptGradient"
               func={() => navigate("/prompt-grad")}
