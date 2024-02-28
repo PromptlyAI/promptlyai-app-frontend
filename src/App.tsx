@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Animations.css";
 import Home from "./Home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PromptGrad from "./prompt-grad/PromptGrad";

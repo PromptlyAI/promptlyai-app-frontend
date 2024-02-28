@@ -16,10 +16,10 @@ export default function Home() {
     <div className="flex justify-center h-[100vh] relative">
       <div className="flex justify-center p-10 w-[500px]">
         <div className="flex flex-col w-[100%] ">
-          <h1 className="text-4xl text-black w-[100%] font-title ">
+          <h1 className="text-4xl text-black w-[100%] font-title slide-in-left ">
             Promptly Labs
           </h1>
-          <h1 className="text-1xl text-black w-[100%] font-title pb-3">
+          <h1 className="text-1xl text-black w-[100%] font-title pb-3 slide-in-left">
             Promptly modululus
           </h1>
 
