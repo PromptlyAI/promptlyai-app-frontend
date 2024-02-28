@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BottomBar() {
   return (
-    <div className="h-[50px] w-[100%] bg-white border shadow-2xl absolute bottom-0 flex justify-between items-center pl-5 pr-5 text-sm">
+    <div className="h-[50px] w-[100%] bg-background-original  shadow-xl absolute bottom-0 flex justify-between items-center pl-5 pr-5 text-sm text-description">
       <span className=" cursor-pointer">Promptly Labs</span>
 
       <div className="flex gap-5">

@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        background: {
+          original: "rgb(15, 23, 42)",
+        },
         blue: {
           default: "#0c98c7",
           hover: "#0eade3",

@@ -6,7 +6,7 @@ interface IProps {
 }
 export default function BarBtn({ title }: IProps) {
   return (
-    <div className="w-[100%] h-[40px] rounded-2xl bg-white flex items-center pl-5 relative shadow-xl select-none">
+    <div className="w-[100%] h-[40px] rounded-2xl bg-description flex items-center pl-5 relative shadow-xl select-none hover:bg-white cursor-pointer transition-colors">
       <div className="flex items-center gap-5">
         <FaCog />
         {title}
