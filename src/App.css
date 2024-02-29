@@ -10,7 +10,7 @@
   );
 } */
 
-#root {
+.dark-theme {
   height: 100vh;
   background: rgb(15, 23, 42);
   background: linear-gradient(
@@ -19,5 +19,14 @@
     rgba(15, 23, 42, 1) 64%,
     rgba(27, 18, 66, 1) 81%,
     rgba(23, 11, 41, 1) 100%
+  );
+}
+.light-theme {
+  background: rgb(242, 242, 242);
+  background: linear-gradient(
+    203deg,
+    rgba(242, 242, 242, 1) 20%,
+    rgba(242, 242, 242, 1) 42%,
+    rgba(146, 200, 78, 1) 100%
   );
 }

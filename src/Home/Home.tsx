@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PromptlyApp from "../promptlyV1/PromptlyApp";
 import { useNavigate } from "react-router";
 import SmallBtn from "../shared/ui/SmallBtn";
@@ -11,6 +11,7 @@ import BottomBar from "./components/BottomBar";
 export default function Home() {
   const navigate = useNavigate();
   const desciption = useLetterAnimation(titleDescription(), 12);
+  const [fillScreen, setFillScreen] = useState<boolean>(false);
 
   return (
     <div className="flex justify-center h-[100vh] relative">
@@ -28,8 +29,11 @@ export default function Home() {
           </span>
           {/* <h2 className="text-xl text-black">Our Services:</h2> */}
           <div className="flex flex-col gap-5 justify-around pt-2">
-            <BarBtn title="Prompt Grad" />
-            <BarBtn title="Promptly" />
+            <BarBtn
+              func={() => setFillScreen(!fillScreen)}
+              title="Prompt Grad"
+            />
+            <BarBtn func={() => setFillScreen(!fillScreen)} title="Promptly" />
             {/* <TextBox
               func={() => navigate("/prompt-grad")}
               title="Prompt Gradient"
@@ -50,6 +54,9 @@ export default function Home() {
         </div>
       </div>
       <BottomBar />
+      {/* <div className="w-[100%] h-[100%] absolute pointer-events-none flex justify-center items-center">
+        <div className={`${fillScreen && "fill-screen"} fill-box`}></div>
+      </div> */}
     </div>
   );
 }
