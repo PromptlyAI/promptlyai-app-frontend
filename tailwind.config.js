@@ -4,6 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        textColor: "rgb(var(--active-text-color) / <alpha-value>)",
+
+        background: {
+          original: "rgb(15, 23, 42)",
+        },
         blue: {
           default: "#0c98c7",
           hover: "#0eade3",
