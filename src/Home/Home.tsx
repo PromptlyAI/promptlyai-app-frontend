@@ -29,11 +29,8 @@ export default function Home() {
           </span>
           {/* <h2 className="text-xl text-black">Our Services:</h2> */}
           <div className="flex flex-col gap-5 justify-around pt-2">
-            <BarBtn
-              func={() => setFillScreen(!fillScreen)}
-              title="Prompt Grad"
-            />
-            <BarBtn func={() => setFillScreen(!fillScreen)} title="Promptly" />
+            <BarBtn func={() => navigate("/prompt-grad")} title="Prompt Grad" />
+            <BarBtn func={() => navigate("/promptly")} title="Promptly" />
             {/* <TextBox
               func={() => navigate("/prompt-grad")}
               title="Prompt Gradient"
